@@ -14,7 +14,7 @@
         <About/>
       </mt-tab-container-item>
     </mt-tab-container>
-    <mt-tabbar v-model="tabId">
+    <mt-tabbar style="position: fixed;" v-model="tabId">
       <mt-tab-item id="t1">
       <img slot="icon" src="../assets/transaction.svg"/>
       明细
