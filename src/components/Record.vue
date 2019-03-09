@@ -1,9 +1,9 @@
-<template>
-  <div>
-    <mt-header fixed title="Bookit" style="z-index:2;"></mt-header>
+<template id="record">
+  <v-ons-page>
+    <Title title="Bookit"/>
     <div class="wrapper">
       <div class="head" style="box-shadow: #00cdff 0px 0px 20px 0px;">
-        <div class="left box" @click="onClickDate">
+        <div class="head-left box" @click="onClickDate">
           <div class="label">
             <span>{{year}}年</span>
           </div>
@@ -11,7 +11,7 @@
           <span class="label">月</span>
           <font-awesome-icon icon="caret-down" />
         </div>
-        <div class="right box">
+        <div class="head-right box">
           <div class="label">
             <span>收入</span>
           </div>
@@ -30,34 +30,59 @@
       </div>
 
       <div class="list">
-        <div v-for="(day, index) in list" :key="index">
-          <span class="list-label">{{day.date}}</span>
-          <div class="list-label-right list-label">
-            <span class="list-label">收入: {{day.income}}</span>
-            <span class="list-label">支出: {{day.pay}}</span>
+        <v-ons-list>
+          <div v-for="(day, index) in list" :key="index">
+            <v-ons-list-header>
+              <span class="list-label">{{day.date}}</span>
+              <div class="list-head-right list-label">
+                <span class="list-label">收入: {{day.income}}</span>
+                <span class="list-label">支出: {{day.pay}}</span>
+              </div>
+            </v-ons-list-header>
+            
+            
+
+            <v-ons-list-item v-for="(item, index) in day.list" :key="index">
+              <div class="left">
+                <img class="list-item__thumbnail" src="http://placekitten.com/g/40/40">
+              </div>
+              <div class="center">
+                {{item.name}}
+              </div>
+              <div class="right">
+                <span class="list-label-right">{{`${item.amount > 0 ? '+' : ''}${item.amount}`}}</span>
+              </div>
+
+            </v-ons-list-item>
+
           </div>
-          <mt-cell v-for="(item, index) in day.list" :key="index" :title="item.name">
-            <span>{{item.amount>0?'+':''}}{{item.amount}}</span>
-            <img slot="icon" src="" width="24" height="24" >
-          </mt-cell>
-        </div>
+        </v-ons-list>
       </div>
 
 
-     <mt-datetime-picker
+      <mt-datetime-picker
         ref="picker"
         v-model="pickerValue"
         type="date"
         @confirm="handleConfirm">
       </mt-datetime-picker>
-
     </div>
-  </div>
+    <v-ons-fab
+      style="box-shadow: #26a2ff 0px 2px 10px 0px;"
+      position="bottom right"
+      :visible="fabVisible">
+      <v-ons-icon icon="md-plus"></v-ons-icon>
+    </v-ons-fab>
+  </v-ons-page>
 </template>
 
 <script>
+import Title from '@/components/Title';
 export default {
   name: 'Record',
+  components: {
+    Title,
+  },
   data() {
     const today = new Date();
     const year = today.getFullYear();
@@ -169,14 +194,15 @@ export default {
     margin-bottom: 4px;
     position: fixed;
     z-index: 1;
+    width: 100%;
   }
 
-  .left {
+  .head-left {
     width: 30%;
     border-right: 1px solid rgba(255, 255, 255, 0.29);
   }
 
-  .right {
+  .head-right {
     width: 400px;
   }
 
@@ -209,10 +235,13 @@ export default {
   }
 
   .list-label-right {
-    display: inline-flex;
+    color: #9a9a9a;
+  }
+
+  .list-head-right {
     position: absolute;
     right: 0;
-    margin-top: -8px;
+    margin-top: -5px;
   }
 
   .mint-cell-wrapper {
@@ -220,6 +249,7 @@ export default {
   }
 
   .list {
-    padding-top: 70px;
+    padding-top: 32px;
   }
+
 </style>

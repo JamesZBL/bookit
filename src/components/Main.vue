@@ -1,37 +1,8 @@
 <template>
   <div>
-    <mt-tab-container v-model="tabId">
-      <mt-tab-container-item id="t1">
-        <Record/>
-      </mt-tab-container-item>
-      <mt-tab-container-item id="t2">
-        <Analyse/>
-      </mt-tab-container-item>
-      <mt-tab-container-item id="t3">
-        <Book/>
-      </mt-tab-container-item>
-      <mt-tab-container-item id="t4">
-        <About/>
-      </mt-tab-container-item>
-    </mt-tab-container>
-    <mt-tabbar style="position: fixed;" v-model="tabId">
-      <mt-tab-item id="t1">
-      <img slot="icon" src="../assets/transaction.svg"/>
-      明细
-      </mt-tab-item>
-      <mt-tab-item id="t2">
-      <img slot="icon" src="../assets/piechart.svg"/>
-      图表
-      </mt-tab-item>
-      <mt-tab-item id="t3">
-      <img slot="icon" src="../assets/wallet.svg"/>
-      账本
-      </mt-tab-item>
-      <mt-tab-item id="t4">
-      <img slot="icon" src="../assets/user.svg"/>
-      我的
-      </mt-tab-item>
-    </mt-tabbar>
+    <v-ons-tabbar :tabs="tabs" :index.sync="activeIndex" animation="none">
+    </v-ons-tabbar>
+    
   </div>
 </template>
 
@@ -54,7 +25,36 @@ export default {
   },
   data () {
     return {
+      activeIndex: 0,
       tabId: 't1',
+      tabs: [
+        {
+          icon: 'ion-home',
+          label: '明细',
+          badge: '',
+          key: 'record',
+          page: Record,
+        },{
+          icon: 'ion-home',
+          label: '图表',
+          badge: '',
+          key: 'analyse',
+          page: Analyse,
+        },
+        {
+          icon: 'ion-home',
+          label: '账本',
+          badge: '',
+          key: 'book',
+          page: Book,
+        },{
+          icon: 'ion-home',
+          label: '我的',
+          badge: '99+',
+          key: 'about',
+          page: About,
+        },
+      ]
     }
   },
 

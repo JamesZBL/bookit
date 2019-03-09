@@ -17,6 +17,12 @@ import { faCaretDown, faSortAmountUp } from '@fortawesome/free-solid-svg-icons';
 library.add(faCaretDown);
 library.add(faSortAmountUp);
 
+// Onsen UI
+import 'onsenui/css/onsenui.css';
+import 'onsenui/css/onsen-css-components.css';
+import VueOnsen from 'vue-onsenui'; // This imports 'onsenui', so no need to import it separately
+Vue.use(VueOnsen); 
+VueOnsen.disableAutoStyling();
 
 Vue.config.productionTip = false
 
