@@ -1,15 +1,22 @@
 <template>
-  <div>
+  <v-ons-page>
     <Title back title="分类管理"/>
-  </div>
+    <div class="wrapper">
+      <ul class="list-group" v-sortable="{ handle: '.handle' }">
+        <li class="list-group-item">Foo <i class="handle"></i></li>
+        <li class="list-group-item">Bar <i class="handle"></i></li>
+        <li class="list-group-item">Baz <i class="handle"></i></li>
+      </ul>
+    </div>
+  </v-ons-page>
 </template>
 
 <script>
-import Title from '@/components/Title';
+import Title from "@/components/Title";
 export default {
-  name: 'Category',
+  name: "Category",
   components: {
-    Title,
+    Title
   }
-}
+};
 </script>

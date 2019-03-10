@@ -21,10 +21,14 @@ library.add(faSortAmountUp);
 import 'onsenui/css/onsenui.css';
 import 'onsenui/css/onsen-css-components.css';
 import VueOnsen from 'vue-onsenui'; // This imports 'onsenui', so no need to import it separately
-Vue.use(VueOnsen); 
+Vue.use(VueOnsen);
 VueOnsen.disableAutoStyling();
 
-Vue.config.productionTip = false
+// Vue-Sortable
+import Sortable from 'vue-sortable';
+Vue.use(Sortable);
+
+Vue.config.productionTip = false;
 
 /* eslint-disable no-new */
 new Vue({
@@ -32,4 +36,4 @@ new Vue({
   router,
   components: { App },
   template: '<App/>'
-})
+});
