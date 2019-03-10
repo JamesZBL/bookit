@@ -19,7 +19,7 @@
             <span class="amount">{{income}}</span>
           </div>
         </div>
-        <div class="right box">
+        <div class="head-right box">
           <div class="label">
             <span>支出</span>
           </div>
