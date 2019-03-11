@@ -2,7 +2,7 @@
   <div>
     <div class="title">
       <div>
-        <v-ons-icon @click="goBack" v-if="back" class="icon-back" icon="md-arrow-left"></v-ons-icon>
+        <v-ons-icon @click="goBack" v-if="back" class="icon-back" icon="md-chevron-left"></v-ons-icon>
         <span>{{ title }}</span>
       </div>
     </div>
@@ -36,13 +36,13 @@ export default {
   color: white;
   text-align: center;
   font-size: 18px;
-  font-weight: 500;
+  font-weight: 1000;
 }
 
 .icon-back {
   position: absolute;
   left: 0;
   width: 40px;
-  font-size: 22px;
+  font-size: 32px;
 }
 </style>
