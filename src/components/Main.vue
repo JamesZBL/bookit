@@ -23,7 +23,7 @@ export default {
   },
   data() {
     return {
-      activeIndex: 0,
+      activeIndex: Number(sessionStorage.getItem("activeIndex")) || 0,
       tabId: "t1",
       tabs: [
         {
@@ -60,7 +60,15 @@ export default {
 
   methods: {},
 
-  watch: {}
+  watch: {
+    activeIndex(n, o) {
+      sessionStorage.setItem("activeIndex", n);
+    }
+  },
+
+  mounted() {
+    
+  },
 };
 </script>
 

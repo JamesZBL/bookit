@@ -2,30 +2,39 @@
   <v-ons-page>
     <Title back title="分类管理"/>
     <div class="wrapper">
-      <v-ons-list>
-        <draggable v-model="list" group="people" @start="drag=true" @end="drag=false">
-          <v-ons-list-item v-for="i in list" :key="i.id" style="background-color:white;">
-            <div class="left" @click="hideFromShow(i)">
-              <v-ons-icon icon="md-minus-circle" class="item-operation item-delete"></v-ons-icon>
-              <v-ons-icon :icon="i.icon" class="icon-category"></v-ons-icon>
-            </div>
-            <div class="center">{{i.name}}</div>
-            <div class="right">
-              <v-ons-icon icon="md-menu" class="item-move"></v-ons-icon>
-            </div>
-          </v-ons-list-item>
-        </draggable>
-      </v-ons-list>
-      <v-ons-list v-if="hideList.length">
-        <v-ons-list-header>更多类别</v-ons-list-header>
-        <v-ons-list-item v-for="i in hideList" :key="i.id" style="background-color:white;">
-          <div class="left" @click="addToShow(i)">
-            <v-ons-icon icon="md-plus-circle" class="item-operation item-plus"></v-ons-icon>
-            <v-ons-icon :icon="i.icon" class="icon-category"></v-ons-icon>
-          </div>
-          <div class="center">{{i.name}}</div>
-        </v-ons-list-item>
-      </v-ons-list>
+      <mt-navbar v-model="selected">
+        <mt-tab-item id="t1">支出</mt-tab-item>
+        <mt-tab-item id="t2">收入</mt-tab-item>
+      </mt-navbar>
+      <mt-tab-container v-model="selected">
+        <mt-tab-container-item id="t1">
+          <v-ons-list>
+            <draggable v-model="list" group="people" @start="drag=true" @end="drag=false">
+              <v-ons-list-item v-for="i in list" :key="i.id" style="background-color:white;">
+                <div class="left" @click="hideFromShow(i)">
+                  <v-ons-icon icon="md-minus-circle" class="item-operation item-delete"></v-ons-icon>
+                  <v-ons-icon :icon="i.icon" class="icon-category"></v-ons-icon>
+                </div>
+                <div class="center">{{i.name}}</div>
+                <div class="right">
+                  <v-ons-icon icon="md-menu" class="item-move"></v-ons-icon>
+                </div>
+              </v-ons-list-item>
+            </draggable>
+          </v-ons-list>
+          <v-ons-list v-if="hideList.length">
+            <v-ons-list-header>更多类别</v-ons-list-header>
+            <v-ons-list-item v-for="i in hideList" :key="i.id" style="background-color:white;">
+              <div class="left" @click="addToShow(i)">
+                <v-ons-icon icon="md-plus-circle" class="item-operation item-plus"></v-ons-icon>
+                <v-ons-icon :icon="i.icon" class="icon-category"></v-ons-icon>
+              </div>
+              <div class="center">{{i.name}}</div>
+            </v-ons-list-item>
+          </v-ons-list>
+        </mt-tab-container-item>
+        <mt-tab-container-item id="t2"></mt-tab-container-item>
+      </mt-tab-container>
     </div>
   </v-ons-page>
 </template>
@@ -41,6 +50,7 @@ export default {
   },
   data() {
     return {
+      selected: "t1",
       list: [
         {
           id: 1,
@@ -90,8 +100,8 @@ export default {
     hideFromShow(item) {
       item.hide = true;
       const { list } = this;
-      if(list.length == 1) {
-        this.$ons.notification.alert('至少要保留一个分类哦');
+      if (list.length == 1) {
+        this.$ons.notification.alert("至少要保留一个分类哦");
         return;
       }
       const index = list.indexOf(item);
@@ -126,7 +136,7 @@ export default {
 }
 
 .item-plus {
-  color: green;
+  color: #40dc48;
 }
 
 .list-header {
@@ -136,5 +146,13 @@ export default {
 .list-item {
   color: #5c5c5c;
   font-size: 16px;
+}
+
+.mint-tab-item.is-selected {
+  z-index: 1;
+}
+
+.mint-tab-container {
+  padding-top: 22px;
 }
 </style>
