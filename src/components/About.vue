@@ -1,6 +1,6 @@
 <template id="about">
   <v-ons-page>
-    <Title title/>
+    <c-title title/>
     <div class="wrapper">
       <div class="head" style="box-shadow: #00cdff 0px 0px 20px 0px;">
         <img class="avatar" :src="avatar">
@@ -39,12 +39,18 @@
         </div>
       </div>
       <v-ons-list class="menus">
-        <v-ons-list-item @click="onClickCategory" modifier="chevron" tappable>
+        <v-ons-list-item
+          v-for="i in list"
+          :key="i.id"
+          @click="onClickLink(i.path)"
+          modifier="chevron"
+          tappable
+        >
           <div class="left">
-            <v-ons-icon style="color:red;" icon="md-widgets"></v-ons-icon>
+            <v-ons-icon :style="{color:i.color}" :icon="i.icon"></v-ons-icon>
           </div>
           <div class="center">
-            <span>类别设置</span>
+            <span>{{i.name}}</span>
           </div>
         </v-ons-list-item>
       </v-ons-list>
@@ -66,13 +72,9 @@
 </template>
 
 <script>
-import Title from "@/components/Title";
 import { MessageBox } from "mint-ui";
 export default {
   name: "About",
-  components: {
-    Title
-  },
   data() {
     return {
       authenticated: true,
@@ -91,7 +93,30 @@ export default {
         total_day: 18,
         checked_today: true
       },
-      dialogVisible: false
+      dialogVisible: false,
+      list: [
+        {
+          id: 1,
+          icon: "md-widgets",
+          name: "类别设置",
+          path: "/category",
+          color: "#86cbff"
+        },
+        {
+          id: 2,
+          icon: "md-help",
+          name: "帮助",
+          path: "/help",
+          color: "#ffc182"
+        },
+        {
+          id: 3,
+          icon: "md-mood",
+          name: "关于",
+          path: "/aboutapp",
+          color: "#ff83c7"
+        }
+      ]
     };
   },
 
@@ -103,19 +128,19 @@ export default {
       });
     },
 
-    onClickCategory() {
-      this.$router.push("/category");
-    },
-
     onClickUserCheck() {
       this.dialogVisible = true;
+    },
+
+    onClickLink(path) {
+      this.$router.push(path);
     }
   },
 
   computed: {
     check_modal_title() {
       return this.check.checked_today ? "已经签过了哦" : "签到成功";
-    },
+    }
   }
 };
 </script>
@@ -240,5 +265,9 @@ export default {
 
 .modal-subtitle {
   color: #7b7b7b;
+}
+
+.list-item__left {
+  padding: 12px 14px 12px 10px;
 }
 </style>

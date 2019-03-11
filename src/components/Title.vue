@@ -27,7 +27,8 @@ export default {
 <style scoped>
 .title {
   display: block;
-  height: 40px;
+  height: 50px;
+  line-height: 50px;
   z-index: 3;
   position: fixed;
   background-color: #26a2ff;
@@ -36,7 +37,6 @@ export default {
   text-align: center;
   font-size: 18px;
   font-weight: 500;
-  line-height: 40px;
 }
 
 .icon-back {

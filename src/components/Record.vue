@@ -1,6 +1,6 @@
 <template id="record">
   <v-ons-page>
-    <Title title="Bookit"/>
+    <c-title title="Bookit"/>
     <div class="wrapper">
       <div class="head" style="box-shadow: #00cdff 0px 0px 20px 0px;">
         <div class="head-left box" @click="onClickDate">
@@ -65,12 +65,8 @@
 </template>
 
 <script>
-import Title from "@/components/Title";
 export default {
   name: "Record",
-  components: {
-    Title
-  },
   data() {
     const today = new Date();
     const year = today.getFullYear();

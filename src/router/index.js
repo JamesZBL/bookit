@@ -6,6 +6,7 @@ import About from '@/components/About'
 import Book from '@/components/Book'
 import Analyse from '@/components/Analyse'
 import Category from '@/components/settings/Category'
+import AboutApp from '@/components/about/AboutApp'
 
 Vue.use(Router)
 
@@ -34,6 +35,9 @@ export default new Router({
     {
       path: '/category',
       component: Category
+    }, {
+      path: '/aboutapp',
+      component: AboutApp
     }
   ]
 })

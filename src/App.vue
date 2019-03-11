@@ -24,7 +24,7 @@ body {
 }
 
 .wrapper {
-  margin-top: 40px;
+  margin-top: 50px;
 }
 
 span {

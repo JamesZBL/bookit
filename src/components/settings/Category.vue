@@ -1,6 +1,6 @@
 <template>
   <v-ons-page>
-    <Title back title="分类管理"/>
+    <c-title back title="分类管理"/>
     <div class="wrapper">
       <mt-navbar v-model="selected">
         <mt-tab-item id="t1">支出</mt-tab-item>
@@ -40,12 +40,10 @@
 </template>
 
 <script>
-import Title from "@/components/Title";
 import draggable from "vuedraggable";
 export default {
   name: "Category",
   components: {
-    Title,
     draggable
   },
   data() {

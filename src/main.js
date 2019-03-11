@@ -28,6 +28,10 @@ VueOnsen.disableAutoStyling();
 import Sortable from 'vue-sortable';
 Vue.use(Sortable);
 
+// Customed components
+import Title from '@/components/Title';
+Vue.component('c-title', Title);
+
 Vue.config.productionTip = false;
 
 /* eslint-disable no-new */
