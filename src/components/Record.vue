@@ -253,4 +253,8 @@ export default {
 .list {
   padding-top: 32px;
 }
+
+.wrapper {
+  margin-bottom: 90px;
+}
 </style>
