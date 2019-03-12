@@ -1,7 +1,9 @@
 <template id="book">
   <v-ons-page>
-    <mt-header fixed title="账本" style="z-index:2;"></mt-header>
-    <h1>账本</h1>
+    <c-title title="账本"/>
+    <div class="wrapper">
+      
+    </div>
   </v-ons-page>
 </template>
 

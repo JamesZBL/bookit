@@ -36,6 +36,10 @@ Vue.use(Transitions);
 import Title from '@/components/Title';
 Vue.component('c-title', Title);
 
+// Vue-Observe-Visibility
+import VueObserveVisibility from 'vue-observe-visibility'
+Vue.use(VueObserveVisibility)
+
 Vue.config.productionTip = false;
 
 /* eslint-disable no-new */

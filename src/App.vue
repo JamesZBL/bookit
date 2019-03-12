@@ -40,4 +40,12 @@ span {
 .mint-header-title {
   font-size: 20px;
 }
+
+.mark {
+  width: 1px;
+  height: 1px;
+  position: fixed;
+  top: 100px;
+  margin-left: 1px;
+}
 </style>
