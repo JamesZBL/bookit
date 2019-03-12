@@ -28,6 +28,10 @@ VueOnsen.disableAutoStyling();
 import Sortable from 'vue-sortable';
 Vue.use(Sortable);
 
+// Vue2-transitions
+import Transitions from 'vue2-transitions';
+Vue.use(Transitions);
+
 // Customed components
 import Title from '@/components/Title';
 Vue.component('c-title', Title);

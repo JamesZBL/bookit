@@ -14,6 +14,10 @@ export default new Router({
   routes: [
     {
       path: '/',
+      redirect: '/main'
+    },
+    {
+      path: '/main',
       name: 'index',
       component: Main,
       children: [
@@ -33,10 +37,10 @@ export default new Router({
       ]
     },
     {
-      path: '/category',
+      path: '/settings/category',
       component: Category
     }, {
-      path: '/aboutapp',
+      path: '/settings/aboutapp',
       component: AboutApp
     }
   ]

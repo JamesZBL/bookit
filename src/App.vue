@@ -1,12 +1,18 @@
 <template>
   <div id="app">
-    <router-view/>
+    <fade-transition>
+      <router-view></router-view>
+    </fade-transition>
   </div>
 </template>
 
 <script>
+import { FadeTransition } from "vue2-transitions";
 export default {
-  name: "App"
+  name: "App",
+  components: {
+    FadeTransition
+  }
 };
 </script>
 

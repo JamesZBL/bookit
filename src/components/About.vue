@@ -99,21 +99,21 @@ export default {
           id: 1,
           icon: "md-widgets",
           name: "类别设置",
-          path: "/category",
+          path: "/settings/category",
           color: "#86cbff"
         },
         {
           id: 2,
           icon: "md-help",
           name: "帮助",
-          path: "/help",
+          path: "/settings/help",
           color: "#ffc182"
         },
         {
           id: 3,
           icon: "md-mood",
           name: "关于",
-          path: "/aboutapp",
+          path: "/settings/aboutapp",
           color: "#ff83c7"
         }
       ]
