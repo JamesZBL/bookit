@@ -59,4 +59,8 @@ export default {
 .mint-tab-container {
   padding-top: 22px;
 }
+
+.list-item__left {
+  padding: 12px 14px 12px 10px;
+}
 </style>
