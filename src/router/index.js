@@ -7,6 +7,8 @@ import Book from '@/components/Book'
 import Analyse from '@/components/Analyse'
 import Category from '@/components/settings/Category'
 import AboutApp from '@/components/about/AboutApp'
+import NewRecord from '@/components/NewRecord'
+import NewRecordSelect from '@/components/NewRecordSelect'
 
 Vue.use(Router)
 
@@ -18,7 +20,7 @@ export default new Router({
     },
     {
       path: '/main',
-      name: 'index',
+      name: 'main',
       component: Main,
       children: [
         {
@@ -42,6 +44,12 @@ export default new Router({
     }, {
       path: '/settings/aboutapp',
       component: AboutApp
+    }, {
+      path: '/record/new/:category',
+      component: NewRecord
+    }, {
+      path: '/record/new-select',
+      component: NewRecordSelect
     }
   ]
 })

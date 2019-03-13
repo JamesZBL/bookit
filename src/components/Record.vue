@@ -55,10 +55,7 @@
 
       <mt-datetime-picker ref="picker" v-model="pickerValue" type="date" @confirm="handleConfirm"></mt-datetime-picker>
     </div>
-    <v-ons-fab
-      style="box-shadow: #26a2ff 0px 2px 10px 0px;"
-      position="bottom right"
-    >
+    <v-ons-fab @click="handleNewRecord" style="box-shadow: #26a2ff 0px 2px 10px 0px;" position="bottom right">
       <v-ons-icon icon="md-plus"></v-ons-icon>
     </v-ons-fab>
   </v-ons-page>
@@ -172,6 +169,10 @@ export default {
       const date = new Date(this.pickerValue);
       this.year = date.getFullYear();
       this.month = date.getMonth() + 1;
+    },
+
+    handleNewRecord() {
+      this.$router.push("/record/new-select");
     }
   },
 

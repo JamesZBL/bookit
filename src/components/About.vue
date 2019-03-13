@@ -56,7 +56,7 @@
       </v-ons-list>
       <mt-button
         class="btn"
-        @click="onClickLogout"
+        @click.native="onClickLogout"
         v-if="authenticated"
         size="large"
         type="danger"
@@ -190,13 +190,6 @@ export default {
 
 .menus {
   padding-top: 220px;
-}
-
-.btn {
-  margin: auto;
-  margin-top: auto;
-  width: 92%;
-  margin-top: 10px;
 }
 
 .float-label {

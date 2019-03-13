@@ -7,11 +7,15 @@
 </template>
 
 <script>
+import categories from "@/category";
 import { FadeTransition } from "vue2-transitions";
 export default {
   name: "App",
   components: {
     FadeTransition
+  },
+  created() {
+    
   }
 };
 </script>
@@ -47,5 +51,20 @@ span {
   position: fixed;
   top: 100px;
   margin-left: 1px;
+}
+
+.mint-navbar {
+  padding: 0 24%;
+}
+
+.card-wrapper {
+  padding-top: 5px;
+}
+
+.btn {
+  margin: auto;
+  margin-top: auto;
+  width: 92%;
+  margin-top: 10px;
 }
 </style>

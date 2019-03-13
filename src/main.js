@@ -20,7 +20,7 @@ library.add(faSortAmountUp);
 // Onsen UI
 import 'onsenui/css/onsenui.css';
 import 'onsenui/css/onsen-css-components.css';
-import VueOnsen from 'vue-onsenui'; // This imports 'onsenui', so no need to import it separately
+import VueOnsen from 'vue-onsenui';
 Vue.use(VueOnsen);
 VueOnsen.disableAutoStyling();
 
@@ -34,7 +34,9 @@ Vue.use(Transitions);
 
 // Customed components
 import Title from '@/components/Title';
+import Tabbar from '@/components/Tabbar';
 Vue.component('c-title', Title);
+Vue.component('c-tabbar', Tabbar);
 
 // Vue-Observe-Visibility
 import VueObserveVisibility from 'vue-observe-visibility'
