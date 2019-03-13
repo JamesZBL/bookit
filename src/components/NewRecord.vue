@@ -4,6 +4,16 @@
     <div class="wrapper card-wrapper">
       <v-ons-card>
         <div>
+          <label class="label" for="date">日期</label>
+          <span
+            id="date"
+            class="input"            
+            @click="onClickDate"
+          >
+          {{dateDisplay}}
+          </span>
+        </div>
+        <div>
           <label class="label" for="comment">备注</label>
           <input id="comment" type="text" maxlength="6" class="input" v-model="comment">
         </div>
@@ -19,16 +29,6 @@
             placeholder="￥0.00"
             v-model="amount"
           >
-        </div>
-        <div>
-          <label class="label" for="date">日期</label>
-          <span
-            id="date"
-            class="input"            
-            @click="onClickDate"
-          >
-          {{dateDisplay}}
-          </span>
         </div>
       </v-ons-card>
       <mt-button class="btn" @click.native="onClickSave" size="large" type="default">保存</mt-button>
@@ -55,7 +55,7 @@ export default {
     this.comment = getDisplayOf(this.category);
   },
   methods: {
-    onclickSave() {},
+    onClickSave() {},
     onClickDate() {
       this.$refs.picker.open();
     },
