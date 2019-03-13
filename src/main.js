@@ -34,9 +34,7 @@ Vue.use(Transitions);
 
 // Customed components
 import Title from '@/components/Title';
-import Tabbar from '@/components/Tabbar';
 Vue.component('c-title', Title);
-Vue.component('c-tabbar', Tabbar);
 
 // Vue-Observe-Visibility
 import VueObserveVisibility from 'vue-observe-visibility'
