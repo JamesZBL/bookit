@@ -20,35 +20,54 @@
             v-model="amount"
           >
         </div>
+        <div>
+          <label class="label" for="date">日期</label>
+          <span
+            id="date"
+            class="input"            
+            @click="onClickDate"
+          >
+          {{dateDisplay}}
+          </span>
+        </div>
       </v-ons-card>
-      <mt-button
-        class="btn"
-        @click.native="onClickSave"
-        size="large"
-        type="default"
-      >保存</mt-button>
+      <mt-button class="btn" @click.native="onClickSave" size="large" type="default">保存</mt-button>
     </div>
+    <mt-datetime-picker ref="picker" v-model="pickerValue" type="date" @confirm="confirmDate"></mt-datetime-picker>
   </v-ons-page>
 </template>
 
 <script>
 import { getDisplayOf } from "@/category";
+import { getCurrentDate, formatDate } from "@/date";
 export default {
   data() {
     return {
       amount: "￥0.00",
-      comment: null
+      comment: null,
+      category: null,
+      pickerValue: getCurrentDate(),
+      date: getCurrentDate()
     };
   },
   created() {
-    this.comment = getDisplayOf(this.$route.params.category);
+    this.category = this.$route.params.category;
+    this.comment = getDisplayOf(this.category);
   },
   methods: {
-    onclickSave() {
-
+    onclickSave() {},
+    onClickDate() {
+      this.$refs.picker.open();
+    },
+    confirmDate() {
+      this.date = this.pickerValue;
     }
   },
-  computed: {}
+  computed: {
+    dateDisplay() {
+      return formatDate(this.date);
+    }
+  }
 };
 </script>
 
