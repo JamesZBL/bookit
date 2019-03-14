@@ -124,6 +124,7 @@ export default {
     onClickLogout() {
       this.$ons.notification.confirm("确定要退出登录吗?").then(ok => {
         if (ok) {
+          this.$router.replace("/signin");
         }
       });
     },

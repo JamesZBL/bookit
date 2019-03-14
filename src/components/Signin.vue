@@ -53,6 +53,8 @@ export default {
         email,
         password
       });
+      this.$router.replace("/");
+      sessionStorage.clear();
     }
   }
 };
