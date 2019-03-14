@@ -2,7 +2,7 @@
   <v-ons-page>
     <c-title title/>
     <div class="wrapper">
-      <div class="head" style="box-shadow: #00cdff 0px 0px 20px 0px;">
+      <div class="about-head" style="box-shadow: #00cdff 0px 0px 20px 0px;">
         <img class="avatar" :src="avatar">
         <div class="head-right">
           <div class="head-first">
@@ -15,7 +15,7 @@
           <span class="check-text">签到</span>
           <span class="check-filler"></span>
         </div>
-        <div class="float">
+        <div class="about-float">
           <v-ons-row>
             <v-ons-col>
               <div class="float-col">
@@ -146,8 +146,8 @@ export default {
 </script>
 
 <style scoped>
-.head {
-  height: 105px;
+.about-head {
+  height: 150px;
   background: linear-gradient(#26a2ff, #00cdff);
   color: white;
   margin-bottom: 4px;
@@ -170,18 +170,18 @@ export default {
   font-weight: 1000;
 }
 
-.float {
+.about-float {
   color: black;
   z-index: 3;
   background-color: white;
-  height: 70px;
+  height: 90px;
   width: 86%;
   top: 200px;
   box-shadow: rgba(1, 1, 1, 0.1) 0px 2px 10px 2px;
   border-radius: 5px;
   margin: auto;
   padding: 10px;
-  margin-top: 15px;
+  margin-top: 20px;
 }
 
 .list-cells {

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="title">
+    <div class="c-title">
       <div>
         <v-ons-icon @click="goBack" v-if="back" class="icon-back" icon="md-chevron-left"></v-ons-icon>
         <span>{{ title }}</span>
@@ -25,7 +25,7 @@ export default {
 </script>
 
 <style scoped>
-.title {
+.c-title {
   display: block;
   height: 50px;
   line-height: 50px;

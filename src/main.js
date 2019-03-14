@@ -32,15 +32,25 @@ Vue.use(Sortable);
 import Transitions from 'vue2-transitions';
 Vue.use(Transitions);
 
+// Vue-Observe-Visibility
+import VueObserveVisibility from 'vue-observe-visibility';
+Vue.use(VueObserveVisibility);
+
+// Bootstrap-Vue
+import BootstrapVue from 'bootstrap-vue';
+Vue.use(BootstrapVue);
+
+// Vuetify
+import Vuetify from 'vuetify';
+Vue.use(Vuetify);
+
 // Customed components
 import Title from '@/components/Title';
 Vue.component('c-title', Title);
 
-// Vue-Observe-Visibility
-import VueObserveVisibility from 'vue-observe-visibility'
-Vue.use(VueObserveVisibility)
-
 Vue.config.productionTip = false;
+
+import 'vuetify/dist/vuetify.min.css';
 
 /* eslint-disable no-new */
 new Vue({
