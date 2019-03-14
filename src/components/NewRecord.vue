@@ -24,9 +24,10 @@
             type="number"
             maxlength="8"
             class="input"
-            max="999999"
             min="0.01"
+            max="999999"
             placeholder="￥0.00"
+            step="0.01"
             v-model="amount"
           >
         </div>
