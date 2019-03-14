@@ -42,7 +42,12 @@ Vue.use(BootstrapVue);
 
 // Vuetify
 import Vuetify from 'vuetify';
-Vue.use(Vuetify);
+Vue.use(Vuetify, {
+  iconfont: 'md'
+});
+
+// MD-icon
+import 'material-design-icons-iconfont/dist/material-design-icons.css'
 
 // Customed components
 import Title from '@/components/Title';

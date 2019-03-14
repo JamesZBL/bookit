@@ -9,6 +9,7 @@ import Category from '@/components/settings/Category'
 import AboutApp from '@/components/about/AboutApp'
 import NewRecord from '@/components/NewRecord'
 import NewRecordSelect from '@/components/NewRecordSelect'
+import Signin from '@/components/Signin'
 
 Vue.use(Router)
 
@@ -37,6 +38,10 @@ export default new Router({
           component: Analyse
         }
       ]
+    },
+    {
+      path: '/signin',
+      component: Signin
     },
     {
       path: '/settings/category',
