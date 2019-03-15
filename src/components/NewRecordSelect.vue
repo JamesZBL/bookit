@@ -11,7 +11,7 @@
           <v-ons-list>
             <v-ons-list-item
               @click="gotoNew(i)"
-              v-for="i in list"
+              v-for="i in payCategories"
               :key="i.id"
               modifier="chevron"
               tappable
@@ -30,17 +30,17 @@
 
 <script>
 import categories from "@/category";
-import { getShowList } from "@/category";
 export default {
   name: "new-record-select",
   data() {
+    const { $store } = this;
+    const { state, getters } = $store;
+    const { visibleCategories } = $store.getters;
     return {
       selected: "t1",
-      list: []
+      payCategories: visibleCategories("pay"),
+      incomeCategories: visibleCategories("income")
     };
-  },
-  created() {
-    this.list = getShowList();
   },
   methods: {
     gotoNew(type) {
