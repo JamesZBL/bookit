@@ -6,6 +6,7 @@ import About from '@/components/About'
 import Book from '@/components/Book'
 import Analyse from '@/components/Analyse'
 import Category from '@/components/settings/Category'
+import Password from '@/components/settings/Password'
 import AboutApp from '@/components/about/AboutApp'
 import NewRecord from '@/components/NewRecord'
 import NewRecordSelect from '@/components/NewRecordSelect'
@@ -63,7 +64,10 @@ export default new Router({
     }, {
       path: '/settings/aboutapp',
       component: AboutApp
-    }, {
+    },  {
+      path: '/settings/password',
+      component: Password
+    },{
       path: '/record/new/:category',
       component: NewRecord
     }, {

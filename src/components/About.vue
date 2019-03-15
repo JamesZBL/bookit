@@ -40,8 +40,8 @@
       </div>
       <v-ons-list class="menus">
         <v-ons-list-item
-          v-for="i in list"
-          :key="i.id"
+          v-for="(i,index) in list"
+          :key="index"
           @click="onClickLink(i.path)"
           modifier="chevron"
           tappable
@@ -96,21 +96,23 @@ export default {
       dialogVisible: false,
       list: [
         {
-          id: 1,
           icon: "md-widgets",
           name: "类别设置",
           path: "/settings/category",
           color: "#86cbff"
+        },{
+          icon: "md-lock-outline",
+          name: "密码修改",
+          path: "/settings/password",
+          color: "#ff83c7"
         },
         {
-          id: 2,
           icon: "md-help",
           name: "帮助",
           path: "/settings/help",
           color: "#ffc182"
         },
         {
-          id: 3,
           icon: "md-mood",
           name: "关于",
           path: "/settings/aboutapp",
