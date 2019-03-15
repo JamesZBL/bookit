@@ -188,9 +188,9 @@ export default {
 
     onClickDateOk() {
       this.dialogVisible = false;
-      const yearAndMonth = this.pickerDate.split('-');
+      const yearAndMonth = this.pickerDate.split("-");
       this.year = yearAndMonth[0];
-      this.month = yearAndMonth[1];
+      this.month = yearAndMonth[1].replace(/^0/, "");
     }
   },
 

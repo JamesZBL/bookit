@@ -104,7 +104,7 @@ export default {
           icon: "md-lock-outline",
           name: "密码修改",
           path: "/settings/password",
-          color: "#ff83c7"
+          color: "#8783ff"
         },
         {
           icon: "md-help",
