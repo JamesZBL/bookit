@@ -6,6 +6,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     email: '',
+    codeType: ''
   },
 
   getters: {
@@ -15,6 +16,10 @@ export default new Vuex.Store({
   mutations: {
     setEmail(state, email) {
       state.email = email;
+    },
+
+    setCodeType(state, type) {
+      state.codeType = type;
     }
   }
 });

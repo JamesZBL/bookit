@@ -22,7 +22,7 @@
     <v-btn color="info" @click="signin" large>登录</v-btn>
     <v-container>
       <div class="sign-links">
-        <span class="left">忘记密码</span>
+        <span class="left" @click="onClickForgetPassword">忘记密码</span>
         <span class="right" @click="onClickSignup">现在注册</span>
       </div>
     </v-container>
@@ -62,6 +62,10 @@ export default {
 
     onClickSignup() {
       this.$router.push("/signup");
+    },
+
+    onClickForgetPassword() {
+      this.$router.push("/email");
     }
   }
 };

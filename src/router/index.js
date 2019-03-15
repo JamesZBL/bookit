@@ -12,6 +12,7 @@ import NewRecordSelect from '@/components/NewRecordSelect'
 import Signin from '@/components/sign/Signin'
 import Signup from '@/components/sign/Signup'
 import Code from '@/components/sign/Code'
+import Email from '@/components/sign/Email'
 
 Vue.use(Router)
 
@@ -52,6 +53,9 @@ export default new Router({
     {
       path: '/code',
       component: Code
+    },{
+      path: '/email',
+      component: Email
     },
     {
       path: '/settings/category',

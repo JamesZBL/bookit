@@ -21,7 +21,7 @@
 export default {
   name: "email-code",
   data() {
-    const state = this.$store.state;
+    const { state } = this.$store;
     return {
       email: state.email,
       emailCode: "",

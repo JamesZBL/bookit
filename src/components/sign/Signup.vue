@@ -66,9 +66,11 @@ export default {
 
   methods: {
     onClickSubmit() {
+      const { $router } = this;
       const validate = this.$refs.form.validate();
       if (!validate) return;
-      this.$store.commit("setEmail", this.email);
+      $store.commit("setEmail", this.email);
+      $store.commit("setCodeType", "signup");
       this.$router.push(`/code`);
     }
   },
