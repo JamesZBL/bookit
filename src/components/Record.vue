@@ -52,8 +52,6 @@
           </div>
         </v-ons-list>
       </div>
-
-      <mt-datetime-picker ref="picker" v-model="pickerValue" type="date" @confirm="handleConfirm"></mt-datetime-picker>
     </div>
     <v-ons-fab
       @click="handleNewRecord"
@@ -62,6 +60,18 @@
     >
       <v-ons-icon icon="md-plus"></v-ons-icon>
     </v-ons-fab>
+    <v-ons-dialog cancelable :visible.sync="dialogVisible">
+      <v-date-picker
+        v-model="pickerDate"
+        locale="zh-cn"
+        type="month"
+        v-show="true"
+        :reactive="true"
+      >
+        <v-spacer></v-spacer>
+        <v-btn flat color="primary" @click="onClickDateOk">OK</v-btn>
+      </v-date-picker>
+    </v-ons-dialog>
   </v-ons-page>
 </template>
 
@@ -73,6 +83,8 @@ export default {
     const year = today.getFullYear();
     const month = today.getMonth() + 1;
     return {
+      dialogVisible: false,
+      pickerDate: new Date().toISOString().substring(0, 10),
       year,
       month,
       pickerValue: `${year}-${month}-01`,
@@ -166,17 +178,19 @@ export default {
 
   methods: {
     onClickDate() {
-      this.$refs.picker.open();
-    },
-
-    handleConfirm() {
-      const date = new Date(this.pickerValue);
-      this.year = date.getFullYear();
-      this.month = date.getMonth() + 1;
+      this.dialogVisible = true;
+      console.log(this.pickerDate);
     },
 
     handleNewRecord() {
       this.$router.push("/record/new-select");
+    },
+
+    onClickDateOk() {
+      this.dialogVisible = false;
+      const yearAndMonth = this.pickerDate.split('-');
+      this.year = yearAndMonth[0];
+      this.month = yearAndMonth[1];
     }
   },
 

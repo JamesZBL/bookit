@@ -22,11 +22,14 @@
     <v-btn color="info" @click="signin" large>登录</v-btn>
     <v-container>
       <div class="sign-links">
-        <span>忘记密码</span>
-        <span class="right">现在注册</span>
+        <span class="left">忘记密码</span>
+        <span class="right" @click="onClickSignup">现在注册</span>
       </div>
     </v-container>
-    <span class="signin-sub-title signin-copyright">Copyright 2019 MAO RU NAN</span>
+    <div class="copyright-wrapper">
+      <span class="signin-sub-title signin-copyright">License Apache 2.0</span>
+      <span class="signin-sub-title signin-copyright">Copyright 2019 MAO RU NAN</span>
+    </div>
   </v-app>
 </template>
 
@@ -55,6 +58,10 @@ export default {
       });
       this.$router.replace("/");
       sessionStorage.clear();
+    },
+
+    onClickSignup() {
+      this.$router.push("/signup");
     }
   }
 };
@@ -73,19 +80,34 @@ export default {
   text-shadow: #0064b8 1px 1px 3px;
 }
 
-.sign-links {
+.sign-links span {
   color: rgba(29, 130, 212, 0.78);
+  font-size: 14px;
+  display: inline-block;
+  line-height: 32px;
+  padding: 0 10px;
 }
 
 .signin-sub-title {
   color: rgba(255, 255, 255, 0.607);
   text-align: center;
+
+  font-size: 16px;
 }
 
 .signin-copyright {
-  color: rgba(255, 255, 255, 0.255);
-  margin-bottom: 20px;
-  font-size: 14px;
+  color: rgba(255, 255, 255, 0.25);
+  display: block;
+  font-size: 12px;
+}
+
+.copyright {
+  margin-bottom: 10px;
+  padding: 20px 0;
+}
+
+.copyright-wrapper {
+  padding-bottom: 20px;
 }
 
 .theme--dark.application {

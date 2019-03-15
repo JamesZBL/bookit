@@ -9,7 +9,9 @@ import Category from '@/components/settings/Category'
 import AboutApp from '@/components/about/AboutApp'
 import NewRecord from '@/components/NewRecord'
 import NewRecordSelect from '@/components/NewRecordSelect'
-import Signin from '@/components/Signin'
+import Signin from '@/components/sign/Signin'
+import Signup from '@/components/sign/Signup'
+import Code from '@/components/sign/Code'
 
 Vue.use(Router)
 
@@ -42,6 +44,14 @@ export default new Router({
     {
       path: '/signin',
       component: Signin
+    },
+    {
+      path: '/signup',
+      component: Signup
+    },
+    {
+      path: '/code',
+      component: Code
     },
     {
       path: '/settings/category',

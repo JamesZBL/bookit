@@ -14,9 +14,7 @@ export default {
   components: {
     FadeTransition
   },
-  created() {
-    
-  }
+  created() {}
 };
 </script>
 
@@ -68,4 +66,7 @@ span {
   margin-top: 10px;
 }
 
+.mint-navbar .mint-tab-item {
+  color: #7d7c7c;
+}
 </style>
