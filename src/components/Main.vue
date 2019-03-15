@@ -12,6 +12,7 @@ import About from "@/components/About";
 import { TabContainer, TabContainerItem } from "mint-ui";
 import { Tabbar, TabItem } from "mint-ui";
 import { Header } from "mint-ui";
+import categories from "@/category";
 
 export default {
   name: "Main",
@@ -58,7 +59,25 @@ export default {
     };
   },
 
-  methods: {},
+  methods: {
+    initCategories() {
+      const { $store } = this;
+      // gotten hidden categories
+      const hiddenCategories = [];
+      // gotten customedCategories
+      const customedCategories = [];
+      const visibleCategories = [];
+      hiddenCategories.forEach(hidden => {
+        const find = categories.filter(c => c.name === hidden.name)[0];
+        const index = categories.indexOf(find);
+        categories.splice(index, 1);
+      });
+      categories.forEach(c => visibleCategories.push(c));
+      customedCategories.forEach(c => visibleCategories.push(c));
+      $store.commit("setVisibleCategories", visibleCategories);
+      $store.commit("setHiddenCategories", hiddenCategories);
+    }
+  },
 
   watch: {
     activeIndex(n, o) {
@@ -66,9 +85,9 @@ export default {
     }
   },
 
-  mounted() {
-    
-  },
+  created() {
+    this.initCategories();
+  }
 };
 </script>
 

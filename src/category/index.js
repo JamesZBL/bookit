@@ -2,23 +2,43 @@ const categories = [
   {
     name: 'food',
     display: '饮食',
-    icon: 'md-local-dining'
+    icon: 'md-local-dining',
+    type: 'pay'
   }, {
     name: 'transportation',
     display: '交通',
-    icon: 'md-car-taxi'
+    icon: 'md-car-taxi',
+    type: 'pay'
   }, {
     name: 'sport',
     display: '健身',
-    icon: 'md-run'
+    icon: 'md-run',
+    type: 'pay'
   }, {
     name: 'learning',
     display: '学习',
-    icon: 'md-book'
+    icon: 'md-book',
+    type: 'pay'
   }, {
     name: 'digital',
     display: '数码',
-    icon: 'md-headset'
+    icon: 'md-headset',
+    type: 'pay'
+  }, {
+    name: 'salary',
+    display: '工资',
+    icon: 'md-headset',
+    type: 'income'
+  }, {
+    name: 'financial',
+    display: '理财',
+    icon: 'md-headset',
+    type: 'income'
+  }, {
+    name: 'part-time',
+    display: '兼职',
+    icon: 'md-headset',
+    type: 'income'
   }
 ]
 
