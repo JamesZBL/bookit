@@ -95,7 +95,6 @@ export default {
 .signin-sub-title {
   color: rgba(255, 255, 255, 0.607);
   text-align: center;
-
   font-size: 16px;
 }
 
@@ -111,7 +110,10 @@ export default {
 }
 
 .copyright-wrapper {
-  padding-bottom: 20px;
+  padding-bottom: 2em;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
 
 .theme--dark.application {
