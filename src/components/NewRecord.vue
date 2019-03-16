@@ -43,17 +43,16 @@ import { getDisplayOf } from "@/category";
 import { getCurrentDate, formatDate } from "@/date";
 export default {
   data() {
+    const { name, display } = this.$store.state.selectedCategory;
     return {
       amount: "￥0.00",
-      comment: null,
-      category: null,
+      comment: display,
+      category: name,
       pickerValue: getCurrentDate(),
       date: getCurrentDate()
     };
   },
   created() {
-    this.category = this.$route.params.category;
-    this.comment = getDisplayOf(this.category);
   },
   methods: {
     onClickSave() {},

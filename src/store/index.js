@@ -8,7 +8,8 @@ export default new Vuex.Store({
     email: '',
     codeType: '',
     visibleCategories: [],
-    hiddenCategories: []
+    hiddenCategories: [],
+    selectedCategory: {},
   },
 
   getters: {
@@ -39,7 +40,7 @@ export default new Vuex.Store({
       const index = visibleCategories.indexOf(find);
       s.visibleCategories.splice(index, 1);
       s.hiddenCategories.push(category);
-    }, 
+    },
 
     showDefaultCategory(s, category) {
       const { name } = category;
@@ -48,6 +49,10 @@ export default new Vuex.Store({
       const index = hiddenCategories.indexOf(find);
       s.hiddenCategories.splice(index, 1);
       s.visibleCategories.push(category);
+    },
+
+    setSelectCategory(s, type) {
+      s.selectedCategory = type;
     }
   },
 

@@ -68,7 +68,7 @@ export default new Router({
       path: '/settings/password',
       component: Password
     },{
-      path: '/record/new/:category',
+      path: '/record/new',
       component: NewRecord
     }, {
       path: '/record/new-select',

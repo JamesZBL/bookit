@@ -44,7 +44,8 @@ export default {
   },
   methods: {
     gotoNew(type) {
-      this.$router.replace(`/record/new/${type.name}`);
+      this.$router.replace(`/record/new`);
+      this.$store.commit('setSelectCategory', type);
     }
   }
 };
