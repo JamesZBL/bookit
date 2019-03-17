@@ -42,7 +42,6 @@ export default {
     },
 
     onVisibilityChanged(visible, entry) {
-      console.log(visible);
       if (visible) this.initChart();
     }
   }

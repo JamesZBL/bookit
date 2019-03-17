@@ -10,10 +10,8 @@ export default new Vuex.Store({
     visibleCategories: [],
     hiddenCategories: [],
     selectedCategory: {},
-  },
-
-  getters: {
-    getEmail: s => s.email,
+    books: [],
+    selectedBook: {}
   },
 
   mutations: {
@@ -53,15 +51,37 @@ export default new Vuex.Store({
 
     setSelectCategory(s, type) {
       s.selectedCategory = type;
+    },
+
+    setBooks(s, books) {
+      s.books = books;
+    },
+
+    setSelectedBook(s, book) {
+      s.selectedBook = book;
+    },
+
+    addBook(s, book) {
+      s.books.push({
+        ...book,
+        type: 'customed'
+      });
+    },
+
+    removeBook(s, book) {
+      const find = s.books.find(b => b.display === book.display);
+      s.books.splice(s.books.indexOf(find), 1);
     }
   },
 
   getters: {
+    getEmail: s => s.email,
     visiblePayCategories: s => s.visibleCategories.filter(c => c.type === 'pay'),
     visibleIncomeCategories: s => s.visibleCategories.filter(c => c.type === 'income'),
     hiddenPayCategories: s => s.hiddenCategories.filter(c => c.type === 'pay'),
     hiddenIncomeCategories: s => s.hiddenCategories.filter(c => c.type === 'income'),
     visibleCategories: s => type => s.visibleCategories.filter(c => c.type === type),
-    hiddenCategories: s => type => s.hiddenCategories.fill(c => c.type === type)
+    hiddenCategories: s => type => s.hiddenCategories.filter(c => c.type === type),
+    isBookExisted: s => display => !!s.books.find(b => b.display === display)
   }
 });

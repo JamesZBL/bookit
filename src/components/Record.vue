@@ -55,7 +55,6 @@
     </div>
     <v-ons-fab
       @click="handleNewRecord"
-      style="box-shadow: #26a2ff 0px 2px 10px 0px;"
       position="bottom right"
     >
       <v-ons-icon icon="md-plus"></v-ons-icon>

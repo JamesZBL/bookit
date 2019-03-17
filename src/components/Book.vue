@@ -5,11 +5,11 @@
       <v-ons-card>
         <v-container grid-list-md text-xs-center>
           <v-layout row wrap>
-            <v-flex v-for="(i,index) in book" :key="index" xs4>
-              <v-card dark color="purple">
+            <v-flex v-for="(i,index) in books" :key="index" xs4>
+              <v-card dark :color="i.color" class="book" @click="selectBook(i)">
                 <v-ons-icon
                   icon="md-bookmark"
-                  v-if="getCurrentBookDisplay() === i.display"
+                  v-if="selectedBook.display === i.display"
                   class="bookmark"
                 ></v-ons-icon>
                 <v-card-text class="px-0">{{i.display}}</v-card-text>
@@ -19,37 +19,51 @@
         </v-container>
       </v-ons-card>
     </div>
+    <v-ons-fab @click="onClickNewBook" position="bottom right">
+      <v-ons-icon icon="md-plus"></v-ons-icon>
+    </v-ons-fab>
   </v-ons-page>
 </template>
 
 <script>
-import book from "@/book";
-import { getCurrentBookDisplay } from "@/book";
 export default {
   name: "Book",
   data() {
-    return {
-      book
-    };
+    return {};
+  },
+  computed: {
+    books() {
+      return this.$store.state.books;
+    },
+    selectedBook() {
+      return this.$store.state.selectedBook;
+    }
   },
   methods: {
-    getCurrentBookDisplay
+    selectBook(book) {
+      const { $store } = this;
+      $store.commit("setSelectedBook", book);
+    },
+
+    onClickNewBook() {
+      this.$router.push("/book/new");
+    }
   }
 };
 </script>
 
 <style scoped>
 .book {
-  text-align: center;
   height: 100px;
-  background-color: blueviolet;
-  color: white;
-  border-radius: 5px;
+  font-size: 14px;
+  overflow: hidden;
 }
 
 .bookmark {
   position: absolute;
+  font-size: 22px;
   right: 5px;
-  top: 0;
+  top: -5px;
+  color: white;
 }
 </style>

@@ -43,8 +43,10 @@ Vue.use(BootstrapVue);
 
 // Vuetify
 import Vuetify from 'vuetify';
+import config from '@/theme/vuetify';
 Vue.use(Vuetify, {
-  iconfont: 'md'
+  iconfont: 'md',
+  config
 });
 import 'vuetify/dist/vuetify.min.css';
 

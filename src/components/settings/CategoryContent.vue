@@ -20,7 +20,11 @@
     </v-ons-list>
     <v-ons-list v-if="hiddenCategories.length">
       <v-ons-list-header>更多类别</v-ons-list-header>
-      <v-ons-list-item v-for="i in hiddenCategories" :key="i.id" style="background-color:white;">
+      <v-ons-list-item
+        v-for="(i, index) in hiddenCategories"
+        :key="index"
+        style="background-color:white;"
+      >
         <div class="left" @click="addToShow(i)">
           <v-ons-icon icon="md-plus-circle" class="item-operation item-plus"></v-ons-icon>
           <v-ons-icon :icon="i.icon" class="icon-category"></v-ons-icon>
@@ -43,23 +47,20 @@ export default {
     type: String
   },
   data() {
-    const { $store } = this;
-    const { state, getters } = $store;
-    const { visibleCategories, hiddenCategories } = $store.getters;
-    const { type } = this;
-    return {
-      visibleCategories: visibleCategories(type),
-      hiddenCategories: hiddenCategories(type)
-    };
+    return {};
+  },
+  computed: {
+    visibleCategories() {
+      return this.$store.getters.visibleCategories(this.type);
+    },
+    hiddenCategories() {
+      return this.$store.getters.hiddenCategories(this.type);
+    }
   },
   methods: {
     addToShow(item) {
-      this.visibleCategories.push(item);
-      const { hiddenCategories } = this;
-      const index = hiddenCategories.indexOf(item);
-      if (index > -1) {
-        hiddenCategories.splice(index, 1);
-      }
+      const { $store } = this;
+      $store.commit("showDefaultCategory", item);
     },
 
     hideFromShow(item) {
@@ -68,19 +69,19 @@ export default {
         this.$ons.notification.alert("至少要保留一个分类哦");
         return;
       }
-      const index = visibleCategories.indexOf(item);
-      if (index > -1) {
-        visibleCategories.splice(index, 1);
-      }
       if (!item.customed) {
         this.hideDefaultCategory(item);
+      } else {
+        this.deleteCustomedCategory(category);
       }
     },
 
     hideDefaultCategory(category) {
       const { $store } = this;
       $store.commit("hideDefaultCategory", category);
-    }
+    },
+
+    deleteCustomedCategory(category) {}
   }
 };
 </script>

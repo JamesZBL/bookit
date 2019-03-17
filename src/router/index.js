@@ -4,12 +4,13 @@ import Main from '@/components/Main'
 import Record from '@/components/Record'
 import About from '@/components/About'
 import Book from '@/components/Book'
+import NewBook from '@/components/book/NewBook'
 import Analyse from '@/components/Analyse'
 import Category from '@/components/settings/Category'
 import Password from '@/components/settings/Password'
 import AboutApp from '@/components/about/AboutApp'
-import NewRecord from '@/components/NewRecord'
-import NewRecordSelect from '@/components/NewRecordSelect'
+import NewRecord from '@/components/record/NewRecord'
+import NewRecordSelect from '@/components/record/NewRecordSelect'
 import Signin from '@/components/sign/Signin'
 import Signup from '@/components/sign/Signup'
 import Code from '@/components/sign/Code'
@@ -54,7 +55,7 @@ export default new Router({
     {
       path: '/code',
       component: Code
-    },{
+    }, {
       path: '/email',
       component: Email
     },
@@ -64,15 +65,18 @@ export default new Router({
     }, {
       path: '/settings/aboutapp',
       component: AboutApp
-    },  {
+    }, {
       path: '/settings/password',
       component: Password
-    },{
+    }, {
       path: '/record/new',
       component: NewRecord
     }, {
       path: '/record/new-select',
       component: NewRecordSelect
+    }, {
+      path: '/book/new',
+      component: NewBook
     }
   ]
 })
