@@ -83,7 +83,7 @@ export default {
     const month = today.getMonth() + 1;
     return {
       dialogVisible: false,
-      pickerDate: new Date().toISOString().substring(0, 10),
+      pickerDate: new Date().toISOString().substring(0, 7),
       year,
       month,
       pickerValue: `${year}-${month}-01`,

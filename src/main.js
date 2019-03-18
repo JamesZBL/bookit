@@ -51,7 +51,11 @@ Vue.use(Vuetify, {
 import 'vuetify/dist/vuetify.min.css';
 
 // MD-icon
-import 'material-design-icons-iconfont/dist/material-design-icons.css'
+import 'material-design-icons-iconfont/dist/material-design-icons.css';
+
+// Vue-Touch
+import VueTouch from 'vue-touch';
+VueTouch, { name: 'v-touch' };
 
 // Customed components
 import Title from '@/components/Title';

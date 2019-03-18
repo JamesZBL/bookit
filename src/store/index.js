@@ -71,6 +71,10 @@ export default new Vuex.Store({
     removeBook(s, book) {
       const find = s.books.find(b => b.display === book.display);
       s.books.splice(s.books.indexOf(find), 1);
+    },
+
+    setBookDefault(s) {
+      s.selectedBook = s.books[0];
     }
   },
 
