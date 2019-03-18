@@ -57,6 +57,23 @@ import 'material-design-icons-iconfont/dist/material-design-icons.css';
 import VueTouch from 'vue-touch';
 VueTouch, { name: 'v-touch' };
 
+// Accounting
+import accounting from 'accounting';
+accounting.settings = {
+  currency: {
+    symbol: "￥",
+    format: "%s%v",
+    decimal: ".",
+    thousand: ",",
+    precision: 2
+  },
+  number: {
+    precision: 0,
+    thousand: "",
+    decimal: "."
+  }
+};
+
 // Customed components
 import Title from '@/components/Title';
 Vue.component('c-title', Title);

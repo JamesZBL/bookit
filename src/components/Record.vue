@@ -16,7 +16,7 @@
             <span>收入</span>
           </div>
           <div>
-            <span class="amount">{{income}}</span>
+            <number :number="income" class="amount"/>
           </div>
         </div>
         <div class="head-right box">
@@ -24,7 +24,7 @@
             <span>支出</span>
           </div>
           <div>
-            <span class="amount">{{pay}}</span>
+            <number :number="pay" class="amount"/>
           </div>
         </div>
       </div>
@@ -42,7 +42,7 @@
 
             <v-ons-list-item v-for="(item, index) in day.list" :key="index">
               <div class="left">
-                <img class="list-item__thumbnail" src="http://placekitten.com/g/40/40">
+                <v-ons-icon :icon="getCategory(item).icon" class="item-icon"></v-ons-icon>
               </div>
               <div class="center">{{item.name}}</div>
               <div class="right">
@@ -53,10 +53,7 @@
         </v-ons-list>
       </div>
     </div>
-    <v-ons-fab
-      @click="handleNewRecord"
-      position="bottom right"
-    >
+    <v-ons-fab @click="handleNewRecord" position="bottom right">
       <v-ons-icon icon="md-plus"></v-ons-icon>
     </v-ons-fab>
     <v-ons-dialog cancelable :visible.sync="dialogVisible">
@@ -75,8 +72,13 @@
 </template>
 
 <script>
+import number from "@/components/number/Money";
+import accounting from "accounting";
 export default {
   name: "Record",
+  components: {
+    number
+  },
   data() {
     const today = new Date();
     const year = today.getFullYear();
@@ -86,9 +88,8 @@ export default {
       pickerDate: new Date().toISOString().substring(0, 7),
       year,
       month,
-      pickerValue: `${year}-${month}-01`,
-      income: "0.00",
-      pay: "0.00",
+      income: 1123456,
+      pay: 1123456,
       list: [
         {
           date: "2019-03-02",
@@ -97,22 +98,22 @@ export default {
           list: [
             {
               name: "键盘",
-              category: "数码",
+              category: "learning",
               amount: -2
             },
             {
               name: "买了块表",
-              category: "数码",
+              category: "learning",
               amount: -200
             },
             {
               name: "鼠标",
-              category: "数码",
+              category: "learning",
               amount: -2
             },
             {
               name: "耳机",
-              category: "数码",
+              category: "learning",
               amount: -130.2
             }
           ]
@@ -124,22 +125,22 @@ export default {
           list: [
             {
               name: "工资",
-              category: "数码",
+              category: "learning",
               amount: 7999
             },
             {
               name: "水杯",
-              category: "数码",
+              category: "learning",
               amount: -20
             },
             {
               name: "自行车",
-              category: "数码",
+              category: "learning",
               amount: -2
             },
             {
               name: "汽车",
-              category: "数码",
+              category: "learning",
               amount: -200000
             }
           ]
@@ -151,22 +152,22 @@ export default {
           list: [
             {
               name: "轮胎",
-              category: "数码",
+              category: "learning",
               amount: -2
             },
             {
               name: "水蜜桃",
-              category: "数码",
+              category: "learning",
               amount: -2
             },
             {
               name: "剃须刀",
-              category: "数码",
+              category: "learning",
               amount: -2
             },
             {
               name: "代码整洁之道",
-              category: "数码",
+              category: "learning",
               amount: -2
             }
           ]
@@ -174,7 +175,7 @@ export default {
       ]
     };
   },
-
+  computed: {},
   methods: {
     onClickDate() {
       this.dialogVisible = true;
@@ -190,10 +191,12 @@ export default {
       const yearAndMonth = this.pickerDate.split("-");
       this.year = yearAndMonth[0];
       this.month = yearAndMonth[1].replace(/^0/, "");
-    }
-  },
+    },
 
-  computed: {}
+    getCategory(record) {
+      return this.$store.getters.findCategoryByName(record.category);
+    }
+  }
 };
 </script>
 
@@ -208,19 +211,21 @@ export default {
   width: 100%;
 }
 
+.box {
+  display: table-cell;
+  padding: 0 0.5em;
+  height: 40px;
+}
+
 .head-left {
-  width: 30%;
+  width: 25%;
   border-right: 1px solid rgba(255, 255, 255, 0.29);
+  min-width: 90px;
+  padding: 0 0.5em 0 1em;
 }
 
 .head-right {
   width: 400px;
-}
-
-.box {
-  display: table-cell;
-  padding: 0 1em;
-  height: 40px;
 }
 
 .label {
@@ -270,5 +275,9 @@ export default {
 
 .wrapper {
   margin-bottom: 90px;
+}
+
+.item-icon {
+  color: #e57474;
 }
 </style>

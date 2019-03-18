@@ -86,6 +86,8 @@ export default new Vuex.Store({
     hiddenIncomeCategories: s => s.hiddenCategories.filter(c => c.type === 'income'),
     visibleCategories: s => type => s.visibleCategories.filter(c => c.type === type),
     hiddenCategories: s => type => s.hiddenCategories.filter(c => c.type === type),
+    findCategoryByName: s => name => s.visibleCategories.find(c => c.name === name) ||
+      s.hiddenCategories.find(c => c.name === name),
     isBookExisted: s => display => !!s.books.find(b => b.display === display)
   }
 });
