@@ -1,13 +1,13 @@
 <template id="book">
-  <v-ons-page>
+  <v-ons-page v-on:swiperight="onPressCard">
     <c-title title="账本"/>
     <div class="wrapper card-wrapper">
-      <v-container grid-list-md text-xs-center v-on:swiperight="onPressCard">
+      <v-container grid-list-md text-xs-center>
         <v-layout row wrap>
           <v-flex v-for="(i,index) in books" :key="index" xs4>
             <v-touch>
               <v-card dark :color="i.color" class="book" @click="selectBook(i)">
-                <div class="mask" v-if="showDelete && i.type!=='default'"></div>
+                <div class="mask" v-if="showDelete"></div>
                 <v-ons-icon
                   icon="md-bookmark"
                   v-if="selectedBook.display === i.display && !showDelete"
@@ -52,6 +52,7 @@ export default {
   methods: {
     selectBook(book) {
       const { $store } = this;
+      if (this.showDelete) return;
       $store.commit("setSelectedBook", book);
     },
 
@@ -78,12 +79,12 @@ export default {
       this.setBookDefault();
     },
 
-    removeBook(book){
+    removeBook(book) {
       this.$store.commit("removeBook", book);
     },
 
     setBookDefault() {
-      this.$store.commit('setBookDefault');
+      this.$store.commit("setBookDefault");
     }
   }
 };
