@@ -46,7 +46,6 @@
               </div>
               <div class="center">{{item.name}}</div>
               <div class="right">
-                <!-- <span class="list-label-right">{{`${item.amount > 0 ? '+' : ''}${item.amount}`}}</span> -->
                 <span class="list-label-right">{{formatMoney(item.amount)}}</span>
               </div>
             </v-ons-list-item>
