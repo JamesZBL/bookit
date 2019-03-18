@@ -11,7 +11,8 @@ export default new Vuex.Store({
     hiddenCategories: [],
     selectedCategory: {},
     books: [],
-    selectedBook: {}
+    selectedBook: {},
+    hideAmount: false
   },
 
   mutations: {
@@ -75,6 +76,10 @@ export default new Vuex.Store({
 
     setBookDefault(s) {
       s.selectedBook = s.books[0];
+    },
+
+    setHideAmount(s, b) {
+      s.hideAmount = b;
     }
   },
 
