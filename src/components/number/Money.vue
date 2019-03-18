@@ -1,7 +1,7 @@
 <template>
   <div @click="toggle">
     <span>
-      {{ display }}
+      <span :class="moneyClass">{{ display }}</span>
       <v-ons-icon icon="md-eye" class="eye" v-if="!show"></v-ons-icon>
     </span>
   </div>
@@ -24,6 +24,14 @@ export default {
   computed: {
     display() {
       return this.show ? accounting.formatMoney(this.number, "") : "****";
+    },
+    moneyClass() {
+      return this.long ? ["long"] : [];
+    },
+    long() {
+      const { number } = this;
+      const length = accounting.formatNumber(number, 0).length;
+      return 5 < length;
     }
   },
 
@@ -33,11 +41,7 @@ export default {
     }
   },
 
-  created() {
-    const { number } = this;
-    const length = accounting.formatNumber(number, 0);
-    if (8 < length) this.show = false;
-  }
+  created() {}
 };
 </script>
 
@@ -47,5 +51,9 @@ export default {
   position: absolute;
   top: 26px;
   margin-left: 4px;
+}
+
+.long {
+  font-size: 14px;
 }
 </style>
