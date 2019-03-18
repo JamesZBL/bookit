@@ -110,4 +110,9 @@ ons-speed-dial-item.fab,
 button.fab {
   background-color: #26a2ff;
 }
+
+.ons-icon.fa {
+  font-weight: 600;
+  font-size: 14px !important;
+}
 </style>

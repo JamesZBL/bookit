@@ -35,8 +35,8 @@
             <v-ons-list-header>
               <span class="list-label">{{day.date}}</span>
               <div class="list-head-right list-label">
-                <span class="list-label">收入: {{day.income}}</span>
-                <span class="list-label">支出: {{day.pay}}</span>
+                <span class="list-label">收入: {{formatMoneyClean(day.income)}}</span>
+                <span class="list-label">支出: {{formatMoneyClean(day.pay)}}</span>
               </div>
             </v-ons-list-header>
 
@@ -97,22 +97,22 @@ export default {
           income: 9000,
           list: [
             {
-              name: "键盘",
-              category: "learning",
-              amount: -2
+              name: "海底捞",
+              category: "food",
+              amount: -280
             },
             {
-              name: "买了块表",
-              category: "learning",
+              name: "买了块劳力士",
+              category: "shopping",
+              amount: -1953.34
+            },
+            {
+              name: "健身",
+              category: "sport",
               amount: -200
             },
             {
-              name: "鼠标",
-              category: "learning",
-              amount: -2
-            },
-            {
-              name: "耳机",
+              name: "Java编程思想",
               category: "learning",
               amount: -130.2
             }
@@ -125,22 +125,22 @@ export default {
           list: [
             {
               name: "工资",
-              category: "learning",
+              category: "salary",
               amount: 7999
             },
             {
               name: "水杯",
-              category: "learning",
+              category: "shopping",
               amount: -20
             },
             {
               name: "自行车",
-              category: "learning",
+              category: "car",
               amount: -2
             },
             {
               name: "汽车",
-              category: "learning",
+              category: "car",
               amount: -200000
             }
           ]
@@ -152,17 +152,17 @@ export default {
           list: [
             {
               name: "轮胎",
-              category: "learning",
+              category: "car",
               amount: -2
             },
             {
               name: "水蜜桃",
-              category: "learning",
+              category: "fruit",
               amount: -2
             },
             {
               name: "剃须刀",
-              category: "learning",
+              category: "daily-use",
               amount: -2
             },
             {
@@ -198,6 +198,11 @@ export default {
     },
 
     formatMoney(amount) {
+      const prefix = 0 < amount ? "+" : "";
+      return `${prefix}${this.formatMoneyClean(amount)}`;
+    },
+
+    formatMoneyClean(amount) {
       return accounting.formatMoney(amount, "");
     }
   }
@@ -244,7 +249,6 @@ export default {
 .amount {
   display: block;
   font-size: 24px;
-  margin-top: 3px;
 }
 
 .list-label {
@@ -256,6 +260,7 @@ export default {
 
 .list-label-right {
   color: #9a9a9a;
+  font-size: 16px;
 }
 
 .list-head-right {
@@ -282,6 +287,6 @@ export default {
 }
 
 .item-icon {
-  color: #e57474;
+  color: #acadad;
 }
 </style>

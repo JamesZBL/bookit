@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-ons-list>
-      <draggable v-model="visibleCategories" group="people" @start="drag=true" @end="drag=false">
+      <draggable v-model="visibleCategories" handle=".handle" @change="onDragCategories">
         <v-ons-list-item
           v-for="(i, index) in visibleCategories"
           :key="index"
@@ -12,7 +12,7 @@
             <v-ons-icon :icon="i.icon" class="icon-category"></v-ons-icon>
           </div>
           <div class="center">{{i.display}}</div>
-          <div class="right">
+          <div class="right handle">
             <v-ons-icon icon="md-menu" class="item-move"></v-ons-icon>
           </div>
         </v-ons-list-item>
@@ -47,19 +47,16 @@ export default {
     type: String
   },
   data() {
-    return {};
-  },
-  computed: {
-    visibleCategories() {
-      return this.$store.getters.visibleCategories(this.type);
-    },
-    hiddenCategories() {
-      return this.$store.getters.hiddenCategories(this.type);
-    }
+    return {
+      visibleCategories: this.$store.getters.visibleCategories(this.type),
+      hiddenCategories: this.$store.getters.hiddenCategories(this.type)
+    };
   },
   methods: {
     addToShow(item) {
       const { $store } = this;
+      this.visibleCategories.push(item);
+      this.hiddenCategories.splice(this.hiddenCategories.indexOf(item), 1);
       $store.commit("showDefaultCategory", item);
     },
 
@@ -72,16 +69,22 @@ export default {
       if (!item.customed) {
         this.hideDefaultCategory(item);
       } else {
-        this.deleteCustomedCategory(category);
+        this.deleteCustomedCategory(item);
       }
     },
 
-    hideDefaultCategory(category) {
+    hideDefaultCategory(item) {
       const { $store } = this;
-      $store.commit("hideDefaultCategory", category);
+      this.hiddenCategories.push(item);
+      this.visibleCategories.splice(this.visibleCategories.indexOf(item), 1);
+      $store.commit("hideDefaultCategory", item);
     },
 
-    deleteCustomedCategory(category) {}
+    deleteCustomedCategory(category) {},
+
+    onDragCategories() {
+      this.$store.commit("reSortVisibleCategories", this.visibleCategories);
+    }
   }
 };
 </script>

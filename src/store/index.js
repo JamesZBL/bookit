@@ -32,6 +32,14 @@ export default new Vuex.Store({
       s.hiddenCategories = hiddenCategories;
     },
 
+    reSortVisibleCategories(s, categories) {
+      const { type } = categories[0];
+      s.visibleCategories.filter(c => c.type === type).forEach(c => {
+        s.visibleCategories.splice(s.visibleCategories.indexOf(c), 1);
+      });
+      categories.forEach(c => s.visibleCategories.push(c));
+    },
+
     hideDefaultCategory(s, category) {
       const { name } = category;
       const { visibleCategories } = s;
