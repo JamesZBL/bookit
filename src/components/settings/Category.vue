@@ -12,6 +12,9 @@
         </v-tab-item>
       </v-tabs-items>
     </div>
+    <v-ons-fab @click="handleNewCategory" position="bottom right">
+      <v-ons-icon icon="md-plus"></v-ons-icon>
+    </v-ons-fab>
   </v-ons-page>
 </template>
 
@@ -41,12 +44,20 @@ export default {
       ]
     };
   },
-  methods: {}
+  methods: {
+    handleNewCategory() {
+      this.$router.push('/settings/category/new');
+    }
+  }
 };
 </script>
 
 <style scoped>
 .mint-tab-item.is-selected {
   z-index: 1;
+}
+
+.tab-wrapper {
+  padding-bottom: 100px;
 }
 </style>

@@ -7,6 +7,7 @@ import Book from '@/components/Book'
 import NewBook from '@/components/book/NewBook'
 import Analyse from '@/components/Analyse'
 import Category from '@/components/settings/Category'
+import NewCategory from '@/components/settings/NewCategory'
 import Password from '@/components/settings/Password'
 import AboutApp from '@/components/about/AboutApp'
 import NewRecord from '@/components/record/NewRecord'
@@ -62,6 +63,9 @@ export default new Router({
     {
       path: '/settings/category',
       component: Category
+    }, {
+      path: '/settings/category/new',
+      component: NewCategory
     }, {
       path: '/settings/aboutapp',
       component: AboutApp

@@ -60,6 +60,14 @@ export default new Vuex.Store({
       s.selectedCategory = type;
     },
 
+    addCustomedCategory(s, category) {
+      s.visibleCategories.push(category);
+    },
+
+    removeCategory(s, category) {
+      s.visibleCategories.splice(s.visibleCategories.findIndex(c => c.name === category.name), 1);
+    },
+
     setBooks(s, books) {
       s.books = books;
     },

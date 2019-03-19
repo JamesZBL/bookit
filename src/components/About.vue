@@ -97,7 +97,7 @@ export default {
       list: [
         {
           icon: "md-widgets",
-          name: "类别设置",
+          name: "分类管理",
           path: "/settings/category",
           color: "#86cbff"
         },

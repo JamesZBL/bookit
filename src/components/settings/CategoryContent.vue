@@ -80,7 +80,13 @@ export default {
       $store.commit("hideDefaultCategory", item);
     },
 
-    deleteCustomedCategory(category) {},
+    deleteCustomedCategory(category) {
+      this.$store.commit("removeCategory", category);
+      this.visibleCategories.splice(
+        this.visibleCategories.findIndex(c => c.name === category.name),
+        1
+      );
+    },
 
     onDragCategories() {
       this.$store.commit("reSortVisibleCategories", this.visibleCategories);
