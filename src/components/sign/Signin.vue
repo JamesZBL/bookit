@@ -52,10 +52,6 @@ export default {
   methods: {
     signin() {
       const { email, password } = this;
-      console.log({
-        email,
-        password
-      });
       this.$router.replace("/");
       sessionStorage.clear();
     },

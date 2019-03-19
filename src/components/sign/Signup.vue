@@ -35,8 +35,8 @@
           </v-layout>
         </v-container>
       </v-form>
+      <v-btn color="info" @click="onClickSubmit" large class="btn">立即注册</v-btn>
     </div>
-    <v-btn color="info" @click="onClickSubmit" large>立即注册</v-btn>
   </v-app>
 </template>
 
