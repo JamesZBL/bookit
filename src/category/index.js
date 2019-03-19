@@ -28,7 +28,7 @@ const categories = [
   }, {
     name: 'sport',
     display: '健身',
-    icon: 'fa-walking',
+    icon: 'fa-volleyball-ball',
     type: 'pay'
   }, {
     name: 'learning',
@@ -58,7 +58,7 @@ const categories = [
   }, {
     name: 'vegetable',
     display: '蔬菜',
-    icon: 'fa-carrot',
+    icon: 'fa-leaf',
     type: 'pay'
   }, {
     name: 'fruit',
@@ -68,7 +68,7 @@ const categories = [
   }, {
     name: 'snack',
     display: '零食',
-    icon: 'fa-hamburger',
+    icon: 'fa-cookie-bite',
     type: 'pay'
   }, {
     name: 'communication',
@@ -113,7 +113,7 @@ const categories = [
   }, {
     name: 'smoke-wine',
     display: '烟酒',
-    icon: 'fa-wine-bottle',
+    icon: 'fa-wine-glass-alt',
     type: 'pay'
   }, {
     name: 'car',
@@ -128,7 +128,7 @@ const categories = [
   }, {
     name: 'pet',
     display: '宠物',
-    icon: 'fa-dog',
+    icon: 'fa-crow',
     type: 'pay'
   }, {
     name: 'gift',
