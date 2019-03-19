@@ -194,7 +194,11 @@ export default {
     },
 
     getCategory(record) {
-      return this.$store.getters.findCategoryByName(record.category);
+      return (
+        this.$store.getters.findCategoryByName(record.category) || {
+          icon: "fa-star"
+        }
+      );
     },
 
     formatMoney(amount) {
