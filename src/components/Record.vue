@@ -179,7 +179,6 @@ export default {
   methods: {
     onClickDate() {
       this.dialogVisible = true;
-      console.log(this.pickerDate);
     },
 
     handleNewRecord() {

@@ -7,7 +7,7 @@
     </c-title>
     <div class="tab-wrapper">
       <v-tabs-items v-model="selected">
-        <v-tab-item v-for="(i, index) in tabs" :key="index" :id="`${i.id}`">
+        <v-tab-item v-for="(i, index) in tabs" :key="index" :value="`${i.id}`">
           <CategoryContent :type="i.type"/>
         </v-tab-item>
       </v-tabs-items>
