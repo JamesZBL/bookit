@@ -28,8 +28,7 @@ export default {
       const customedCategories = [];
       const visibleCategories = [];
       hiddenCategories.forEach(hidden => {
-        const find = categories.find(c => c.name === hidden.name);
-        const index = categories.indexOf(find);
+        const index = categories.findIndex(c => c.name === hidden.name);
         categories.splice(index, 1);
       });
       categories.forEach(c => visibleCategories.push(c));
@@ -61,7 +60,15 @@ body {
 }
 
 .wrapper {
-  margin-top: 50px;
+  position: absolute;
+  width: 100%;
+  top: 50px;
+}
+
+.tab-wrapper {
+  position: absolute;
+  width: 100%;
+  top: 100px;
 }
 
 span {

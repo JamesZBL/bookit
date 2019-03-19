@@ -43,8 +43,7 @@ export default new Vuex.Store({
     hideDefaultCategory(s, category) {
       const { name } = category;
       const { visibleCategories } = s;
-      const find = visibleCategories.find(c => c.name === name);
-      const index = visibleCategories.indexOf(find);
+      const index = visibleCategories.findIndex(c => c.name === name);
       s.visibleCategories.splice(index, 1);
       s.hiddenCategories.push(category);
     },
@@ -52,8 +51,7 @@ export default new Vuex.Store({
     showDefaultCategory(s, category) {
       const { name } = category;
       const { hiddenCategories } = s;
-      const find = hiddenCategories.find(c => c.name === name);
-      const index = hiddenCategories.indexOf(find);
+      const index = hiddenCategories.findIndex(c => c.name === name);
       s.hiddenCategories.splice(index, 1);
       s.visibleCategories.push(category);
     },
@@ -78,8 +76,8 @@ export default new Vuex.Store({
     },
 
     removeBook(s, book) {
-      const find = s.books.find(b => b.display === book.display);
-      s.books.splice(s.books.indexOf(find), 1);
+      const index = s.books.findIndex(b => b.display === book.display);
+      s.books.splice(index, 1);
     },
 
     setBookDefault(s) {

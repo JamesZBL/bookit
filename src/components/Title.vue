@@ -5,6 +5,7 @@
         <v-ons-icon @click="goBack" v-if="back" class="icon-back" icon="md-chevron-left"></v-ons-icon>
         <span>{{ title }}</span>
       </div>
+      <slot></slot>
     </div>
   </div>
 </template>
