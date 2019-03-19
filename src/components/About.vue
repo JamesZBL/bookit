@@ -1,6 +1,6 @@
 <template id="about">
   <v-ons-page>
-    <c-title title/>
+    <c-title title></c-title>
     <div class="wrapper">
       <div class="about-head" style="box-shadow: #00cdff 0px 0px 20px 0px;">
         <img class="avatar" :src="avatar">

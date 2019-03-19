@@ -97,7 +97,7 @@ span {
 
 .btn {
   width: 90%;
-  margin: auto 5%;
+  margin: auto 5% !important;
 }
 
 .mint-navbar .mint-tab-item {
@@ -107,13 +107,13 @@ span {
 ons-fab.fab,
 ons-speed-dial-item.fab,
 button.fab {
-  box-shadow: #26a2ff 0px 2px 10px 0px;
+  box-shadow: #26a2ff 0px 2px 10px 0px !important;
 }
 
 ons-fab.fab,
 ons-speed-dial-item.fab,
 button.fab {
-  background-color: #26a2ff;
+  background-color: #26a2ff !important;
 }
 
 .ons-icon.fa {

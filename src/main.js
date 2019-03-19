@@ -76,7 +76,9 @@ accounting.settings = {
 
 // Customed components
 import Title from '@/components/Title';
+import Button from '@/components/Button';
 Vue.component('c-title', Title);
+Vue.component('btn', Button);
 
 Vue.config.productionTip = false;
 

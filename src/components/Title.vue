@@ -28,7 +28,7 @@ export default {
   display: block;
   height: 52px;
   line-height: 50px;
-  z-index: 3;
+  z-index: 6;
   position: fixed;
   background-color: #26a2ff;
   width: 100%;

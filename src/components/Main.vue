@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <v-app>
     <v-ons-tabbar :tabs="tabs" :index.sync="activeIndex" animation="none"></v-ons-tabbar>
-  </div>
+  </v-app>
 </template>
 
 <script>
@@ -66,7 +66,9 @@ export default {
     }
   },
 
-  created() {}
+  created() {
+    StatusBar.backgroundColorByHexString("#26a2ff");
+  }
 };
 </script>
 
