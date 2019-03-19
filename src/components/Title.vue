@@ -41,7 +41,7 @@ export default {
 .icon-back {
   position: absolute;
   left: 0;
-  width: 40px;
+  width: 60px;
   font-size: 32px;
 }
 </style>

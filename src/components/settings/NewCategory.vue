@@ -57,7 +57,7 @@ export default {
         customed: true,
         display,
         type,
-        icon: "md-star",
+        icon: "fa-star",
         name: Math.random()
           .toString()
           .split(".")[1]
