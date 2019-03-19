@@ -68,7 +68,7 @@ body {
 .tab-wrapper {
   position: absolute;
   width: 100%;
-  top: 100px;
+  top: 114px;
 }
 
 span {
@@ -96,10 +96,8 @@ span {
 }
 
 .btn {
-  margin: auto;
-  margin-top: auto;
-  width: 92%;
-  margin-top: 10px;
+  width: 90%;
+  margin: auto 5%;
 }
 
 .mint-navbar .mint-tab-item {

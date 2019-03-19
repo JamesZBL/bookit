@@ -1,10 +1,8 @@
 <template>
   <div>
     <div class="c-title">
-      <div>
-        <v-ons-icon @click="goBack" v-if="back" class="icon-back" icon="md-chevron-left"></v-ons-icon>
-        <span>{{ title }}</span>
-      </div>
+      <v-ons-icon @click="goBack" v-if="back" class="icon-back" icon="md-chevron-left"></v-ons-icon>
+      <span>{{ title }}</span>
       <slot></slot>
     </div>
   </div>
@@ -28,7 +26,7 @@ export default {
 <style scoped>
 .c-title {
   display: block;
-  height: 50px;
+  height: 52px;
   line-height: 50px;
   z-index: 3;
   position: fixed;

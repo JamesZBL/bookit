@@ -35,7 +35,7 @@
         </v-container>
       </v-form>
     </div>
-    <v-btn color="info" @click="onClickSubmit" large>确认</v-btn>
+    <v-btn color="info" @click="onClickSubmit" large class="btn">确认</v-btn>
   </v-app>
 </template>
 

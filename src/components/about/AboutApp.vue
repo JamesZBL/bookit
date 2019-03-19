@@ -1,7 +1,7 @@
 <template>
   <v-ons-page>
     <c-title title="关于" back/>
-    <div class="wrapper">
+    <div>
       <img src="@/assets/bookit.png" class="banner" alt>
       <p class="appname">Bookit</p>
       <p class="version">{{buildVersion}}</p>

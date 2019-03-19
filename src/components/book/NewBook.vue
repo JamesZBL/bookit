@@ -29,9 +29,9 @@
             </v-flex>
           </v-layout>
         </v-container>
+        <v-btn color="info" @click="onClickSubmit" large class="btn">保存</v-btn>
       </v-form>
     </div>
-    <v-btn color="info" @click="onClickSubmit" large>保存</v-btn>
   </v-app>
 </template>
 
@@ -49,9 +49,7 @@ export default {
       displayRules: [
         v => !!v || "请输入账本名称",
         v => v.length <= 6 || "请输入小于6个字符的账本名称",
-        v =>
-          !this.$store.getters.isBookExisted(v) ||
-          "已经存在相同名称的账本了"
+        v => !this.$store.getters.isBookExisted(v) || "已经存在相同名称的账本了"
       ]
     };
   },

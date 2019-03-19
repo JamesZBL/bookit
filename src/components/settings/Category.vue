@@ -49,8 +49,4 @@ export default {
 .mint-tab-item.is-selected {
   z-index: 1;
 }
-
-.mint-tab-container {
-  padding-top: 22px;
-}
 </style>

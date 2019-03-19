@@ -1,16 +1,17 @@
 <template>
   <v-ons-page>
-    <c-title back title="选择分类"></c-title>
-    <div class="wrapper">
-      <mt-navbar v-model="selected">
-        <mt-tab-item id="t1">支出</mt-tab-item>
-        <mt-tab-item id="t2">收入</mt-tab-item>
-      </mt-navbar>
-      <mt-tab-container v-model="selected">
-        <mt-tab-container-item v-for="(i, index) in tabs" :id="i.id" :key="index">
-          <RecordContent :type="i.type" :tabId="i.id"/>
-        </mt-tab-container-item>
-      </mt-tab-container>
+    <c-title back title="选择分类">
+      <v-tabs v-model="selected" centered color="#26a2ff" slider-color="yellow" dark fixed-tabs>
+        <v-tab v-for="(i, index) in tabs" :key="index" :href="`#${i.id}`">{{ i.display }}</v-tab>
+      </v-tabs>
+    </c-title>
+
+    <div class="tab-wrapper">
+      <v-tabs-items v-model="selected">
+        <v-tab-item v-for="(i, index) in tabs" :key="index" :id="`${i.id}`">
+          <RecordContent :type="i.type"/>
+        </v-tab-item>
+      </v-tabs-items>
     </div>
   </v-ons-page>
 </template>
@@ -30,11 +31,13 @@ export default {
       tabs: [
         {
           id: "t1",
-          type: "pay"
+          type: "pay",
+          display: "支出"
         },
         {
           id: "t2",
-          type: "income"
+          type: "income",
+          display: "收入"
         }
       ]
     };

@@ -54,13 +54,13 @@
           </div>
         </v-ons-list-item>
       </v-ons-list>
-      <mt-button
-        class="btn"
-        @click.native="onClickLogout"
+      <v-btn
+        class="btn btn-logout"
+        @click="onClickLogout"
         v-if="authenticated"
-        size="large"
-        type="danger"
-      >退出登录</mt-button>
+        color="error"
+        large
+      >退出登录</v-btn>
     </div>
     <v-ons-dialog cancelable :visible.sync="dialogVisible">
       <img v-if="check.checked_today" class="modal-icon" src="@/assets/happy.svg" alt>
@@ -79,8 +79,8 @@ export default {
     return {
       authenticated: true,
       user: {
-        username: "毛聪明",
-        email: "2495332598@qq.com"
+        username: "摆码王子",
+        email: "maocongming@gmail.com"
       },
       avatar:
         "https://storage.live.com/users/0x77cd9ac5fe438898/myprofile/expressionprofile/profilephoto:UserTileStatic/p?ck=1&ex=720&fofoff=1&sid=3B6A542688A3626C01A8593C898D6307",
@@ -100,7 +100,8 @@ export default {
           name: "类别设置",
           path: "/settings/category",
           color: "#86cbff"
-        },{
+        },
+        {
           icon: "md-lock-outline",
           name: "密码修改",
           path: "/settings/password",
@@ -265,5 +266,9 @@ export default {
 
 .list-item__left {
   padding: 12px 14px 12px 10px;
+}
+
+.btn-logout {
+  top: 10px;
 }
 </style>

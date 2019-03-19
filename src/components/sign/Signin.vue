@@ -19,7 +19,7 @@
         </v-layout>
       </v-container>
     </v-form>
-    <v-btn color="info" @click="signin" large>登录</v-btn>
+    <v-btn color="info" @click="signin" large class="btn">登录</v-btn>
     <v-container>
       <div class="sign-links">
         <span class="left" @click="onClickForgetPassword">忘记密码</span>
@@ -117,7 +117,6 @@ export default {
 }
 
 .theme--dark.application {
-  /* background-image: url('https://cn.bing.com/th?id=OHR.GrapeHarvest_EN-CN1405444811_1920x1080.jpg&rf=NorthMale_1920x1080.jpg&pid=hp'); */
   background: rgba(33, 196, 237, 1);
   background: -moz-linear-gradient(
     top,

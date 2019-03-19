@@ -283,7 +283,7 @@ export default {
 }
 
 .wrapper {
-  margin-bottom: 90px;
+  padding-bottom: 100px;
 }
 
 .item-icon {
