@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <div>
     <c-title title="邮箱验证" back></c-title>
     <div class="wrapper">
       <v-alert :value="true" type="success">验证码已发送至邮箱{{email}}, 请注意查收</v-alert>
@@ -12,9 +12,9 @@
           </v-layout>
         </v-container>
       </v-form>
+      <v-btn color="info" @click="onClickSubmit" large dark class="btn">确认</v-btn>
     </div>
-    <v-btn color="info" @click="onClickSubmit" large>确认</v-btn>
-  </v-app>
+  </div>
 </template>
 
 <script>

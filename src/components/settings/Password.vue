@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <div>
     <c-title back title="修改密码"></c-title>
     <div class="wrapper">
       <v-form v-model="valid" ref="form">
@@ -36,7 +36,7 @@
         <v-btn color="info" @click="onClickSubmit" large class="btn">确认</v-btn>
       </v-form>
     </div>
-  </v-app>
+  </div>
 </template>
 
 <script>

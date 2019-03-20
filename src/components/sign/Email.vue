@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <div>
     <c-title title="邮箱验证" back></c-title>
     <div class="wrapper">
       <v-form v-model="valid" ref="form">
@@ -13,7 +13,7 @@
       </v-form>
       <v-btn color="info" @click="onClickSubmit" large class="btn">确认</v-btn>
     </div>
-  </v-app>
+  </div>
 </template>
 
 <script>

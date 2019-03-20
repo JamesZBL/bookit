@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <div>
     <c-title title="用户注册" back></c-title>
     <div class="wrapper">
       <v-form v-model="valid" ref="form">
@@ -37,7 +37,7 @@
       </v-form>
       <v-btn color="info" @click="onClickSubmit" large class="btn">立即注册</v-btn>
     </div>
-  </v-app>
+  </div>
 </template>
 
 <script>

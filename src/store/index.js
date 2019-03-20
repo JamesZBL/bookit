@@ -5,6 +5,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    activeIndex: '',
     email: '',
     codeType: '',
     visibleCategories: [],
@@ -94,6 +95,10 @@ export default new Vuex.Store({
 
     setHideAmount(s, b) {
       s.hideAmount = b;
+    },
+
+    setActiveIndex(s, index) {
+      s.activeIndex = index;
     }
   },
 
@@ -107,6 +112,7 @@ export default new Vuex.Store({
     hiddenCategories: s => type => s.hiddenCategories.filter(c => c.type === type),
     findCategoryByName: s => name => s.visibleCategories.find(c => c.name === name) ||
       s.hiddenCategories.find(c => c.name === name),
-    isBookExisted: s => display => !!s.books.find(b => b.display === display)
+    isBookExisted: s => display => !!s.books.find(b => b.display === display),
+    activeIndex: s => s.activeIndex
   }
 });

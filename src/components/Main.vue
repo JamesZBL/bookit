@@ -1,7 +1,26 @@
 <template>
-  <v-app>
-    <v-ons-tabbar :tabs="tabs" :index.sync="activeIndex" animation="none"></v-ons-tabbar>
-  </v-app>
+  <v-ons-page>
+    <v-ons-tabbar :swipeable="false">
+      <template slot="pages">
+        <transition>
+          <keep-alive>
+            <!-- <div style="overflow-y:scroll;"> -->
+            <component :is="currentPage"></component>
+            <!-- </div> -->
+          </keep-alive>
+        </transition>
+      </template>
+
+      <v-ons-tab
+        v-for="(tab, index) in tabs"
+        :key="index"
+        :label="tab.label"
+        :icon="tab.icon"
+        @click.prevent="currentPage=tabs[index].name;"
+        :active="currentPage == tabs[index].name"
+      ></v-ons-tab>
+    </v-ons-tabbar>
+  </v-ons-page>
 </template>
 
 <script>
@@ -22,53 +41,55 @@ export default {
     About
   },
   data() {
+    console.log(this.currentPage);
     return {
-      activeIndex: Number(sessionStorage.getItem("activeIndex")) || 0,
-      tabId: "t1",
+      currentPage: this.$store.getters.activeIndex || "record",
       tabs: [
         {
           icon: "md-money-box",
           label: "明细",
           badge: "",
-          key: "record",
-          page: Record
+          name: "record",
+          path: "/record"
         },
         {
           icon: "md-chart",
           label: "图表",
           badge: "",
-          key: "analyse",
-          page: Analyse
+          name: "analyse",
+          path: "/analyse"
         },
         {
           icon: "md-bookmark",
           label: "账本",
           badge: "",
-          key: "book",
-          page: Book
+          name: "book",
+          path: "/book"
         },
         {
           icon: "md-account",
           label: "我的",
           badge: "",
-          key: "about",
-          page: About
+          name: "about",
+          path: "/about"
         }
       ]
     };
   },
 
+  computed: {},
+
+  mounted() {},
+
   methods: {},
 
   watch: {
-    activeIndex(n, o) {
-      sessionStorage.setItem("activeIndex", n);
+    currentPage(n, o) {
+      this.$store.commit("setActiveIndex", n);
     }
   },
 
-  created() {
-    StatusBar.backgroundColorByHexString("#26a2ff");
-  }
+  created() {}
 };
 </script>
 

@@ -1,5 +1,5 @@
 <template id="about">
-  <v-ons-page>
+  <div>
     <c-title title></c-title>
     <div class="wrapper">
       <div class="about-head" style="box-shadow: #00cdff 0px 0px 20px 0px;">
@@ -68,13 +68,13 @@
       <p class="modal-title" style="text-align: center">{{check_modal_title}}</p>
       <p class="modal-subtitle" style="text-align: center">你已连续签到 {{check.total_day}} 天</p>
     </v-ons-dialog>
-  </v-ons-page>
+  </div>
 </template>
 
 <script>
 import { MessageBox } from "mint-ui";
 export default {
-  name: "About",
+  name: "about",
   data() {
     return {
       authenticated: true,

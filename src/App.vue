@@ -1,8 +1,10 @@
 <template>
   <div id="app">
-    <fade-transition>
-      <router-view></router-view>
-    </fade-transition>
+    <v-app>
+      <keep-alive>
+        <router-view></router-view>
+      </keep-alive>
+    </v-app>
   </div>
 </template>
 
@@ -104,20 +106,20 @@ span {
   color: #7d7c7c;
 }
 
-ons-fab.fab,
-ons-speed-dial-item.fab,
-button.fab {
+.v-btn--floating {
   box-shadow: #26a2ff 0px 2px 10px 0px !important;
-}
-
-ons-fab.fab,
-ons-speed-dial-item.fab,
-button.fab {
+  position: fixed !important;
+  bottom: 16px !important;
+  font-size: 24px;
   background-color: #26a2ff !important;
 }
 
 .ons-icon.fa {
   font-weight: 600;
   font-size: 14px !important;
+}
+
+.application--wrap {
+  overflow-y: scroll;
 }
 </style>

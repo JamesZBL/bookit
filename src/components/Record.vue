@@ -1,5 +1,5 @@
 <template id="record">
-  <v-ons-page>
+  <div>
     <c-title title="Bookit"/>
     <div class="wrapper">
       <div class="head" style="box-shadow: #00cdff 0px 0px 20px 0px;">
@@ -52,30 +52,30 @@
           </div>
         </v-ons-list>
       </div>
+      <v-btn absolute dark fab bottom right @click="handleNewRecord">
+        <v-ons-icon icon="md-plus"></v-ons-icon>
+      </v-btn>
+      <v-ons-dialog cancelable :visible.sync="dialogVisible">
+        <v-date-picker
+          v-model="pickerDate"
+          locale="zh-cn"
+          type="month"
+          v-show="true"
+          :reactive="true"
+        >
+          <v-spacer></v-spacer>
+          <v-btn flat color="primary" @click="onClickDateOk">OK</v-btn>
+        </v-date-picker>
+      </v-ons-dialog>
     </div>
-    <v-ons-fab @click="handleNewRecord" position="bottom right">
-      <v-ons-icon icon="md-plus"></v-ons-icon>
-    </v-ons-fab>
-    <v-ons-dialog cancelable :visible.sync="dialogVisible">
-      <v-date-picker
-        v-model="pickerDate"
-        locale="zh-cn"
-        type="month"
-        v-show="true"
-        :reactive="true"
-      >
-        <v-spacer></v-spacer>
-        <v-btn flat color="primary" @click="onClickDateOk">OK</v-btn>
-      </v-date-picker>
-    </v-ons-dialog>
-  </v-ons-page>
+  </div>
 </template>
 
 <script>
 import number from "@/components/number/Money";
 import accounting from "accounting";
 export default {
-  name: "Record",
+  name: "record",
   components: {
     number
   },
@@ -214,7 +214,7 @@ export default {
 
 <style scoped>
 .head {
-  height: 65px;
+  height: 67px;
   background: linear-gradient(#26a2ff, #00cdff);
   color: white;
   margin-bottom: 4px;

@@ -1,5 +1,5 @@
 <template>
-  <v-ons-page>
+  <div>
     <c-title back title="分类管理">
       <v-tabs v-model="selected" centered color="#26a2ff" slider-color="yellow" dark fixed-tabs>
         <v-tab v-for="(i, index) in tabs" :key="index" :href="`#${i.id}`">{{ i.display }}</v-tab>
@@ -15,7 +15,7 @@
     <v-ons-fab @click="handleNewCategory" position="bottom right">
       <v-ons-icon icon="md-plus"></v-ons-icon>
     </v-ons-fab>
-  </v-ons-page>
+  </div>
 </template>
 
 <script>

@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <div>
     <c-title title="添加账本" back/>
     <div class="wrapper card-wrapper">
       <v-container grid-list-md text-xs-center>
@@ -32,7 +32,7 @@
         <v-btn color="info" @click="onClickSubmit" large class="btn">保存</v-btn>
       </v-form>
     </div>
-  </v-app>
+  </div>
 </template>
 
 <script>

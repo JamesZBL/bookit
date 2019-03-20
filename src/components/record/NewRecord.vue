@@ -1,5 +1,5 @@
 <template>
-  <v-ons-page>
+  <div>
     <c-title back title="记一笔"></c-title>
     <div class="wrapper card-wrapper">
       <v-ons-card>
@@ -35,7 +35,7 @@
       <v-btn class="btn" @click.native="onClickSave" color="info" large dark>保存</v-btn>
     </div>
     <mt-datetime-picker ref="picker" v-model="pickerValue" type="date" @confirm="confirmDate"></mt-datetime-picker>
-  </v-ons-page>
+  </div>
 </template>
 
 <script>

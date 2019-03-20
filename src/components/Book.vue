@@ -1,5 +1,5 @@
 <template id="book">
-  <v-ons-page v-on:swiperight="onPressCard">
+  <div v-on:swiperight="onPressCard">
     <c-title title="账本"/>
     <div class="wrapper card-wrapper">
       <v-container grid-list-md text-xs-center>
@@ -27,15 +27,15 @@
         </v-layout>
       </v-container>
     </div>
-    <v-ons-fab @click="onClickFab" position="bottom right">
+    <v-btn absolute dark fab bottom right @click="onClickFab">
       <v-ons-icon :icon="showDelete? 'md-check':'md-plus'"></v-ons-icon>
-    </v-ons-fab>
-  </v-ons-page>
+    </v-btn>
+  </div>
 </template>
 
 <script>
 export default {
-  name: "Book",
+  name: "book",
   data() {
     return {
       showDelete: false
@@ -102,7 +102,7 @@ export default {
   position: absolute;
   font-size: 22px;
   right: 5px;
-  top: -5px;
+  top: -9px;
   color: white;
 }
 

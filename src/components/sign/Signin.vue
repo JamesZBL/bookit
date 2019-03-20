@@ -1,34 +1,36 @@
 <template>
   <v-app dark>
-    <h1 class="signin-title">Bookit</h1>
-    <span class="signin-sub-title">基于 Vue.js 的记账 APP</span>
-    <v-form v-model="valid" dark>
+    <div class="signin">
+      <h1 class="signin-title">Bookit</h1>
+      <span class="signin-sub-title">基于 Vue.js 的记账 APP</span>
+      <v-form v-model="valid" dark>
+        <v-container>
+          <v-layout>
+            <v-flex xs12 md4>
+              <v-text-field v-model="email" :rules="emailRules" label="邮箱" required clearable></v-text-field>
+              <v-text-field
+                v-model="password"
+                :rules="passwordRules"
+                label="密码"
+                type="password"
+                required
+                clearable
+              ></v-text-field>
+            </v-flex>
+          </v-layout>
+        </v-container>
+      </v-form>
+      <v-btn color="info" @click="signin" large class="btn">登录</v-btn>
       <v-container>
-        <v-layout>
-          <v-flex xs12 md4>
-            <v-text-field v-model="email" :rules="emailRules" label="邮箱" required clearable></v-text-field>
-            <v-text-field
-              v-model="password"
-              :rules="passwordRules"
-              label="密码"
-              type="password"
-              required
-              clearable
-            ></v-text-field>
-          </v-flex>
-        </v-layout>
+        <div class="sign-links">
+          <span class="left" @click="onClickForgetPassword">忘记密码</span>
+          <span class="right" @click="onClickSignup">现在注册</span>
+        </div>
       </v-container>
-    </v-form>
-    <v-btn color="info" @click="signin" large class="btn">登录</v-btn>
-    <v-container>
-      <div class="sign-links">
-        <span class="left" @click="onClickForgetPassword">忘记密码</span>
-        <span class="right" @click="onClickSignup">现在注册</span>
+      <div class="copyright-wrapper">
+        <span class="signin-sub-title signin-copyright">License Apache 2.0</span>
+        <span class="signin-sub-title signin-copyright">Copyright 2019 MAO RU NAN</span>
       </div>
-    </v-container>
-    <div class="copyright-wrapper">
-      <span class="signin-sub-title signin-copyright">License Apache 2.0</span>
-      <span class="signin-sub-title signin-copyright">Copyright 2019 MAO RU NAN</span>
     </div>
   </v-app>
 </template>
@@ -53,7 +55,7 @@ export default {
     signin() {
       const { email, password } = this;
       this.$router.replace("/");
-      sessionStorage.clear();
+      this.$store.commit("setActiveIndex", 0);
     },
 
     onClickSignup() {
@@ -92,6 +94,7 @@ export default {
   color: rgba(255, 255, 255, 0.607);
   text-align: center;
   font-size: 16px;
+  display: block;
 }
 
 .signin-copyright {
@@ -112,7 +115,8 @@ export default {
   width: 100%;
 }
 
-.theme--dark.application {
+.signin {
+  height: 100%;
   background: rgba(33, 196, 237, 1);
   background: -moz-linear-gradient(
     top,
@@ -121,7 +125,7 @@ export default {
     rgba(0, 88, 171, 1) 36%,
     rgba(2, 73, 140, 1) 52%,
     rgba(6, 26, 46, 1) 100%
-  );
+  ) !important;
   background: -webkit-gradient(
     left top,
     left bottom,
@@ -130,7 +134,7 @@ export default {
     color-stop(36%, rgba(0, 88, 171, 1)),
     color-stop(52%, rgba(2, 73, 140, 1)),
     color-stop(100%, rgba(6, 26, 46, 1))
-  );
+  ) !important;
   background: -webkit-linear-gradient(
     top,
     rgba(33, 196, 237, 1) 0%,
@@ -138,7 +142,7 @@ export default {
     rgba(0, 88, 171, 1) 36%,
     rgba(2, 73, 140, 1) 52%,
     rgba(6, 26, 46, 1) 100%
-  );
+  ) !important;
   background: -o-linear-gradient(
     top,
     rgba(33, 196, 237, 1) 0%,
@@ -146,7 +150,7 @@ export default {
     rgba(0, 88, 171, 1) 36%,
     rgba(2, 73, 140, 1) 52%,
     rgba(6, 26, 46, 1) 100%
-  );
+  ) !important;
   background: -ms-linear-gradient(
     top,
     rgba(33, 196, 237, 1) 0%,
@@ -154,7 +158,7 @@ export default {
     rgba(0, 88, 171, 1) 36%,
     rgba(2, 73, 140, 1) 52%,
     rgba(6, 26, 46, 1) 100%
-  );
+  ) !important;
   background: linear-gradient(
     to bottom,
     rgba(33, 196, 237, 1) 0%,
@@ -162,6 +166,6 @@ export default {
     rgba(0, 88, 171, 1) 36%,
     rgba(2, 73, 140, 1) 52%,
     rgba(6, 26, 46, 1) 100%
-  );
+  ) !important;
 }
 </style>

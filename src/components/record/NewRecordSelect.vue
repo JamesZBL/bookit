@@ -1,5 +1,5 @@
 <template>
-  <v-ons-page>
+  <div>
     <c-title back title="选择分类">
       <v-tabs v-model="selected" centered color="#26a2ff" slider-color="yellow" dark fixed-tabs>
         <v-tab v-for="(i, index) in tabs" :key="index" :href="`#${i.id}`">{{ i.display }}</v-tab>
@@ -13,7 +13,7 @@
         </v-tab-item>
       </v-tabs-items>
     </div>
-  </v-ons-page>
+  </div>
 </template>
 
 <script>

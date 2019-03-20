@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <div>
     <c-title back title="新建分类"></c-title>
     <div class="wrapper">
       <v-form v-model="valid" ref="form">
@@ -14,7 +14,7 @@
       </v-form>
       <v-btn color="info" @click="onClickSubmit" large class="btn">确认</v-btn>
     </div>
-  </v-app>
+  </div>
 </template>
 
 <script>

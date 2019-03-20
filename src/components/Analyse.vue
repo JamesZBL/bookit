@@ -1,5 +1,5 @@
 <template id="analyse">
-  <v-ons-page>
+  <div>
     <c-title title="图表"/>
     <div class="wrapper card-wrapper">
       <div v-observe-visibility="onVisibilityChanged" class="mark"></div>
@@ -13,7 +13,7 @@
         <SubjectPay :styles="chartStyle" ref="subjectsPay"/>
       </v-ons-card>
     </div>
-  </v-ons-page>
+  </div>
 </template>
 
 <script>
@@ -21,7 +21,7 @@ import IncomeAndPay from "@/components/chart/IncomeAndPay";
 import SubjectPay from "@/components/chart/SubjectPay";
 import SubjectIncome from "@/components/chart/SubjectIncome";
 export default {
-  name: "Analyse",
+  name: "analyse",
   components: {
     IncomeAndPay,
     SubjectPay,
