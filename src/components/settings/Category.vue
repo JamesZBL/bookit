@@ -12,9 +12,9 @@
         </v-tab-item>
       </v-tabs-items>
     </div>
-    <v-ons-fab @click="handleNewCategory" position="bottom right">
+    <v-btn absolute dark fab bottom right @click="handleNewCategory">
       <v-ons-icon icon="md-plus"></v-ons-icon>
-    </v-ons-fab>
+    </v-btn>
   </div>
 </template>
 

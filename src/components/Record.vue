@@ -1,5 +1,5 @@
 <template id="record">
-  <div>
+  <div class="scroll">
     <c-title title="Bookit"/>
     <div class="wrapper">
       <div class="head" style="box-shadow: #00cdff 0px 0px 20px 0px;">
@@ -175,6 +175,7 @@ export default {
       ]
     };
   },
+  mounted() {},
   computed: {},
   methods: {
     onClickDate() {

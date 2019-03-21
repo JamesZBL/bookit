@@ -1,5 +1,5 @@
 <template id="book">
-  <div v-on:swiperight="onPressCard">
+  <div class="scroll" v-on:swiperight="onPressCard">
     <c-title title="账本"/>
     <div class="wrapper card-wrapper">
       <v-container grid-list-md text-xs-center>
@@ -17,7 +17,7 @@
                 <v-card-text
                   class="px-0 delete"
                   v-if="showDelete && i.type!=='default'"
-                  @click="onClickDeleteBook"
+                  @click="onClickDeleteBook(i)"
                 >
                   <v-ons-icon icon="md-delete"></v-ons-icon>
                 </v-card-text>

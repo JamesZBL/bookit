@@ -81,14 +81,6 @@ span {
   font-size: 20px;
 }
 
-.mark {
-  width: 1px;
-  height: 1px;
-  position: fixed;
-  top: 100px;
-  margin-left: 1px;
-}
-
 .mint-navbar {
   padding: 0 24%;
 }
@@ -110,7 +102,7 @@ span {
   box-shadow: #26a2ff 0px 2px 10px 0px !important;
   position: fixed !important;
   bottom: 16px !important;
-  font-size: 24px;
+  font-size: 24px !important;
   background-color: #26a2ff !important;
 }
 
@@ -120,6 +112,10 @@ span {
 }
 
 .application--wrap {
+  overflow-y: scroll;
+}
+
+.scroll {
   overflow-y: scroll;
 }
 </style>

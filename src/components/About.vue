@@ -1,5 +1,5 @@
 <template id="about">
-  <div>
+  <div class="scroll">
     <c-title title></c-title>
     <div class="wrapper">
       <div class="about-head" style="box-shadow: #00cdff 0px 0px 20px 0px;">
@@ -13,30 +13,25 @@
         <div class="check" @click="onClickUserCheck">
           <v-ons-icon style="color:white;" icon="md-edit"></v-ons-icon>
           <span class="check-text">签到</span>
-          <span class="check-filler"></span>
         </div>
-        <div class="about-float">
-          <v-ons-row>
-            <v-ons-col>
-              <div class="float-col">
-                <span class="float-value">{{stats.check_count}}</span>
-                <span class="float-label">已连续打卡</span>
-              </div>
-            </v-ons-col>
-            <v-ons-col>
-              <div class="float-col">
-                <span class="float-value">{{stats.day}}</span>
-                <span class="float-label">总记账天数</span>
-              </div>
-            </v-ons-col>
-            <v-ons-col>
-              <div class="float-col">
-                <span class="float-value">{{stats.record_count}}</span>
-                <span class="float-label">总记账笔数</span>
-              </div>
-            </v-ons-col>
-          </v-ons-row>
-        </div>
+      </div>
+      <div class="about-float">
+        <v-container grid-list-md text-xs-center>
+          <v-layout row wrap>
+            <v-flex xs4>
+              <span class="float-value">{{stats.check_count}}</span>
+              <span class="float-label">已连续打卡</span>
+            </v-flex>
+            <v-flex xs4>
+              <span class="float-value">{{stats.day}}</span>
+              <span class="float-label">总记账天数</span>
+            </v-flex>
+            <v-flex xs4>
+              <span class="float-value">{{stats.record_count}}</span>
+              <span class="float-label">总记账笔数</span>
+            </v-flex>
+          </v-layout>
+        </v-container>
       </div>
       <v-ons-list class="menus">
         <v-ons-list-item
@@ -54,13 +49,7 @@
           </div>
         </v-ons-list-item>
       </v-ons-list>
-      <v-btn
-        class="btn btn-logout"
-        @click="onClickLogout"
-        v-if="authenticated"
-        color="error"
-        large
-      >退出登录</v-btn>
+      <v-btn class="btn btn-logout" @click="onClickLogout" color="error" large>退出登录</v-btn>
     </div>
     <v-ons-dialog cancelable :visible.sync="dialogVisible">
       <img v-if="check.checked_today" class="modal-icon" src="@/assets/happy.svg" alt>
@@ -77,7 +66,6 @@ export default {
   name: "about",
   data() {
     return {
-      authenticated: true,
       user: {
         username: "摆码王子",
         email: "maocongming@gmail.com"
@@ -152,15 +140,27 @@ export default {
 
 <style scoped>
 .about-head {
-  height: 150px;
   background: linear-gradient(#26a2ff, #00cdff);
+  height: 155px;
   color: white;
   margin-bottom: 4px;
-  position: fixed;
-  z-index: 1;
   width: 100%;
   padding: 20px 0;
   width: 100%;
+  overflow: hidden;
+}
+
+.about-float {
+  position: fixed;
+  background-color: white;
+  height: 90px;
+  width: 86%;
+  box-shadow: rgba(1, 1, 1, 0.1) 0px 2px 10px 2px;
+  border-radius: 5px;
+  margin: auto;
+  margin-top: 20px;
+  top: 140px;
+  left: 7%;
 }
 
 .avatar {
@@ -175,26 +175,12 @@ export default {
   font-weight: 1000;
 }
 
-.about-float {
-  color: black;
-  z-index: 3;
-  background-color: white;
-  height: 90px;
-  width: 86%;
-  top: 200px;
-  box-shadow: rgba(1, 1, 1, 0.1) 0px 2px 10px 2px;
-  border-radius: 5px;
-  margin: auto;
-  padding: 10px;
-  margin-top: 20px;
-}
-
 .list-cells {
   margin-bottom: 15px;
 }
 
 .menus {
-  padding-top: 220px;
+  margin-top: 60px;
 }
 
 .float-label {
@@ -231,19 +217,16 @@ export default {
 
 .check {
   position: absolute;
-  right: -10px;
+  right: 0;
   top: 24px;
   background-color: #0094ef;
-  border-radius: 20px;
   box-shadow: #009dfe 0 3px 3px;
   font-size: 14px;
   padding: 5px;
   padding-left: 14px;
-}
-
-.check-filler {
-  display: inline-block;
-  width: 20px;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  padding-right: 14px;
 }
 
 .check-text {
@@ -259,6 +242,7 @@ export default {
 
 .modal-title {
   font-size: 20px;
+  margin-top: 10px;
 }
 
 .modal-subtitle {
@@ -271,5 +255,9 @@ export default {
 
 .btn-logout {
   top: 10px;
+}
+
+.container.grid-list-md .layout .flex {
+  padding: 0 !important;
 }
 </style>

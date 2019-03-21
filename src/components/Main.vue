@@ -4,7 +4,7 @@
       <template slot="pages">
         <transition>
           <keep-alive>
-            <div class="tab-item">
+            <div class="scroll" ref="scroll">
               <component :is="currentPage"></component>
             </div>
           </keep-alive>
@@ -16,8 +16,8 @@
         :key="index"
         :label="tab.label"
         :icon="tab.icon"
-        @click.prevent="currentPage=tabs[index].name;"
-        :active="tab.name === getCurrentPage()"
+        @click.prevent="currentPage=tab.name;"
+        :active="tab.name === currentPage"
       ></v-ons-tab>
     </v-ons-tabbar>
   </v-ons-page>
@@ -42,8 +42,7 @@ export default {
   },
   data() {
     return {
-      activeIndex: this.$store.state.activeIndex || 3,
-      currentPage: this.getCurrentPage(),
+      currentPage: "record",
       tabs: [
         {
           icon: "md-money-box",
@@ -80,21 +79,25 @@ export default {
   computed: {},
 
   activated() {
-    this.currentPage = this.getCurrentPage();
+    this.currentPage = this.$store.getters.currentPage || "record";
+    const last = this.currentPage;
+    console.log(this.currentPage);
+    this.currentPage = "";
+    console.log(this.currentPage);
+    this.currentPage = last;
+    setTimeout(() => {
+      this.currentPage = last;
+      console.log(this.currentPage);
+    }, 10);
   },
 
-  mounted() {
-    console.log(this.activeIndex);
-  },
+  mounted() {},
 
-  methods: {
-    getCurrentPage() {
-      return this.$store.getters.currentPage || "record";
-    }
-  },
+  methods: {},
 
   watch: {
     currentPage(n, o) {
+      this.$refs.scroll.scrollTop = 0;
       this.$store.commit("setCurrentPage", n);
     }
   },

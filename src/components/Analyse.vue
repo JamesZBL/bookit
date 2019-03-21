@@ -1,17 +1,10 @@
 <template id="analyse">
-  <div>
+  <div class="scroll">
     <c-title title="图表"/>
     <div class="wrapper card-wrapper">
-      <div v-observe-visibility="onVisibilityChanged" class="mark"></div>
-      <v-ons-card>
-        <IncomeAndPay :styles="chartStyle" ref="incomeAndPay"/>
-      </v-ons-card>
-      <v-ons-card>
-        <SubjectIncome :styles="chartStyle" ref="subjectsIncome"/>
-      </v-ons-card>
-      <v-ons-card>
-        <SubjectPay :styles="chartStyle" ref="subjectsPay"/>
-      </v-ons-card>
+      <IncomeAndPay :styles="chartStyle" ref="incomeAndPay"/>
+      <SubjectIncome :styles="chartStyle" ref="subjectsIncome"/>
+      <SubjectPay :styles="chartStyle" ref="subjectsPay"/>
     </div>
   </div>
 </template>
@@ -33,6 +26,9 @@ export default {
         position: "relative"
       }
     };
+  },
+  mounted() {
+    this.initChart();
   },
   methods: {
     initChart() {
