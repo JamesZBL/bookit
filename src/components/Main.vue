@@ -4,9 +4,9 @@
       <template slot="pages">
         <transition>
           <keep-alive>
-            <!-- <div style="overflow-y:scroll;"> -->
-            <component :is="currentPage"></component>
-            <!-- </div> -->
+            <div class="tab-item">
+              <component :is="currentPage"></component>
+            </div>
           </keep-alive>
         </transition>
       </template>
@@ -17,7 +17,7 @@
         :label="tab.label"
         :icon="tab.icon"
         @click.prevent="currentPage=tabs[index].name;"
-        :active="currentPage == tabs[index].name"
+        :active="tab.name === getCurrentPage()"
       ></v-ons-tab>
     </v-ons-tabbar>
   </v-ons-page>
@@ -41,9 +41,9 @@ export default {
     About
   },
   data() {
-    console.log(this.currentPage);
     return {
-      currentPage: this.$store.getters.activeIndex || "record",
+      activeIndex: this.$store.state.activeIndex || 3,
+      currentPage: this.getCurrentPage(),
       tabs: [
         {
           icon: "md-money-box",
@@ -79,13 +79,23 @@ export default {
 
   computed: {},
 
-  mounted() {},
+  activated() {
+    this.currentPage = this.getCurrentPage();
+  },
 
-  methods: {},
+  mounted() {
+    console.log(this.activeIndex);
+  },
+
+  methods: {
+    getCurrentPage() {
+      return this.$store.getters.currentPage || "record";
+    }
+  },
 
   watch: {
     currentPage(n, o) {
-      this.$store.commit("setActiveIndex", n);
+      this.$store.commit("setCurrentPage", n);
     }
   },
 
@@ -95,4 +105,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.tab-item {
+  overflow-y: scroll;
+}
 </style>

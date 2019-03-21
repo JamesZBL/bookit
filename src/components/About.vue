@@ -128,6 +128,7 @@ export default {
       this.$ons.notification.confirm("确定要退出登录吗?").then(ok => {
         if (ok) {
           this.$router.replace("/signin");
+          this.$store.commit("setCurrentPage", "");
         }
       });
     },
