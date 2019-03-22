@@ -88,8 +88,8 @@ export default {
       pickerDate: new Date().toISOString().substring(0, 7),
       year,
       month,
-      income: 99999,
-      pay: 99999,
+      income: 1612.5,
+      pay: 24578.75,
       list: [
         {
           date: "2019-03-02",

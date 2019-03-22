@@ -10,7 +10,8 @@ const setLightColor = function () {
 }
 
 const setColor = function (color) {
-  StatusBar.backgroundColorByHexString(color);
+  if ("undefined" !== typeof StatusBar)
+    StatusBar.backgroundColorByHexString(color);
 }
 
 export {

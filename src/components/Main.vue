@@ -1,26 +1,27 @@
 <template>
-  <v-ons-page>
-    <v-ons-tabbar :swipeable="false">
-      <template slot="pages">
-        <transition>
-          <keep-alive>
-            <div class="scroll" ref="scroll">
-              <component :is="currentPage"></component>
-            </div>
-          </keep-alive>
-        </transition>
-      </template>
-
-      <v-ons-tab
-        v-for="(tab, index) in tabs"
-        :key="index"
-        :label="tab.label"
-        :icon="tab.icon"
-        @click.prevent="currentPage=tab.name;"
-        :active="tab.name === currentPage"
-      ></v-ons-tab>
-    </v-ons-tabbar>
-  </v-ons-page>
+  <v-app>
+    <v-ons-page>
+      <v-ons-tabbar :swipeable="false">
+        <template slot="pages">
+          <transition>
+            <keep-alive>
+              <div class="scroll" ref="scroll">
+                <component :is="currentPage"></component>
+              </div>
+            </keep-alive>
+          </transition>
+        </template>
+        <v-ons-tab
+          v-for="(tab, index) in tabs"
+          :key="index"
+          :label="tab.label"
+          :icon="tab.icon"
+          @click.prevent="currentPage=tab.name;"
+          :active="tab.name === currentPage"
+        ></v-ons-tab>
+      </v-ons-tabbar>
+    </v-ons-page>
+  </v-app>
 </template>
 
 <script>

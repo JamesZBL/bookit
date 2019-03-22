@@ -1,8 +1,11 @@
 <template>
   <div @click="toggle">
     <span>
-      <span :class="moneyClass">{{ display }}</span>
-      <v-ons-icon icon="md-eye" class="eye" v-if="!show"></v-ons-icon>
+      <div :class="moneyClass.push('wrapper')">
+        <span>{{ displayInteger }}</span>
+        <span class="decimal">{{ displayDecimal }}</span>
+        <v-ons-icon icon="md-eye" class="eye" v-if="!show"></v-ons-icon>
+      </div>
     </span>
   </div>
 </template>
@@ -22,9 +25,6 @@ export default {
   },
 
   computed: {
-    display() {
-      return this.show ? accounting.formatMoney(this.number, "") : "****";
-    },
     moneyClass() {
       return this.long ? ["long"] : [];
     },
@@ -32,12 +32,24 @@ export default {
       const { number } = this;
       const length = accounting.formatNumber(number, 0).length;
       return 5 < length;
+    },
+    displayInteger() {
+      return this.show ? this.moneySections[0] : "****";
+    },
+    displayDecimal() {
+      return this.show ? `.${this.moneySections[1]}` : "";
+    },
+    moneySections() {
+      return String(this.formatMoney(this.number)).split(".");
     }
   },
 
   methods: {
     toggle() {
       this.show = !this.show;
+    },
+    formatMoney(n) {
+      return accounting.formatMoney(n, "");
     }
   },
 
@@ -54,6 +66,17 @@ export default {
 }
 
 .long {
-  font-size: 14px;
+  font-size: 16px;
+  vertical-align: bottom;
+}
+
+.decimal {
+  font-size: 14px !important;
+  vertical-align: top;
+  line-height: 36px;
+}
+
+.wrapper {
+  display: inline-block;
 }
 </style>
