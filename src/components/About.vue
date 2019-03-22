@@ -151,7 +151,7 @@ export default {
 }
 
 .about-float {
-  position: fixed;
+  position: absolute;
   background-color: white;
   height: 90px;
   width: 86%;
@@ -159,7 +159,7 @@ export default {
   border-radius: 5px;
   margin: auto;
   margin-top: 20px;
-  top: 140px;
+  top: 90px;
   left: 7%;
 }
 

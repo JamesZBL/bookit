@@ -2,7 +2,7 @@
   <div class="scroll">
     <c-title title="Bookit"/>
     <div class="wrapper">
-      <div class="head amount-slim" style="box-shadow: #00cdff 0px 0px 20px 0px;">
+      <div class="head amount-slim" style="">
         <div class="head-left box" @click="onClickDate">
           <div class="label">
             <span>{{year}}年</span>
@@ -88,7 +88,7 @@ export default {
       pickerDate: new Date().toISOString().substring(0, 7),
       year,
       month,
-      income: 1612.5,
+      income: 1682.5,
       pay: 24578.75,
       list: [
         {
@@ -215,6 +215,7 @@ export default {
 
 <style scoped>
 .head {
+  box-shadow: #00cdff 0px 0px 20px 0px;
   height: 67px;
   background: linear-gradient(#26a2ff, #00cdff);
   color: white;
@@ -253,6 +254,7 @@ export default {
 .amount {
   display: block;
   font-size: 24px;
+  margin-top: -4px;
 }
 
 .list-label {

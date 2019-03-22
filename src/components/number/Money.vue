@@ -1,11 +1,11 @@
 <template>
   <div @click="toggle">
     <span>
-      <div :class="moneyClass.push('wrapper')">
+      <span :class="[...moneyClass,'amount-wrapper']">
         <span>{{ displayInteger }}</span>
         <span class="decimal">{{ displayDecimal }}</span>
         <v-ons-icon icon="md-eye" class="eye" v-if="!show"></v-ons-icon>
-      </div>
+      </span>
     </span>
   </div>
 </template>
@@ -60,14 +60,18 @@ export default {
 <style scoped>
 .eye {
   font-size: 14px;
-  position: absolute;
-  top: 26px;
   margin-left: 4px;
+  vertical-align: top;
 }
 
 .long {
   font-size: 16px;
   vertical-align: bottom;
+  line-height: 30px;
+}
+
+:not(.long) > .eye {
+  padding-top: 4px;
 }
 
 .decimal {
@@ -76,7 +80,9 @@ export default {
   line-height: 36px;
 }
 
-.wrapper {
+.amount-wrapper {
   display: inline-block;
+  padding: 0;
+  margin: 0;
 }
 </style>

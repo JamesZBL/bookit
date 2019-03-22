@@ -1,38 +1,37 @@
 <template>
-  <v-app dark>
-    <div class="signin">
-      <h1 class="signin-title">Bookit</h1>
-      <span class="signin-sub-title">基于 Vue.js 的记账 APP</span>
-      <v-form v-model="valid" dark>
-        <v-container>
-          <v-layout>
-            <v-flex xs12 md4>
-              <v-text-field v-model="email" :rules="emailRules" label="邮箱" required clearable></v-text-field>
-              <v-text-field
-                v-model="password"
-                :rules="passwordRules"
-                label="密码"
-                type="password"
-                required
-                clearable
-              ></v-text-field>
-            </v-flex>
-          </v-layout>
-        </v-container>
-      </v-form>
-      <v-btn color="info" @click="signin" large class="btn" round>登录</v-btn>
+  <div class="signin">
+    <h1 class="signin-title">Bookit</h1>
+    <span class="signin-sub-title">基于 Vue.js 的记账 APP</span>
+    <v-form v-model="valid">
       <v-container>
-        <div class="sign-links">
-          <span class="left" @click="onClickForgetPassword">忘记密码</span>
-          <span class="right" @click="onClickSignup">现在注册</span>
-        </div>
+        <v-layout>
+          <v-flex xs12 md4>
+            <v-text-field v-model="email" :rules="emailRules" label="邮箱" required clearable dark></v-text-field>
+            <v-text-field
+              v-model="password"
+              :rules="passwordRules"
+              label="密码"
+              type="password"
+              required
+              clearable
+              dark
+            ></v-text-field>
+          </v-flex>
+        </v-layout>
       </v-container>
-      <div class="copyright-wrapper">
-        <span class="signin-sub-title signin-copyright">License Apache 2.0</span>
-        <span class="signin-sub-title signin-copyright">Copyright 2019 MAO RU NAN</span>
+    </v-form>
+    <v-btn color="info" @click="signin" large class="btn" round>登录</v-btn>
+    <v-container>
+      <div class="sign-links">
+        <span class="left" @click="onClickForgetPassword">忘记密码</span>
+        <span class="right" @click="onClickSignup">现在注册</span>
       </div>
+    </v-container>
+    <div class="copyright-wrapper">
+      <span class="signin-sub-title signin-copyright">License Apache 2.0</span>
+      <span class="signin-sub-title signin-copyright">Copyright 2019 MAO RU NAN</span>
     </div>
-  </v-app>
+  </div>
 </template>
 
 <script>
