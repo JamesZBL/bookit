@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="vapp">
     <v-app>
       <keep-alive include="Main">
         <router-view></router-view>
@@ -12,6 +12,7 @@
 import { FadeTransition } from "vue2-transitions";
 import categories from "@/category";
 import books from "@/book";
+import "@/fonts/fonts.css";
 export default {
   name: "App",
   components: {
@@ -117,5 +118,13 @@ span {
 
 .scroll {
   overflow-y: scroll;
+}
+
+.amount-slim {
+  font-family: "Lato", Arial, Helvetica, sans-serif;
+}
+
+.amount-round {
+  font-family: "Varela Round", Arial, Helvetica, sans-serif;
 }
 </style>

@@ -49,7 +49,7 @@
           </div>
         </v-ons-list-item>
       </v-ons-list>
-      <v-btn class="btn btn-logout" @click="onClickLogout" color="error" large>退出登录</v-btn>
+      <v-btn class="btn btn-logout" @click="onClickLogout" color="error" large round>退出登录</v-btn>
     </div>
     <v-ons-dialog cancelable :visible.sync="dialogVisible">
       <img v-if="check.checked_today" class="modal-icon" src="@/assets/happy.svg" alt>
@@ -198,6 +198,7 @@ export default {
   text-align: center;
   line-height: 40px;
   color: #486482;
+  font-family: "Lato", Arial, Helvetica, sans-serif;
 }
 
 .head-right {

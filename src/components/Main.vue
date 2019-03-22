@@ -31,6 +31,7 @@ import About from "@/components/About";
 import { TabContainer, TabContainerItem } from "mint-ui";
 import { Tabbar, TabItem } from "mint-ui";
 import { Header } from "mint-ui";
+import { setMainColor } from "@/theme/statusbar";
 
 export default {
   name: "Main",
@@ -79,16 +80,8 @@ export default {
   computed: {},
 
   activated() {
+    setMainColor();
     this.currentPage = this.$store.getters.currentPage || "record";
-    const last = this.currentPage;
-    console.log(this.currentPage);
-    this.currentPage = "";
-    console.log(this.currentPage);
-    this.currentPage = last;
-    setTimeout(() => {
-      this.currentPage = last;
-      console.log(this.currentPage);
-    }, 10);
   },
 
   mounted() {},

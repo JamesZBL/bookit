@@ -29,7 +29,7 @@
             </v-flex>
           </v-layout>
         </v-container>
-        <v-btn color="info" @click="onClickSubmit" large class="btn">保存</v-btn>
+        <v-btn color="info" @click="onClickSubmit" large class="btn" round>保存</v-btn>
       </v-form>
     </div>
   </div>

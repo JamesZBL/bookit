@@ -35,12 +35,13 @@
           </v-layout>
         </v-container>
       </v-form>
-      <v-btn color="info" @click="onClickSubmit" large class="btn">立即注册</v-btn>
+      <v-btn color="info" @click="onClickSubmit" large class="btn" round>立即注册</v-btn>
     </div>
   </div>
 </template>
 
 <script>
+import { setMainColor } from "@/theme/statusbar";
 export default {
   data() {
     return {
@@ -62,6 +63,10 @@ export default {
         v => v.length >= 8 || "密码应不少于8个字符"
       ]
     };
+  },
+
+  mounted() {
+    setMainColor();
   },
 
   methods: {

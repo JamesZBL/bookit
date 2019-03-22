@@ -20,7 +20,7 @@
           </v-layout>
         </v-container>
       </v-form>
-      <v-btn color="info" @click="signin" large class="btn">登录</v-btn>
+      <v-btn color="info" @click="signin" large class="btn" round>登录</v-btn>
       <v-container>
         <div class="sign-links">
           <span class="left" @click="onClickForgetPassword">忘记密码</span>
@@ -36,6 +36,7 @@
 </template>
 
 <script>
+import { setLightColor } from "@/theme/statusbar";
 export default {
   name: "signin",
   data() {
@@ -49,6 +50,10 @@ export default {
       ],
       passwordRules: [v => !!v || "请输入密码"]
     };
+  },
+
+  mounted() {
+    setLightColor();
   },
 
   methods: {

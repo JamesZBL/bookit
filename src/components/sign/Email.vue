@@ -11,12 +11,13 @@
           </v-layout>
         </v-container>
       </v-form>
-      <v-btn color="info" @click="onClickSubmit" large class="btn">确认</v-btn>
+      <v-btn color="info" @click="onClickSubmit" large class="btn" round>确认</v-btn>
     </div>
   </div>
 </template>
 
 <script>
+import { setMainColor } from "@/theme/statusbar";
 export default {
   name: "email",
   data() {
@@ -30,6 +31,9 @@ export default {
         v => /.+@.+/.test(v) || "请输入有效格式的邮箱"
       ]
     };
+  },
+  mounted() {
+    setMainColor();
   },
   methods: {
     onClickSubmit() {

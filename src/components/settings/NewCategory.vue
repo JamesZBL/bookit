@@ -12,7 +12,7 @@
           </v-layout>
         </v-container>
       </v-form>
-      <v-btn color="info" @click="onClickSubmit" large class="btn">确认</v-btn>
+      <v-btn color="info" @click="onClickSubmit" large class="btn" round>确认</v-btn>
     </div>
   </div>
 </template>

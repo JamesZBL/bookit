@@ -2,7 +2,7 @@
   <div class="scroll">
     <c-title title="Bookit"/>
     <div class="wrapper">
-      <div class="head" style="box-shadow: #00cdff 0px 0px 20px 0px;">
+      <div class="head amount-slim" style="box-shadow: #00cdff 0px 0px 20px 0px;">
         <div class="head-left box" @click="onClickDate">
           <div class="label">
             <span>{{year}}年</span>
@@ -32,7 +32,7 @@
       <div class="list">
         <v-ons-list>
           <div v-for="(day, index) in list" :key="index">
-            <v-ons-list-header>
+            <v-ons-list-header class="amount-round">
               <span class="list-label">{{day.date}}</span>
               <div class="list-head-right list-label">
                 <span class="list-label">收入: {{formatMoneyClean(day.income)}}</span>
@@ -45,7 +45,7 @@
                 <v-ons-icon :icon="getCategory(item).icon" class="item-icon"></v-ons-icon>
               </div>
               <div class="center">{{item.name}}</div>
-              <div class="right">
+              <div class="right amount-round">
                 <span class="list-label-right">{{formatMoney(item.amount)}}</span>
               </div>
             </v-ons-list-item>

@@ -33,7 +33,7 @@
             </v-flex>
           </v-layout>
         </v-container>
-        <v-btn color="info" @click="onClickSubmit" large class="btn">确认</v-btn>
+        <v-btn color="info" @click="onClickSubmit" large class="btn" round>确认</v-btn>
       </v-form>
     </div>
   </div>

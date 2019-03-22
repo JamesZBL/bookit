@@ -32,7 +32,7 @@
           >
         </div>
       </v-ons-card>
-      <v-btn class="btn" @click.native="onClickSave" color="info" large dark>保存</v-btn>
+      <v-btn class="btn" @click.native="onClickSave" color="info" large dark round>保存</v-btn>
     </div>
     <mt-datetime-picker ref="picker" v-model="pickerValue" type="date" @confirm="confirmDate"></mt-datetime-picker>
   </div>
