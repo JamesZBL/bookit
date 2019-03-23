@@ -95,7 +95,7 @@ export default {
   height: 100px;
   font-size: 14px;
   overflow: hidden;
-  text-shadow: 1px 1px 2px #0000004d;
+  text-shadow: rgba(0, 0, 0, 0.33) 1px 1px 2px;
 }
 
 .bookmark {
