@@ -127,4 +127,8 @@ span {
 .amount-round {
   font-family: "Varela Round", Arial, Helvetica, sans-serif;
 }
+
+.fab-wrapper {
+  padding-bottom: 100px;
+}
 </style>

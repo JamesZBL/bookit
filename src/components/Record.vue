@@ -1,7 +1,7 @@
 <template id="record">
   <div class="scroll">
     <c-title title="Bookit"/>
-    <div class="wrapper">
+    <div class="wrapper fab-wrapper">
       <div class="head amount-slim" style="">
         <div class="head-left box" @click="onClickDate">
           <div class="label">
@@ -286,10 +286,6 @@ export default {
 
 .list {
   padding-top: 32px;
-}
-
-.wrapper {
-  padding-bottom: 100px;
 }
 
 .item-icon {

@@ -1,7 +1,7 @@
 <template id="book">
   <div class="scroll" v-on:swiperight="onPressCard">
     <c-title title="账本"/>
-    <div class="wrapper card-wrapper">
+    <div class="wrapper card-wrapper fab-wrapper">
       <v-container grid-list-md text-xs-center>
         <v-layout row wrap>
           <v-flex v-for="(i,index) in books" :key="index" xs4>
