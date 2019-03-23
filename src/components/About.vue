@@ -221,7 +221,7 @@ export default {
   right: 0;
   top: 24px;
   background-color: #0094ef;
-  box-shadow: rgba(0, 0, 0, 0.33) 0 3px 8px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
   font-size: 14px;
   padding: 5px;
   padding-left: 14px;
