@@ -20,3 +20,4 @@ plugins/
 !/www
 /www/*
 !/www/res
+!/www/js

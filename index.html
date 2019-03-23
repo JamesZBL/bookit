@@ -17,13 +17,13 @@
     if (!app) app.initialize();
     document.addEventListener('deviceready', registerBackButtonListener, false);
     function registerBackButtonListener() {
-      document.addEventListener('backbutton', onBackButtonDown, true);
+      document.addEventListener('backbutton', onBackButtonDown, false);
     }
     function onBackButtonDown(e) {
       e.preventDefault();
       if (1 < history.length) {
         navigator.app.backHistory();
-        return true;
+        return false;
       }
     }
   </script>
