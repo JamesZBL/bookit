@@ -15,6 +15,17 @@
   <script type="text/javascript" src="js/index.js"></script>
   <script type="text/javascript">
     if (!app) app.initialize();
+    document.addEventListener('deviceready', registerBackButtonListener, false);
+    function registerBackButtonListener() {
+      document.addEventListener('backbutton', onBackButtonDown, true);
+    }
+    function onBackButtonDown(e) {
+      e.preventDefault();
+      if (1 < history.length) {
+        navigator.app.backHistory();
+        return false;
+      }
+    }
   </script>
 </body>
 
