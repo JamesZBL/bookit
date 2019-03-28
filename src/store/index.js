@@ -14,7 +14,8 @@ export default new Vuex.Store({
     selectedCategory: {},
     books: [],
     selectedBook: {},
-    hideAmount: false
+    hideAmount: false,
+    recordType: ''
   },
 
   mutations: {
@@ -104,6 +105,10 @@ export default new Vuex.Store({
 
     setCurrentPage(s, page) {
       s.currentPage = page;
+    },
+
+    setRecordType(s, type) {
+      s.recordType = type;
     }
   },
 

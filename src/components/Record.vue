@@ -2,7 +2,7 @@
   <div class="scroll">
     <c-title title="Bookit"/>
     <div class="wrapper fab-wrapper">
-      <div class="head amount-slim" style="">
+      <div class="head amount-slim" style>
         <div class="head-left box" @click="onClickDate">
           <div class="label">
             <span>{{year}}年</span>
@@ -16,7 +16,7 @@
             <span>收入</span>
           </div>
           <div>
-            <number :number="income" class="amount"/>
+            <number :number="income" :visible.sync="amountVisible" class="amount"/>
           </div>
         </div>
         <div class="head-right box">
@@ -24,7 +24,7 @@
             <span>支出</span>
           </div>
           <div>
-            <number :number="pay" class="amount"/>
+            <number :number="pay" :visible.sync="amountVisible" class="amount"/>
           </div>
         </div>
       </div>
@@ -74,6 +74,7 @@
 <script>
 import number from "@/components/number/Money";
 import accounting from "accounting";
+import axios from "@/request";
 export default {
   name: "record",
   components: {
@@ -84,99 +85,46 @@ export default {
     const year = today.getFullYear();
     const month = today.getMonth() + 1;
     return {
+      amountVisible: false,
       dialogVisible: false,
       pickerDate: new Date().toISOString().substring(0, 7),
       year,
       month,
-      income: 1682.5,
-      pay: 24578.75,
-      list: [
-        {
-          date: "2019-03-02",
-          pay: 23,
-          income: 9000,
-          list: [
-            {
-              name: "海底捞",
-              category: "food",
-              amount: -280
-            },
-            {
-              name: "买了块劳力士",
-              category: "shopping",
-              amount: -1953.34
-            },
-            {
-              name: "健身",
-              category: "sport",
-              amount: -200
-            },
-            {
-              name: "Java编程思想",
-              category: "learning",
-              amount: -130.2
-            }
-          ]
-        },
-        {
-          date: "2019-03-02",
-          pay: 23,
-          income: 9000,
-          list: [
-            {
-              name: "工资",
-              category: "salary",
-              amount: 7999
-            },
-            {
-              name: "水杯",
-              category: "shopping",
-              amount: -20
-            },
-            {
-              name: "自行车",
-              category: "car",
-              amount: -2
-            },
-            {
-              name: "汽车",
-              category: "car",
-              amount: -200000
-            }
-          ]
-        },
-        {
-          date: "2019-03-02",
-          pay: 23,
-          income: 9000,
-          list: [
-            {
-              name: "轮胎",
-              category: "car",
-              amount: -2
-            },
-            {
-              name: "水蜜桃",
-              category: "fruit",
-              amount: -2
-            },
-            {
-              name: "剃须刀",
-              category: "daily-use",
-              amount: -2
-            },
-            {
-              name: "代码整洁之道",
-              category: "learning",
-              amount: -2
-            }
-          ]
-        }
-      ]
+      income: 0,
+      pay: 0,
+      list: []
     };
   },
-  mounted() {},
-  computed: {},
+  activated() {
+    this.loadData();
+  },
+  mounted() {
+    this.loadData();
+  },
+  computed: {
+    startTime() {
+      return new Date(this.pickerDate).toISOString().substring(0, 10);
+    },
+    endTime() {
+      const date = new Date(this.pickerDate);
+      const month = 1 + date.getMonth();
+      const year = date.getFullYear();
+      const december = month === 12;
+      const nextMonth = december ? 1 : month + 1;
+      const nextYear = december ? year + 1 : year;
+      return new Date(`${nextYear}-${nextMonth}-01`)
+        .toISOString()
+        .substring(0, 10);
+    }
+  },
+  watch: {
+    year(n, o) {
+      this.loadData();
+    },
+    month(n, o) {
+      this.loadData();
+    }
+  },
   methods: {
     onClickDate() {
       this.dialogVisible = true;
@@ -208,6 +156,53 @@ export default {
 
     formatMoneyClean(amount) {
       return accounting.formatMoney(amount, "");
+    },
+
+    loadData() {
+      this.loadRecords();
+      this.loadSum();
+      this.loadSettings();
+    },
+
+    loadRecords() {
+      axios
+        .get("/record", {
+          params: {
+            start: this.startTime,
+            end: this.endTime
+          }
+        })
+        .then(({ data }) => {
+          this.list = data.map(unit => {
+            const transformedList = unit.list.map(record => ({
+              ...record,
+              category: record.categoryName,
+              name: record.comment
+            }));
+            unit.list = transformedList;
+            return unit;
+          });
+        });
+    },
+
+    loadSum() {
+      axios
+        .get("/record/sum", {
+          params: {
+            start: this.startTime,
+            end: this.endTime
+          }
+        })
+        .then(({ data: { income, pay } }) => {
+          this.income = income;
+          this.pay = pay;
+        });
+    },
+
+    loadSettings() {
+      axios.get("/settings").then(({ data: { showAmount } }) => {
+        this.amountVisible = showAmount;
+      });
     }
   }
 };

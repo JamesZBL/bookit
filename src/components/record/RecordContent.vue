@@ -29,9 +29,10 @@ export default {
     };
   },
   methods: {
-    gotoNew(type) {
+    gotoNew(category) {
       this.$router.replace(`/record/new`);
-      this.$store.commit("setSelectCategory", type);
+      this.$store.commit("setSelectCategory", category);
+      this.$store.commit('setRecordType', this.type.toUpperCase());
     }
   }
 };

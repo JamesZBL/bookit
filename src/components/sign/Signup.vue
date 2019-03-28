@@ -42,6 +42,7 @@
 
 <script>
 import { setMainColor } from "@/theme/statusbar";
+import axios from "@/request";
 export default {
   data() {
     return {
@@ -75,8 +76,17 @@ export default {
       const validate = this.$refs.form.validate();
       if (!validate) return;
       $store.commit("setEmail", this.email);
-      $store.commit("setCodeType", "signup");
-      this.$router.push(`/code`);
+      $store.commit("setCodeType", "REGISTER");
+      const { email, password, nickName } = this;
+      axios
+        .post("/user", {
+          email,
+          password,
+          nickName
+        })
+        .then(r => {
+          this.$router.push(`/code`);
+        });
     }
   },
 

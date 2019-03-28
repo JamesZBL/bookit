@@ -83,7 +83,10 @@ export default {
     this.currentPage = this.$store.getters.currentPage || "record";
   },
 
-  mounted() {},
+  mounted() {
+    const token = localStorage.getItem("token");
+    if (!token) this.$router.replace("/signin");
+  },
 
   methods: {},
 

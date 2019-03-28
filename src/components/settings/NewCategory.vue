@@ -58,9 +58,7 @@ export default {
         display,
         type,
         icon: "fa-star",
-        name: Math.random()
-          .toString()
-          .split(".")[1]
+        name: ''
       };
       this.$store.commit("addCustomedCategory", category);
     }

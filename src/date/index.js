@@ -2,14 +2,16 @@ const getCurrentDate = function () {
   return new Date();
 }
 
+const getCurrentDateString = function() {
+  return formatDate(getCurrentDate());
+}
+
 const formatDate = function (v) {
-  const year = v.getFullYear();
-  const month = v.getMonth() + 1;
-  const day = v.getDate();
-  return `${year}-${month}-${day}`;
+  return v.toLocaleDateString().split('/').map(n => n < 10 ? `0${n}` : n).join('-');
 }
 
 export {
   getCurrentDate,
-  formatDate
+  formatDate,
+  getDateString
 }

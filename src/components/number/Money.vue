@@ -4,7 +4,7 @@
       <span :class="[...moneyClass,'amount-wrapper']">
         <span>{{ displayInteger }}</span>
         <span class="decimal">{{ displayDecimal }}</span>
-        <v-ons-icon icon="md-eye" class="eye" v-if="!show"></v-ons-icon>
+        <v-ons-icon icon="md-eye" class="eye" v-if="!visible"></v-ons-icon>
       </span>
     </span>
   </div>
@@ -16,12 +16,12 @@ export default {
   name: "number",
   data() {
     return {
-      show: false
     };
   },
 
   props: {
-    number: Number
+    number: Number,
+    visible: Boolean
   },
 
   computed: {
@@ -34,10 +34,10 @@ export default {
       return 5 < length;
     },
     displayInteger() {
-      return this.show ? this.moneySections[0] : "****";
+      return this.visible ? this.moneySections[0] : "****";
     },
     displayDecimal() {
-      return this.show ? `.${this.moneySections[1]}` : "";
+      return this.visible ? `.${this.moneySections[1]}` : "";
     },
     moneySections() {
       return String(this.formatMoney(this.number)).split(".");
@@ -46,14 +46,12 @@ export default {
 
   methods: {
     toggle() {
-      this.show = !this.show;
+      this.visible = !this.visible;
     },
     formatMoney(n) {
       return accounting.formatMoney(n, "");
     }
-  },
-
-  created() {}
+  }
 };
 </script>
 

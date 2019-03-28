@@ -3,10 +3,10 @@
     <c-title title></c-title>
     <div class="wrapper">
       <div class="about-head" style="box-shadow: #00cdff 0px 0px 20px 0px;">
-        <img class="avatar" :src="avatar">
+        <img class="avatar" :src="user.avatar">
         <div class="head-right">
-          <div class="head-first">
-            <span class="username">{{user.username}}</span>
+          <div class="head-first" @click="onClickNickName">
+            <span class="username">{{user.nickName}}</span>
           </div>
           <span class="email">{{user.email}}</span>
         </div>
@@ -62,16 +62,17 @@
 
 <script>
 import { MessageBox } from "mint-ui";
+import axios from "@/request";
+import { prompt, alert, toast } from "@/notification";
 export default {
   name: "about",
   data() {
     return {
       user: {
-        username: "摆码王子",
-        email: "maocongming@gmail.com"
+        nickName: "",
+        email: "",
+        avatar: ""
       },
-      avatar:
-        "https://storage.live.com/users/0x77cd9ac5fe438898/myprofile/expressionprofile/profilephoto:UserTileStatic/p?ck=1&ex=720&fofoff=1&sid=3B6A542688A3626C01A8593C898D6307",
       stats: {
         day: 71,
         record_count: 22,
@@ -111,6 +112,10 @@ export default {
     };
   },
 
+  mounted() {
+    this.loadData();
+  },
+
   methods: {
     onClickLogout() {
       this.$ons.notification.confirm("确定要退出登录吗?").then(ok => {
@@ -122,11 +127,48 @@ export default {
     },
 
     onClickUserCheck() {
-      this.dialogVisible = true;
+      axios.post("/check-in").then(({ data }) => {
+        this.check.checked_today = !data;
+        // FIXME
+        this.dialogVisible = true;
+      });
     },
 
     onClickLink(path) {
       this.$router.push(path);
+    },
+
+    loadData() {
+      this.loadProfile();
+    },
+
+    loadProfile() {
+      axios.get("/profile").then(({ data }) => {
+        this.user = data;
+      });
+    },
+
+    onClickNickName() {
+      const _this = this;
+      prompt("请输入新的昵称", function(v) {
+        const value = v && v.trim();
+        if (!value) {
+          alert("无效的昵称");
+          return false;
+        }
+        _this.updateNickName(value);
+      });
+    },
+
+    updateNickName(nickName) {
+      axios
+        .put("/profile/nick-name", {
+          nickName
+        })
+        .then(({ data }) => {
+          this.user = data;
+          toast("修改成功");
+        });
     }
   },
 

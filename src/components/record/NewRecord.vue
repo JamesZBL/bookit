@@ -5,13 +5,7 @@
       <v-ons-card>
         <div>
           <label class="label" for="date">日期</label>
-          <span
-            id="date"
-            class="input"            
-            @click="onClickDate"
-          >
-          {{dateDisplay}}
-          </span>
+          <span id="date" class="input" @click="onClickDate">{{dateDisplay}}</span>
         </div>
         <div>
           <label class="label" for="comment">备注</label>
@@ -41,31 +35,54 @@
 <script>
 import { getDisplayOf } from "@/category";
 import { getCurrentDate, formatDate } from "@/date";
+import axios from "@/request";
 export default {
   data() {
-    const { name, display } = this.$store.state.selectedCategory;
+    const {
+      selectedCategory: { name, display },
+      recordType
+    } = this.$store.state;
     return {
       amount: "￥0.00",
       comment: display,
-      category: name,
-      pickerValue: getCurrentDate(),
-      date: getCurrentDate()
+      category: name || display,
+      pickerValue: new Date(),
+      date: new Date(),
+      type: recordType
     };
   },
-  created() {
-  },
+  created() {},
   methods: {
-    onClickSave() {},
     onClickDate() {
       this.$refs.picker.open();
     },
     confirmDate() {
       this.date = this.pickerValue;
+    },
+    onClickSave() {
+      const { amountValue, comment, category, type, dateValue } = this;
+      axios
+        .post("/record", {
+          type,
+          categoryName: category,
+          amount: amountValue,
+          comment,
+          createdAt: dateValue
+        })
+        .then(r => {
+          this.$router.replace("/");
+        });
     }
   },
   computed: {
     dateDisplay() {
       return formatDate(this.date);
+    },
+    dateValue() {
+      return formatDate(this.date);
+    },
+    amountValue() {
+      return this.type == "PAY" ? -this.amount : this.amount;
     }
   }
 };

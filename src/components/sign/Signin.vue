@@ -2,7 +2,7 @@
   <div class="signin">
     <h1 class="signin-title">Bookit</h1>
     <span class="signin-sub-title">基于 Vue.js 的记账 APP</span>
-    <v-form v-model="valid">
+    <v-form ref="form" v-model="valid">
       <v-container>
         <v-layout>
           <v-flex xs12 md4>
@@ -36,6 +36,9 @@
 
 <script>
 import { setLightColor } from "@/theme/statusbar";
+import { setToken } from "@/request";
+import axios from "@/request";
+import { alert } from "@/notification";
 export default {
   name: "signin",
   data() {
@@ -57,9 +60,26 @@ export default {
 
   methods: {
     signin() {
+      const form = this.$refs.form;
+      const valid = form.validate();
+      if (!valid) return;
       const { email, password } = this;
-      this.$router.replace("/");
-      this.$store.commit("setActiveIndex", 0);
+      axios
+        .get("/token", {
+          params: {
+            email,
+            password
+          }
+        })
+        .then(({ data }) => {
+          setToken(data);
+          if (!data) alert("用户名或密码错误");
+          else {
+            setTimeout(() => {
+              this.$router.replace("/");
+            }, 500);
+          }
+        });
     },
 
     onClickSignup() {

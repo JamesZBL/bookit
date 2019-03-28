@@ -18,6 +18,8 @@
 </template>
 
 <script>
+import axios from "@/request";
+import { toast } from "@/notification";
 export default {
   name: "email-code",
   data() {
@@ -25,11 +27,27 @@ export default {
     return {
       email: state.email,
       emailCode: "",
-      valid: false
+      valid: false,
+      type: state.codeType
     };
   },
   methods: {
-    onClickSubmit() {}
+    onClickSubmit() {
+      const { type, emailCode, email, $router } = this;
+      switch (type) {
+        case "REGISTER":
+          axios
+            .post("/registration", {
+              email,
+              code: `${emailCode}`
+            })
+            .then(r => {
+              toast("注册成功，请登录", () => {
+                $router.replace("/signin");
+              });
+            });
+      }
+    }
   }
 };
 </script>
