@@ -53,9 +53,9 @@
     </div>
     <v-ons-dialog cancelable :visible.sync="dialogVisible">
       <img v-if="check.checked_today" class="modal-icon" src="@/assets/happy.svg" alt>
-      <img v-if="!check.checked_today" class="modal-icon" src="@/assets/cool.svg" alt>
+      <img v-else class="modal-icon" src="@/assets/cool.svg" alt>
       <p class="modal-title" style="text-align: center">{{check_modal_title}}</p>
-      <p class="modal-subtitle" style="text-align: center">你已连续签到 {{check.total_day}} 天</p>
+      <p class="modal-subtitle" style="text-align: center">你已连续签到 {{stats.check_count}} 天</p>
     </v-ons-dialog>
   </div>
 </template>
@@ -74,12 +74,12 @@ export default {
         avatar: ""
       },
       stats: {
-        day: 71,
-        record_count: 22,
-        check_count: 18
+        day: 0,
+        record_count: 0,
+        check_count: 0
       },
       check: {
-        total_day: 18,
+        total_day: 0,
         checked_today: true
       },
       dialogVisible: false,
@@ -128,9 +128,9 @@ export default {
 
     onClickUserCheck() {
       axios.post("/check-in").then(({ data }) => {
-        this.check.checked_today = !data;
-        // FIXME
+        this.check.checked_today = !!!data;
         this.dialogVisible = true;
+        this.loadCheckStatistics();
       });
     },
 
@@ -140,11 +140,28 @@ export default {
 
     loadData() {
       this.loadProfile();
+      this.loadCheckStatistics();
+      this.loadRecordStats();
     },
 
     loadProfile() {
       axios.get("/profile").then(({ data }) => {
         this.user = data;
+      });
+    },
+
+    loadCheckStatistics() {
+      axios.get("/check-in/sum").then(({ data }) => {
+        this.stats.check_count = data;
+      });
+    },
+
+    loadRecordStats() {
+      axios.get('/record/sum/days').then(({ data }) => {
+        this.stats.day = data;
+      });
+      axios.get('/record/sum/counts').then(({ data }) => {
+        this.stats.record_count = data;
       });
     },
 
@@ -174,7 +191,7 @@ export default {
 
   computed: {
     check_modal_title() {
-      return this.check.checked_today ? "已经签过了哦" : "签到成功";
+      return this.check.checked_today ? "今天签过了哦" : "签到成功";
     }
   }
 };
