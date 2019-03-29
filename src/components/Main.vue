@@ -113,6 +113,12 @@ export default {
           }))
         );
       });
+      axios.get("/settings").then(({ data }) => {
+        const { activeBookId } = data;
+        this.$store.commit("setSelectedBook", {
+          id: activeBookId
+        });
+      });
     }
   },
 

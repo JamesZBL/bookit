@@ -83,6 +83,10 @@ export default new Vuex.Store({
     },
 
     setSelectedBook(s, book) {
+      if(null == book.id) {
+        s.selectedBook = books[0];
+        return;
+      }
       s.selectedBook = book;
     },
 

@@ -10,7 +10,7 @@
                 <div class="mask" v-if="showDelete"></div>
                 <v-ons-icon
                   icon="md-bookmark"
-                  v-if="selectedBook.display === i.display && !showDelete"
+                  v-if="(selectedBook.display === i.display || selectedBook.id === i.id) && !showDelete"
                   class="bookmark"
                 ></v-ons-icon>
                 <v-card-text class="px-0 display">{{i.display}}</v-card-text>
