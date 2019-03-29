@@ -131,4 +131,8 @@ span {
 .fab-wrapper {
   padding-bottom: 100px;
 }
+
+.center {
+  color: #4a5660 !important;
+}
 </style>

@@ -285,5 +285,7 @@ export default {
 
 .item-icon {
   color: #acadad;
+  width: 18px;
+  margin-left: 6px;
 }
 </style>
