@@ -16,7 +16,25 @@ export default new Vuex.Store({
     books: [],
     selectedBook: {},
     hideAmount: false,
-    recordType: ''
+    recordType: '',
+    record: {
+      list: [],
+      income: 0,
+      pay: 0,
+      amountVisible: false
+    },
+    profile: {
+      user: {
+        nickName: "",
+        email: "",
+        avatar: ""
+      },
+      stats: {
+        day: 0,
+        record_count: 0,
+        check_count: 0
+      },
+    }
   },
 
   mutations: {
@@ -83,8 +101,8 @@ export default new Vuex.Store({
     },
 
     setSelectedBook(s, book) {
-      if(null == book.id) {
-        s.selectedBook = books[0];
+      if (null == book.id) {
+        s.selectedBook = DefaultBooks[0];
         return;
       }
       s.selectedBook = book;
@@ -120,6 +138,41 @@ export default new Vuex.Store({
 
     setRecordType(s, type) {
       s.recordType = type;
+    },
+
+    setRecordList(s, list) {
+      s.record.list = list;
+    },
+
+    setRecordIncome(s, income) {
+      s.record.income = income;
+    },
+
+    setRecordPay(s, pay) {
+      s.record.pay = pay;
+    },
+
+    setRecordAmountVisible(s, visible) {
+      s.record.amountVisible = visible;
+    },
+
+    setUser(s, user) {
+      s.profile.user = user;
+    },
+
+    setUserNickName(s, name) {
+      s.profile.user.nickName = name;
+    },
+
+    setUserAvatar(s, avatar) {
+      s.profile.user.avatar = avatar;
+    },
+
+    setStats(s, stats) {
+      s.profile.stats = {
+        ...s.profile.stats,
+        ...stats
+      };
     }
   },
 

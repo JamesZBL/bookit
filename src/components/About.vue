@@ -68,18 +68,7 @@ export default {
   name: "about",
   data() {
     return {
-      user: {
-        nickName: "",
-        email: "",
-        avatar: ""
-      },
-      stats: {
-        day: 0,
-        record_count: 0,
-        check_count: 0
-      },
       check: {
-        total_day: 0,
         checked_today: true
       },
       dialogVisible: false,
@@ -110,6 +99,18 @@ export default {
         }
       ]
     };
+  },
+
+  computed: {
+    user() {
+      return this.$store.state.profile.user;
+    },
+    stats() {
+      return this.$store.state.profile.stats;
+    },
+    check_modal_title() {
+      return this.check.checked_today ? "今天签过了哦" : "签到成功";
+    }
   },
 
   mounted() {
@@ -146,22 +147,28 @@ export default {
 
     loadProfile() {
       axios.get("/profile").then(({ data }) => {
-        this.user = data;
+        this.$store.commit("setUser", data);
       });
     },
 
     loadCheckStatistics() {
       axios.get("/check-in/sum").then(({ data }) => {
-        this.stats.check_count = data;
+        this.$store.commit("setStats", {
+          check_count: data
+        });
       });
     },
 
     loadRecordStats() {
-      axios.get('/record/sum/days').then(({ data }) => {
-        this.stats.day = data;
+      axios.get("/record/sum/days").then(({ data }) => {
+        this.$store.commit("setStats", {
+          day: data
+        });
       });
-      axios.get('/record/sum/counts').then(({ data }) => {
-        this.stats.record_count = data;
+      axios.get("/record/sum/counts").then(({ data }) => {
+        this.$store.commit("setStats", {
+          record_count: data
+        });
       });
     },
 
@@ -183,15 +190,9 @@ export default {
           nickName
         })
         .then(({ data }) => {
-          this.user = data;
+          this.$store.commit("setUser", data);
           toast("修改成功");
         });
-    }
-  },
-
-  computed: {
-    check_modal_title() {
-      return this.check.checked_today ? "今天签过了哦" : "签到成功";
     }
   }
 };

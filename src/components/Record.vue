@@ -85,14 +85,10 @@ export default {
     const year = today.getFullYear();
     const month = today.getMonth() + 1;
     return {
-      amountVisible: false,
       dialogVisible: false,
       pickerDate: new Date().toISOString().substring(0, 7),
       year,
-      month,
-      income: 0,
-      pay: 0,
-      list: []
+      month
     };
   },
   activated() {
@@ -115,6 +111,18 @@ export default {
       return new Date(`${nextYear}-${nextMonth}-01`)
         .toISOString()
         .substring(0, 10);
+    },
+    amountVisible() {
+      return this.$store.state.record.amountVisible;
+    },
+    income() {
+      return this.$store.state.record.income;
+    },
+    pay() {
+      return this.$store.state.record.pay;
+    },
+    list() {
+      return this.$store.state.record.list;
     }
   },
   watch: {
@@ -173,15 +181,18 @@ export default {
           }
         })
         .then(({ data }) => {
-          this.list = data.map(unit => {
-            const transformedList = unit.list.map(record => ({
-              ...record,
-              category: record.categoryName,
-              name: record.comment
-            }));
-            unit.list = transformedList;
-            return unit;
-          });
+          this.$store.commit(
+            "setRecordList",
+            data.map(unit => {
+              const transformedList = unit.list.map(record => ({
+                ...record,
+                category: record.categoryName,
+                name: record.comment
+              }));
+              unit.list = transformedList;
+              return unit;
+            })
+          );
         });
     },
 
@@ -194,14 +205,15 @@ export default {
           }
         })
         .then(({ data: { income, pay } }) => {
-          this.income = income;
-          this.pay = pay;
+          const { $store } = this;
+          $store.commit("setRecordIncome", income);
+          $store.commit("setRecordPay", pay);
         });
     },
 
     loadSettings() {
       axios.get("/settings").then(({ data: { showAmount } }) => {
-        this.amountVisible = showAmount;
+        this.$store.commit("setRecordAmountVisible", showAmount);
       });
     }
   }
