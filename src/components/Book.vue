@@ -6,7 +6,7 @@
         <v-layout row wrap>
           <v-flex v-for="(i,index) in books" :key="index" xs4>
             <v-touch>
-              <v-card dark :color="i.color" class="book" @click="selectBook(i)">
+              <v-card dark :color="i.color" class="book" @click="onClickBook(i)">
                 <div class="mask" v-if="showDelete"></div>
                 <v-ons-icon
                   icon="md-bookmark"
@@ -52,10 +52,16 @@ export default {
     }
   },
   methods: {
-    selectBook(book) {
+    onClickBook(book) {
       const { $store } = this;
       if (this.showDelete) return;
-      $store.commit("setSelectedBook", book);
+      axios
+        .put("/settings/active-book", {
+          activeBookId: book.id || null
+        })
+        .then(r => {
+          $store.commit("setSelectedBook", book);
+        });
     },
 
     onClickFab() {
@@ -87,7 +93,13 @@ export default {
     },
 
     removeBook(book) {
-      this.$store.commit("removeBook", book);
+      axios
+        .put("/settings/active-book", {
+          activeBookId: null
+        })
+        .then(r => {
+          this.$store.commit("removeBook", book);
+        });
     },
 
     setBookDefault() {
