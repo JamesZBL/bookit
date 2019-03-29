@@ -4,6 +4,9 @@
     <div class="wrapper">
       <div class="about-head" style="box-shadow: #00cdff 0px 0px 20px 0px;">
         <img class="avatar" :src="user.avatar">
+        <form ref="form" class="form">
+          <input ref="file" type="file" name="avatar" accept="image/*" @change="onFileChange">
+        </form>
         <div class="head-right">
           <div class="head-first" @click="onClickNickName">
             <span class="username">{{user.nickName}}</span>
@@ -193,6 +196,20 @@ export default {
           this.$store.commit("setUser", data);
           toast("修改成功");
         });
+    },
+
+    onFileChange() {
+      const file = this.$refs.file.files[0];
+      const formData = new FormData();
+      formData.set("avatar", file);
+      axios({
+        method: "put",
+        url: "/profile/avatar",
+        data: formData,
+        config: { headers: { "Content-Type": "multipart/form-data" } }
+      }).then(({ data: { avatar } }) => {
+        this.$store.commit("setUserAvatar", avatar);
+      });
     }
   }
 };
@@ -224,11 +241,13 @@ export default {
 }
 
 .avatar {
-  min-width: 60px;
+  width: 60px;
   height: 60px;
   display: inline-block;
   margin-left: 40px;
   border-radius: 50%;
+  object-fit: cover;
+  border: 4px rgba(0, 255, 255, 0.35) solid;
 }
 
 .username {
@@ -320,5 +339,22 @@ export default {
 
 .container.grid-list-md .layout .flex {
   padding: 0 !important;
+}
+
+.form {
+  position: absolute;
+  float: left;
+  left: 0;
+  top: 10px;
+  width: 70px;
+  margin-left: 35px;
+  height: 80px;
+  opacity: 0;
+}
+
+.form > input {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 </style>

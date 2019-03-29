@@ -109,6 +109,7 @@ export default {
   font-size: 24px;
   color: #929292;
   width: 18px;
+  text-align: center;
 }
 
 .item-move {
