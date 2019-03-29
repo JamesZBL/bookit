@@ -287,5 +287,6 @@ export default {
   color: #acadad;
   width: 18px;
   margin-left: 6px;
+  text-align: center;
 }
 </style>

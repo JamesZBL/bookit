@@ -14,16 +14,23 @@ const toast = function (message, callback) {
   });
 }
 
-const prompt = function (message, callbak) {
+const prompt = function (message, callback) {
   notification.prompt(message)
     .then(function (v) {
-      if (callbak)
-        callbak(v);
+      if (callback)
+        callback(v);
     });
+}
+
+const confirm = function (message, callback) {
+  notification.confirm(message).then(ok => {
+    ok && callback && callback();
+  });
 }
 
 export {
   alert,
   toast,
-  prompt
+  prompt,
+  confirm
 }

@@ -37,6 +37,7 @@
 
 <script>
 import colors from "@/components/book/colors";
+import axios from "@/request";
 export default {
   name: "new-book",
   data() {
@@ -60,11 +61,19 @@ export default {
     onClickSubmit() {
       const { display, selectedColor } = this;
       if (!this.$refs.form.validate()) return;
-      this.$store.commit("addBook", {
-        color: selectedColor,
-        display
-      });
-      this.$router.replace("/");
+      axios
+        .post("/book", {
+          color: selectedColor,
+          name: display
+        })
+        .then(({ data: { id, color, name } }) => {
+          this.$store.commit("addBook", {
+            id,
+            color,
+            display: name
+          });
+          this.$router.replace("/");
+        });
     }
   }
 };

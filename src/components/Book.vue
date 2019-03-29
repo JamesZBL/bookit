@@ -34,6 +34,8 @@
 </template>
 
 <script>
+import axios from "@/request";
+import { confirm } from "@/notification";
 export default {
   name: "book",
   data() {
@@ -75,8 +77,13 @@ export default {
     },
 
     onClickDeleteBook(book) {
-      this.removeBook(book);
-      this.setBookDefault();
+      const _this = this;
+      confirm(`确定要删除 ${book.display} 吗？`, function() {
+        axios.delete(`/book/${book.id}`).then(r => {
+          _this.removeBook(book);
+          _this.setBookDefault();
+        });
+      });
     },
 
     removeBook(book) {

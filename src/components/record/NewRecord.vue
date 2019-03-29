@@ -40,7 +40,8 @@ export default {
   data() {
     const {
       selectedCategory: { name, display },
-      recordType
+      recordType,
+      selectedBook
     } = this.$store.state;
     return {
       amount: "￥0.00",
@@ -48,7 +49,8 @@ export default {
       category: name || display,
       pickerValue: new Date(),
       date: new Date(),
-      type: recordType
+      type: recordType,
+      selectedBook
     };
   },
   created() {},
@@ -60,14 +62,22 @@ export default {
       this.date = this.pickerValue;
     },
     onClickSave() {
-      const { amountValue, comment, category, type, dateValue } = this;
+      const {
+        amountValue,
+        comment,
+        category,
+        type,
+        dateValue,
+        selectedBook
+      } = this;
       axios
         .post("/record", {
           type,
           categoryName: category,
           amount: amountValue,
           comment,
-          createdAt: dateValue
+          createdAt: dateValue,
+          bookId: selectedBook.id
         })
         .then(r => {
           this.$router.replace("/");

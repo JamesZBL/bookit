@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import DefaultBooks from '@/book';
 
 Vue.use(Vuex);
 
@@ -72,7 +73,13 @@ export default new Vuex.Store({
     },
 
     setBooks(s, books) {
-      s.books = books;
+      s.books = [DefaultBooks[0]];
+      for (let b of books) {
+        s.books.push({
+          ...b,
+          type: 'customed'
+        });
+      }
     },
 
     setSelectedBook(s, book) {

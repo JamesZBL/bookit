@@ -31,6 +31,7 @@ import { TabContainer, TabContainerItem } from "mint-ui";
 import { Tabbar, TabItem } from "mint-ui";
 import { Header } from "mint-ui";
 import { setMainColor } from "@/theme/statusbar";
+import axios from "@/request";
 
 export default {
   name: "Main",
@@ -78,26 +79,49 @@ export default {
 
   computed: {},
 
+  created() {},
+
   activated() {
     setMainColor();
     this.currentPage = this.$store.getters.currentPage || "record";
+    this.checkToken();
+    this.loadAppData();
   },
 
   mounted() {
-    const token = localStorage.getItem("token");
-    if (!token) this.$router.replace("/signin");
+    this.checkToken();
+    this.loadAppData();
   },
 
-  methods: {},
+  methods: {
+    checkToken() {
+      const token = localStorage.getItem("token");
+      if (!token) this.$router.replace("/signin");
+    },
+
+    loadAppData() {
+      this.loadBooks();
+    },
+
+    loadBooks() {
+      axios.get("/book").then(({ data }) => {
+        this.$store.commit(
+          "setBooks",
+          data.map(b => ({
+            ...b,
+            display: b.name
+          }))
+        );
+      });
+    }
+  },
 
   watch: {
     currentPage(n, o) {
       this.$refs.scroll.scrollTop = 0;
       this.$store.commit("setCurrentPage", n);
     }
-  },
-
-  created() {}
+  }
 };
 </script>
 
