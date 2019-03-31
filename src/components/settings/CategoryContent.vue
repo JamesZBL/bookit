@@ -37,6 +37,7 @@
 
 <script>
 import draggable from "vuedraggable";
+import axios from "@/request";
 
 export default {
   name: "category-content",
@@ -52,12 +53,19 @@ export default {
       hiddenCategories: this.$store.getters.hiddenCategories(this.type)
     };
   },
+  computed: {},
+  watch: {
+    visibleCategories(n, o) {
+      console.log(n);
+    }
+  },
   methods: {
     addToShow(item) {
       const { $store } = this;
       this.visibleCategories.push(item);
       this.hiddenCategories.splice(this.hiddenCategories.indexOf(item), 1);
       $store.commit("showDefaultCategory", item);
+      this.onVisibleCategoriesChanged();
     },
 
     hideFromShow(item) {
@@ -71,6 +79,7 @@ export default {
       } else {
         this.deleteCustomedCategory(item);
       }
+      this.onVisibleCategoriesChanged();
     },
 
     hideDefaultCategory(item) {
@@ -89,7 +98,18 @@ export default {
     },
 
     onDragCategories() {
-      this.$store.commit("reSortVisibleCategories", this.visibleCategories);
+      this.onVisibleCategoriesChanged();
+    },
+
+    onVisibleCategoriesChanged() {
+      axios
+        .put("/order", {
+          type: this.type.toUpperCase(),
+          names: this.visibleCategories.map(c => c.name || c.display)
+        })
+        .then(r => {
+          this.$store.commit("reSortVisibleCategories", this.visibleCategories);
+        });
     }
   }
 };

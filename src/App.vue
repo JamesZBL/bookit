@@ -10,9 +10,11 @@
 
 <script>
 import { FadeTransition } from "vue2-transitions";
-import categories from "@/category";
+import DefaultCategories from "@/category";
+import { getCategoriesByType } from "@/category";
 import books from "@/book";
 import "@/fonts/fonts.css";
+import axios from "@/request";
 export default {
   name: "App",
   components: {
@@ -25,19 +27,35 @@ export default {
   methods: {
     initCategories() {
       const { $store } = this;
-      // TODO: gotten hidden categories
-      const hiddenCategories = [];
-      // TODO: gotten customedCategories
-      const customedCategories = [];
-      const visibleCategories = [];
-      hiddenCategories.forEach(hidden => {
-        const index = categories.findIndex(c => c.name === hidden.name);
-        categories.splice(index, 1);
-      });
-      categories.forEach(c => visibleCategories.push(c));
-      customedCategories.forEach(c => visibleCategories.push(c));
-      $store.commit("setVisibleCategories", visibleCategories);
-      $store.commit("setHiddenCategories", hiddenCategories);
+
+      // fetch category order
+      for (let type of ["INCOME", "PAY"]) {
+        axios
+          .get("/order", {
+            params: {
+              type
+            }
+          })
+          .then(({ data: { names } }) => {
+            const visibleCategories = [];
+            for (let name of names) {
+              let index = DefaultCategories.findIndex(c => c.name === name);
+              let customed = -1 === index;
+              let find = DefaultCategories[index];
+              visibleCategories.push({
+                customed,
+                display: customed ? name : find.display,
+                name: customed ? name : find.name,
+                icon: customed ? "fa-star" : find.icon,
+                type: type.toLowerCase()
+              });
+              if (!customed) DefaultCategories.splice(index, 1);
+            }
+            const restCategories = getCategoriesByType(type.toLowerCase());
+            this.$store.commit("setVisibleCategoriesByType", visibleCategories);
+            this.$store.commit("setHiddenCategoriesByType", restCategories);
+          });
+      }
     },
 
     initBooks() {

@@ -54,6 +54,32 @@ export default new Vuex.Store({
       s.hiddenCategories = hiddenCategories;
     },
 
+    setVisibleCategoriesByType(s, visibleCategories) {
+      if (!visibleCategories.length) return;
+      const type = visibleCategories[0].type;
+      for (let category of s.visibleCategories) {
+        if (category.type === type) {
+          const index = s.visibleCategories.indexOf(category);
+          s.visibleCategories.splice(index, 1);
+        }
+      }
+      for (let category of visibleCategories)
+        s.visibleCategories.push(category);
+    },
+
+    setHiddenCategoriesByType(s, hiddenCategories) {
+      if (!hiddenCategories.length) return false;
+      const type = hiddenCategories[0].type;
+      for (let category of s.hiddenCategories) {
+        if (category.type === type) {
+          const index = s.hiddenCategories.indexOf(category);
+          s.hiddenCategories.splice(index, 1);
+        }
+      }
+      for (let category of hiddenCategories)
+        s.hiddenCategories.push(category);
+    },
+
     reSortVisibleCategories(s, categories) {
       const { type } = categories[0];
       s.visibleCategories.filter(c => c.type === type).forEach(c => {
@@ -178,6 +204,7 @@ export default new Vuex.Store({
 
   getters: {
     getEmail: s => s.email,
+    visibleCategoriesByType: s => type => s.visibleCategories.filter(c => c.type === type),
     visiblePayCategories: s => s.visibleCategories.filter(c => c.type === 'pay'),
     visibleIncomeCategories: s => s.visibleCategories.filter(c => c.type === 'income'),
     hiddenPayCategories: s => s.hiddenCategories.filter(c => c.type === 'pay'),

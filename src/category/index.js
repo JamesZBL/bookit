@@ -1,4 +1,6 @@
 const categories = [
+
+  /** income **/
   {
     name: 'salary',
     display: '工资',
@@ -14,7 +16,19 @@ const categories = [
     display: '兼职',
     icon: 'fa-user-md',
     type: 'income'
+  }, {
+    name: 'gift-income',
+    display: '礼金',
+    icon: 'fa-gift',
+    type: 'income'
+  }, {
+    name: 'others',
+    display: '其它',
+    icon: 'fa-coins',
+    type: 'income'
   },
+
+  /** pay **/
   {
     name: 'food',
     display: '饮食',
@@ -188,6 +202,10 @@ const initCategories = function () {
     );
 }
 
+const getCategoriesByType = function (type) {
+  return categories.filter(c => c.type === type);
+}
+
 const getDisplayOf = function (name) {
   return categories.find(i => i.name === name).display;
 }
@@ -199,5 +217,6 @@ export {
   KEY_CATEGORIES,
   getShowList,
   initCategories,
-  getDisplayOf
+  getDisplayOf,
+  getCategoriesByType
 }
