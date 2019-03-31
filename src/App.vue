@@ -1,17 +1,14 @@
 <template>
   <div id="vapp">
     <v-app>
-      <ZoomCenterTransition>
-        <keep-alive include="Main">
-          <router-view></router-view>
-        </keep-alive>
-      </ZoomCenterTransition>
+      <keep-alive include="Main">
+        <router-view></router-view>
+      </keep-alive>
     </v-app>
   </div>
 </template>
 
 <script>
-import { ZoomCenterTransition } from "vue2-transitions";
 import DefaultCategories from "@/category";
 import { getCategoriesByType } from "@/category";
 import books from "@/book";
@@ -19,9 +16,7 @@ import "@/fonts/fonts.css";
 import axios from "@/request";
 export default {
   name: "App",
-  components: {
-    ZoomCenterTransition
-  },
+  components: {},
   created() {
     this.initCategories();
     this.initBooks();

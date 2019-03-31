@@ -74,6 +74,13 @@ accounting.settings = {
   }
 };
 
+// Vueg
+import vueg from 'vueg';
+Vue.use(vueg, router, {
+  enter: 'fadeInRight',
+  leave: 'bounceOut'
+});
+
 // Customed components
 import Title from '@/components/Title';
 import Button from '@/components/Button';
