@@ -5,7 +5,7 @@
       <v-ons-list>
         <v-ons-list-item>
           <div class="left">
-            <v-ons-icon :style="{color:'#85f188'}" icon="md-eye-off"></v-ons-icon>
+            <v-ons-icon :style="{color:'#85f188'}" icon="md-eye-off" class="item-icon"></v-ons-icon>
           </div>
           <div class="center">隐藏金额</div>
           <div class="right">
@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import axios from '@/request';
+import axios from "@/request";
 export default {
   name: "display-settings",
   data() {
@@ -56,3 +56,6 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+</style>

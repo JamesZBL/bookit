@@ -3,7 +3,7 @@
     <c-title title></c-title>
     <div class="wrapper">
       <div class="about-head" style="box-shadow: #00cdff 0px 0px 20px 0px;">
-        <img class="avatar" :src="user.avatar">
+        <img class="avatar" :src="avatar">
         <form ref="form" class="form">
           <input ref="file" type="file" name="avatar" accept="image/*" @change="onFileChange">
         </form>
@@ -45,7 +45,7 @@
           tappable
         >
           <div class="left">
-            <v-ons-icon :style="{color:i.color}" :icon="i.icon"></v-ons-icon>
+            <v-ons-icon :style="{color:i.color}" :icon="i.icon" class="item-icon"></v-ons-icon>
           </div>
           <div class="center">
             <span>{{i.name}}</span>
@@ -66,6 +66,7 @@
 <script>
 import axios from "@/request";
 import { prompt, alert, toast } from "@/notification";
+import config from "@/config";
 export default {
   name: "about",
   data() {
@@ -79,7 +80,7 @@ export default {
           icon: "md-eye",
           name: "显示设置",
           path: "/settings/display",
-          color: "#ff8686"
+          color: "#86f4ff"
         },
         {
           icon: "md-widgets",
@@ -118,6 +119,9 @@ export default {
     },
     check_modal_title() {
       return this.check.checked_today ? "今天签过了哦" : "签到成功";
+    },
+    avatar() {
+      return `${config.baseURL}${this.user.avatar}`;
     }
   },
 
@@ -332,10 +336,6 @@ export default {
 
 .modal-subtitle {
   color: #7b7b7b;
-}
-
-.list-item__left {
-  padding: 12px 14px 12px 10px;
 }
 
 .btn-logout {

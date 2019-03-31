@@ -156,4 +156,10 @@ span {
   background-color: rgba(55, 71, 79, 0.8) !important;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3) !important;
 }
+
+.item-icon {
+  width: 18px;
+  margin-left: 6px;
+  text-align: center;
+}
 </style>
