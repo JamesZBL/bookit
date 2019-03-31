@@ -35,7 +35,7 @@ export default new Vuex.Store({
         record_count: 0,
         check_count: 0
       },
-    }
+    },
   },
 
   mutations: {

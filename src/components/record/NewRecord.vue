@@ -23,6 +23,7 @@
             placeholder="￥0.00"
             step="0.01"
             v-model="amount"
+            required
           >
         </div>
       </v-ons-card>
@@ -44,7 +45,7 @@ export default {
       selectedBook
     } = this.$store.state;
     return {
-      amount: "￥0.00",
+      amount: "",
       comment: display,
       category: name || display,
       pickerValue: new Date(),

@@ -2,13 +2,11 @@
   <v-ons-page>
     <v-ons-tabbar :swipeable="false">
       <template slot="pages">
-        <transition>
           <keep-alive>
             <div class="scroll" ref="scroll">
               <component :is="currentPage"></component>
             </div>
           </keep-alive>
-        </transition>
       </template>
       <v-ons-tab
         v-for="(tab, index) in tabs"

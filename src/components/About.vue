@@ -37,6 +37,15 @@
         </v-container>
       </div>
       <v-ons-list class="menus">
+        <v-ons-list-item>
+          <div class="left">
+            <v-ons-icon :style="{color:'#85f188'}" icon="md-eye-off"></v-ons-icon>
+          </div>
+          <div class="center">隐藏金额</div>
+          <div class="right">
+            <v-ons-switch v-model="hideAmount"></v-ons-switch>
+          </div>
+        </v-ons-list-item>
         <v-ons-list-item
           v-for="(i,index) in list"
           :key="index"
@@ -113,6 +122,20 @@ export default {
     },
     check_modal_title() {
       return this.check.checked_today ? "今天签过了哦" : "签到成功";
+    },
+    hideAmount: {
+      get: function() {
+        return this.$store.state.hideAmount;
+      },
+      set: function(s) {
+        axios
+          .put("/settings/show-amount", {
+            showAmount: !s
+          })
+          .then(r => {
+            this.$store.commit("setHideAmount", s);
+          });
+      }
     }
   },
 
@@ -146,6 +169,7 @@ export default {
       this.loadProfile();
       this.loadCheckStatistics();
       this.loadRecordStats();
+      this.loadSettings();
     },
 
     loadProfile() {
@@ -172,6 +196,12 @@ export default {
         this.$store.commit("setStats", {
           record_count: data
         });
+      });
+    },
+
+    loadSettings() {
+      axios.get("/settings").then(({ data: { showAmount } }) => {
+        this.$store.commit("setHideAmount", !showAmount);
       });
     },
 
@@ -298,7 +328,7 @@ export default {
 .check {
   position: absolute;
   right: 0;
-  top: 24px;
+  top: 12px;
   background-color: #0094ef;
   box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
   font-size: 14px;

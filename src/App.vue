@@ -2,14 +2,16 @@
   <div id="vapp">
     <v-app>
       <keep-alive include="Main">
-        <router-view></router-view>
+        <SlideXLeftTransition>
+          <router-view></router-view>
+        </SlideXLeftTransition>
       </keep-alive>
     </v-app>
   </div>
 </template>
 
 <script>
-import { FadeTransition } from "vue2-transitions";
+import { SlideXLeftTransition } from "vue2-transitions";
 import DefaultCategories from "@/category";
 import { getCategoriesByType } from "@/category";
 import books from "@/book";
@@ -18,7 +20,7 @@ import axios from "@/request";
 export default {
   name: "App",
   components: {
-    FadeTransition
+    SlideXLeftTransition
   },
   created() {
     this.initCategories();
