@@ -93,7 +93,8 @@ export default {
       return formatDate(this.date);
     },
     amountValue() {
-      return this.type == "PAY" ? -this.amount : this.amount;
+      const amount = this.amount || 0;
+      return this.type == "PAY" ? -amount : amount;
     }
   }
 };

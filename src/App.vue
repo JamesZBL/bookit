@@ -1,17 +1,17 @@
 <template>
   <div id="vapp">
     <v-app>
-      <SlideXLeftTransition>
+      <ZoomCenterTransition>
         <keep-alive include="Main">
           <router-view></router-view>
         </keep-alive>
-      </SlideXLeftTransition>
+      </ZoomCenterTransition>
     </v-app>
   </div>
 </template>
 
 <script>
-import { SlideXLeftTransition } from "vue2-transitions";
+import { ZoomCenterTransition } from "vue2-transitions";
 import DefaultCategories from "@/category";
 import { getCategoriesByType } from "@/category";
 import books from "@/book";
@@ -20,7 +20,7 @@ import axios from "@/request";
 export default {
   name: "App",
   components: {
-    SlideXLeftTransition
+    ZoomCenterTransition
   },
   created() {
     this.initCategories();
