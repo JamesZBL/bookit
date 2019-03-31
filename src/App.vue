@@ -153,4 +153,10 @@ span {
 .center {
   color: #4a5660 !important;
 }
+
+.toast {
+  margin: 60px 10px !important;
+  background-color: rgba(55, 71, 79, 0.8) !important;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3) !important;
+}
 </style>

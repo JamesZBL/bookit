@@ -16,6 +16,7 @@ import Signin from '@/components/sign/Signin'
 import Signup from '@/components/sign/Signup'
 import Code from '@/components/sign/Code'
 import Email from '@/components/sign/Email'
+import NewPassword from '@/components/sign/Password'
 
 Vue.use(Router)
 
@@ -24,8 +25,7 @@ export default new Router({
     {
       path: '/',
       redirect: '/main'
-    },
-    {
+    }, {
       path: '/main',
       name: 'main',
       component: Main,
@@ -44,23 +44,19 @@ export default new Router({
           component: Analyse
         }
       ]
-    },
-    {
+    }, {
       path: '/signin',
       component: Signin
-    },
-    {
+    }, {
       path: '/signup',
       component: Signup
-    },
-    {
+    }, {
       path: '/code',
       component: Code
     }, {
       path: '/email',
       component: Email
-    },
-    {
+    }, {
       path: '/settings/category',
       component: Category
     }, {
@@ -81,6 +77,9 @@ export default new Router({
     }, {
       path: '/book/new',
       component: NewBook
+    }, {
+      path: '/password/new',
+      component: NewPassword
     }
   ]
 })

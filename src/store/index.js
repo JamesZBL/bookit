@@ -10,6 +10,7 @@ export default new Vuex.Store({
     currentPage: '',
     email: '',
     codeType: '',
+    code: '',
     visibleCategories: [],
     hiddenCategories: [],
     selectedCategory: {},
@@ -199,6 +200,10 @@ export default new Vuex.Store({
         ...s.profile.stats,
         ...stats
       };
+    },
+
+    setCode(s, code) {
+      s.code = code;
     }
   },
 

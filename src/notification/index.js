@@ -10,7 +10,7 @@ const alert = function (message, callback) {
 const toast = function (message, callback) {
   notification.toast(message, {
     callback: callback || (() => { }),
-    timeout: 2000
+    timeout: 2500
   });
 }
 

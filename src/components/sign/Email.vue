@@ -18,6 +18,7 @@
 
 <script>
 import { setMainColor } from "@/theme/statusbar";
+import axios from "@/request";
 export default {
   name: "email",
   data() {
@@ -42,9 +43,17 @@ export default {
       const { form } = this.$refs;
       form.validate();
       if (!valid) return;
-      $store.commit("setCodeType", "password");
+      $store.commit("setCodeType", "PASSWORD");
       $store.commit("setEmail", email);
-      $router.push("/code");
+      axios
+        .get("/profile/reset-code", {
+          params: {
+            email
+          }
+        })
+        .then(r => {
+          $router.push("/code");
+        });
     }
   }
 };

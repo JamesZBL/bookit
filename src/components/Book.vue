@@ -35,7 +35,7 @@
 
 <script>
 import axios from "@/request";
-import { confirm } from "@/notification";
+import { confirm, toast } from "@/notification";
 export default {
   name: "book",
   data() {

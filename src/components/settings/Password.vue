@@ -40,6 +40,8 @@
 </template>
 
 <script>
+import axios from "@/request";
+import { toast } from "@/notification";
 export default {
   name: "password",
   data() {
@@ -56,10 +58,18 @@ export default {
   },
   methods: {
     onClickSubmit() {
-      const { $router, $store } = this;
+      const { $router, passwordOriginal, passwordRepeat } = this;
       const validate = this.$refs.form.validate();
       if (!validate) return;
-      this.$router.replace(`/`);
+      axios
+        .put("/profile/password", {
+          oldPassword: passwordOriginal,
+          newPassword: passwordRepeat
+        })
+        .then(r => {
+          toast("已修改，下次登录请使用新密码");
+          this.$router.replace(`/`);
+        });
     }
   },
   computed: {

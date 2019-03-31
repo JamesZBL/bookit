@@ -33,7 +33,7 @@ export default {
   },
   methods: {
     onClickSubmit() {
-      const { type, emailCode, email, $router } = this;
+      const { type, emailCode, email, $router, $store } = this;
       switch (type) {
         case "REGISTER":
           axios
@@ -46,6 +46,12 @@ export default {
                 $router.replace("/signin");
               });
             });
+          break;
+        case "PASSWORD":
+          $store.commit("setCode", emailCode);
+          $router.push('/password/new');
+          break;
+        default:
       }
     }
   }
