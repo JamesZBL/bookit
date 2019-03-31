@@ -3,7 +3,8 @@
     <c-title title></c-title>
     <div class="wrapper">
       <div class="about-head" style="box-shadow: #00cdff 0px 0px 20px 0px;">
-        <img class="avatar" :src="avatar">
+        <img class="avatar" :src="avatar" v-if="avatarValid">
+        <img class="avatar" src="@/assets/avatar.png" v-else>
         <form ref="form" class="form">
           <input ref="file" type="file" name="avatar" accept="image/*" @change="onFileChange">
         </form>
@@ -122,6 +123,10 @@ export default {
     },
     avatar() {
       return `${config.baseURL}${this.user.avatar}`;
+    },
+    avatarValid() {
+      const { avatar } = this.user;
+      return undefined != avatar && null != avatar;
     }
   },
 
