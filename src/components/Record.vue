@@ -75,6 +75,7 @@
 import number from "@/components/number/Money";
 import accounting from "accounting";
 import axios from "@/request";
+import { formatDate } from "@/date";
 export default {
   name: "record",
   components: {
@@ -99,7 +100,7 @@ export default {
   },
   computed: {
     startTime() {
-      return new Date(this.pickerDate).toISOString().substring(0, 10);
+      return formatDate(new Date(this.pickerDate));
     },
     endTime() {
       const date = new Date(this.pickerDate);
@@ -108,9 +109,7 @@ export default {
       const december = month === 12;
       const nextMonth = december ? 1 : month + 1;
       const nextYear = december ? year + 1 : year;
-      return new Date(`${nextYear}-${nextMonth}-01`)
-        .toISOString()
-        .substring(0, 10);
+      return formatDate(new Date(`${nextYear}-${nextMonth}-01`));
     },
     amountVisible() {
       return this.$store.state.record.amountVisible;

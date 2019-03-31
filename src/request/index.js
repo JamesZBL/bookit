@@ -1,6 +1,7 @@
 const axios = require('axios');
 import router from '../router';
 import { alert } from '@/notification';
+import config from '@/config';
 
 // const setRouter = function (router) {
 //   $router = router;
@@ -11,7 +12,7 @@ const setToken = function (token) {
   localStorage.setItem('token', token);
 }
 
-axios.defaults.baseURL = 'http://192.168.1.2:8080';
+axios.defaults.baseURL = config.baseURL;
 axios.defaults.headers.common['token'] = localStorage.getItem("token") || "";
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 
