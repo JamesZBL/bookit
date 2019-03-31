@@ -13,5 +13,6 @@ const formatDate = function (v) {
 export {
   getCurrentDate,
   formatDate,
-  getDateString
+  getDateString,
+  getCurrentDateString
 }

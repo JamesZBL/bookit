@@ -75,7 +75,7 @@
 import number from "@/components/number/Money";
 import accounting from "accounting";
 import axios from "@/request";
-import { formatDate } from "@/date";
+import { formatDate, getCurrentDateString } from "@/date";
 export default {
   name: "record",
   components: {
@@ -87,7 +87,7 @@ export default {
     const month = today.getMonth() + 1;
     return {
       dialogVisible: false,
-      pickerDate: new Date().toISOString().substring(0, 7),
+      pickerDate: getCurrentDateString(),
       year,
       month
     };
