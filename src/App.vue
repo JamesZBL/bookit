@@ -1,11 +1,11 @@
 <template>
   <div id="vapp">
     <v-app>
-      <keep-alive include="Main">
-        <SlideXLeftTransition>
+      <SlideXLeftTransition>
+        <keep-alive include="Main">
           <router-view></router-view>
-        </SlideXLeftTransition>
-      </keep-alive>
+        </keep-alive>
+      </SlideXLeftTransition>
     </v-app>
   </div>
 </template>
