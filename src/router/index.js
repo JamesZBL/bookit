@@ -17,6 +17,7 @@ import Signup from '@/components/sign/Signup'
 import Code from '@/components/sign/Code'
 import Email from '@/components/sign/Email'
 import NewPassword from '@/components/sign/Password'
+import DisplaySettings from '@/components/settings/Display'
 
 Vue.use(Router)
 
@@ -68,6 +69,9 @@ export default new Router({
     }, {
       path: '/settings/password',
       component: Password
+    }, {
+      path: '/settings/display',
+      component: DisplaySettings
     }, {
       path: '/record/new',
       component: NewRecord

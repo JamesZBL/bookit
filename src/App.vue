@@ -102,7 +102,7 @@ span {
 }
 
 .card-wrapper {
-  padding-top: 5px;
+  padding-top: 20px;
 }
 
 .btn {
