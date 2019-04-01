@@ -2,8 +2,22 @@ const getCurrentDate = function () {
   return new Date();
 }
 
-const getCurrentDateString = function() {
+const getCurrentDateString = function () {
   return formatDate(getCurrentDate());
+}
+
+const getFirstDayOfCurrentMonth = function () {
+  return `${getCurrentDateString().substring(0, 8)}01`;
+}
+
+const getFirstDayOfNextMonth = function () {
+  const date = new Date(getCurrentDateString());
+  const month = 1 + date.getMonth();
+  const year = date.getFullYear();
+  const december = month === 12;
+  const nextMonth = december ? 1 : month + 1;
+  const nextYear = december ? year + 1 : year;
+  return formatDate(new Date(`${nextYear}-${nextMonth}-01`));
 }
 
 const formatDate = function (v) {
@@ -14,5 +28,7 @@ export {
   getCurrentDate,
   formatDate,
   getDateString,
-  getCurrentDateString
+  getCurrentDateString,
+  getFirstDayOfCurrentMonth,
+  getFirstDayOfNextMonth
 }
