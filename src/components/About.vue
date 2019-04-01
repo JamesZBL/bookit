@@ -122,7 +122,7 @@ export default {
       return this.check.checked_today ? "今天签过了哦" : "签到成功";
     },
     avatar() {
-      return `${config.baseURL}${this.user.avatar}`;
+      return `${config.fileBaseURL}${this.user.avatar}`;
     },
     avatarValid() {
       const { avatar } = this.user;
@@ -214,6 +214,7 @@ export default {
 
     onFileChange() {
       const file = this.$refs.file.files[0];
+      if(!file) return;
       const formData = new FormData();
       formData.set("avatar", file);
       axios({
