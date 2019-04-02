@@ -75,7 +75,13 @@
 import number from "@/components/number/Money";
 import accounting from "accounting";
 import axios from "@/request";
-import { formatDate, getCurrentDateString, getFirstDayOfCurrentMonth, getFirstDayOfNextMonth } from "@/date";
+import {
+  formatDate,
+  getCurrentDateString,
+  getFirstDayOf,
+  getFirstDayOfNextMonthOf,
+  getCurrentYearAndMonthString
+} from "@/date";
 export default {
   name: "record",
   components: {
@@ -87,7 +93,7 @@ export default {
     const month = today.getMonth() + 1;
     return {
       dialogVisible: false,
-      pickerDate: getCurrentDateString(),
+      pickerDate: '2019-04',
       year,
       month
     };
@@ -100,10 +106,11 @@ export default {
   },
   computed: {
     startTime() {
-      return getFirstDayOfCurrentMonth();
+      console.log(this.pickerDate);
+      return getFirstDayOf(this.pickerDate);
     },
     endTime() {
-      return getFirstDayOfNextMonth();
+      return getFirstDayOfNextMonthOf(this.pickerDate);
     },
     amountVisible() {
       return this.$store.state.record.amountVisible;

@@ -2,10 +2,7 @@ const axios = require('axios');
 import router from '../router';
 import { alert } from '@/notification';
 import config from '@/config';
-
-// const setRouter = function (router) {
-//   $router = router;
-// }
+import { Indicator } from 'mint-ui';
 
 const setToken = function (token) {
   axios.defaults.headers.common['token'] = token;
@@ -42,6 +39,14 @@ axios.interceptors.response.use(function (response) {
   }
   return Promise.reject(error);
 });
+
+const startLoading = function() {
+  Indicator.open();
+}
+
+const endLoading = function() {
+  Indicator.close();
+}
 
 export default axios;
 export {
