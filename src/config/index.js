@@ -4,8 +4,8 @@ const config = {
     fileBaseURL: 'http://192.168.1.2:7998'
   },
   'production': {
-    baseURL: 'http://192.168.1.2:7997',
-    fileBaseURL: 'http://192.168.1.2:7997'
+    baseURL: 'https://bookit.letec.top',
+    fileBaseURL: 'https://bookit.letec.top'
   }
 }
 
