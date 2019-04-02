@@ -5,7 +5,9 @@ import config from '@/config';
 import { Indicator } from 'mint-ui';
 
 const startLoading = function() {
-  Indicator.open();
+  setTimeout(() => {
+    Indicator.open();
+  }, 100);
 }
 
 const endLoading = function() {
