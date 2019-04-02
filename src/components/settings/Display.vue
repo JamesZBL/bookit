@@ -36,6 +36,7 @@ export default {
           })
           .then(r => {
             this.$store.commit("setHideAmount", s);
+            this.$store.commit("setRecordAmountVisible", !s);
           });
       }
     }

@@ -127,11 +127,18 @@ export default {
     avatarValid() {
       const { avatar } = this.user;
       return undefined != avatar && null != avatar;
+    },
+    loaded() {
+      return this.$store.state.loaded.about;
     }
   },
 
+  activated() {
+    this.loadIfNeeded();
+  },
+
   mounted() {
-    this.loadData();
+    this.loadIfNeeded();
   },
 
   methods: {
@@ -154,6 +161,13 @@ export default {
 
     onClickLink(path) {
       this.$router.push(path);
+    },
+
+    loadIfNeeded() {
+      if (!this.loaded) {
+        this.loadData();
+        this.$store.commit("setLoaded", "about");
+      }
     },
 
     loadData() {
@@ -214,7 +228,7 @@ export default {
 
     onFileChange() {
       const file = this.$refs.file.files[0];
-      if(!file) return;
+      if (!file) return;
       const formData = new FormData();
       formData.set("avatar", file);
       axios({

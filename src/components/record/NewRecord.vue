@@ -81,6 +81,7 @@ export default {
           bookId: selectedBook.id
         })
         .then(r => {
+          this.$store.commit("setLoaded", "record");
           this.$router.replace("/");
         });
     }

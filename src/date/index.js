@@ -3,7 +3,7 @@ const getCurrentDate = function () {
 }
 
 const getCurrentYearAndMonthString = function () {
-  return formatDate(getCurrentDate()).split(0, 7);
+  return formatDate(getCurrentDate()).substring(0, 7);
 }
 
 const getCurrentDateString = function () {

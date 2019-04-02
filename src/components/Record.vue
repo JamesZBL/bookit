@@ -93,16 +93,16 @@ export default {
     const month = today.getMonth() + 1;
     return {
       dialogVisible: false,
-      pickerDate: '2019-04',
+      pickerDate: getCurrentYearAndMonthString(),
       year,
       month
     };
   },
   activated() {
-    this.loadData();
+    this.loadIfNeeded();
   },
   mounted() {
-    this.loadData();
+    this.loadIfNeeded();
   },
   computed: {
     startTime() {
@@ -123,6 +123,9 @@ export default {
     },
     list() {
       return this.$store.state.record.list;
+    },
+    loaded() {
+      return this.$store.state.loaded.record;
     }
   },
   watch: {
@@ -164,6 +167,13 @@ export default {
 
     formatMoneyClean(amount) {
       return accounting.formatMoney(amount, "");
+    },
+
+    loadIfNeeded() {
+      if (!this.loaded) {
+        this.loadData();
+        this.$store.commit("setLoaded", "record");
+      }
     },
 
     loadData() {

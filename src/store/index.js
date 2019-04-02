@@ -36,6 +36,10 @@ export default new Vuex.Store({
         check_count: 0
       },
     },
+    loaded: {
+      record: false,
+      about: false
+    }
   },
 
   mutations: {
@@ -204,6 +208,11 @@ export default new Vuex.Store({
 
     setCode(s, code) {
       s.code = code;
+    },
+
+    setLoaded(s, name) {
+      const origin = s.loaded[name];
+      s.loaded[name] = !origin;
     }
   },
 
