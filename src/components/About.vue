@@ -147,6 +147,7 @@ export default {
         if (ok) {
           this.$router.replace("/signin");
           this.$store.commit("setCurrentPage", "");
+          this.$store.commit("resetAll");
         }
       });
     },

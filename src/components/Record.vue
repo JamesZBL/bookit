@@ -40,7 +40,11 @@
               </div>
             </v-ons-list-header>
 
-            <v-ons-list-item v-for="(item, index) in day.list" :key="index">
+            <v-ons-list-item
+              v-for="(item, index) in day.list"
+              :key="index"
+              @press="loadSettings"
+            >
               <div class="left">
                 <v-ons-icon :icon="getCategory(item).icon" class="item-icon"></v-ons-icon>
               </div>

@@ -4,46 +4,52 @@ import DefaultBooks from '@/book';
 
 Vue.use(Vuex);
 
-export default new Vuex.Store({
-  state: {
-    activeIndex: '',
-    currentPage: '',
-    email: '',
-    codeType: '',
-    code: '',
-    visibleCategories: [],
-    hiddenCategories: [],
-    selectedCategory: {},
-    books: [],
-    selectedBook: {},
-    hideAmount: false,
-    recordType: '',
-    record: {
-      list: [],
-      income: 0,
-      pay: 0,
-      amountVisible: false
-    },
-    profile: {
-      user: {
-        nickName: "",
-        email: "",
-        avatar: ""
-      },
-      stats: {
-        day: 0,
-        record_count: 0,
-        check_count: 0
-      },
-    },
-    loaded: {
-      record: false,
-      about: false,
-      book: false
-    }
+const defaultState = () => ({
+  activeIndex: '',
+  currentPage: '',
+  email: '',
+  codeType: '',
+  code: '',
+  visibleCategories: [],
+  hiddenCategories: [],
+  selectedCategory: {},
+  books: [],
+  selectedBook: {},
+  hideAmount: false,
+  recordType: '',
+  record: {
+    list: [],
+    income: 0,
+    pay: 0,
+    amountVisible: false
   },
+  profile: {
+    user: {
+      nickName: "",
+      email: "",
+      avatar: ""
+    },
+    stats: {
+      day: 0,
+      record_count: 0,
+      check_count: 0
+    },
+  },
+  loaded: {
+    record: false,
+    about: false,
+    book: false
+  }
+});
+
+export default new Vuex.Store({
+  state: defaultState(),
 
   mutations: {
+    resetAll(s) {
+      Object.assign(s, defaultState());
+    },
+
     setEmail(s, email) {
       s.email = email;
     },
