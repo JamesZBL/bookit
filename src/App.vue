@@ -162,4 +162,8 @@ span {
   margin-left: 6px;
   text-align: center;
 }
+
+.mint-indicator * {
+  z-index: 3 !important;
+}
 </style>

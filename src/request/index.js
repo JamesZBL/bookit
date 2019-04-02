@@ -4,6 +4,14 @@ import { alert } from '@/notification';
 import config from '@/config';
 import { Indicator } from 'mint-ui';
 
+const startLoading = function() {
+  Indicator.open();
+}
+
+const endLoading = function() {
+  Indicator.close();
+}
+
 const setToken = function (token) {
   axios.defaults.headers.common['token'] = token;
   localStorage.setItem('token', token);
@@ -16,18 +24,22 @@ axios.defaults.headers.post['Content-Type'] = 'application/json';
 // Add a request interceptor
 axios.interceptors.request.use(function (config) {
   // Do something before request is sent
+  startLoading();
   return config;
 }, function (error) {
   // Do something with request error
+  endLoading();
   return Promise.reject(error);
 });
 
 // Add a response interceptor
 axios.interceptors.response.use(function (response) {
   // Do something with response data
+  endLoading();
   return response;
 }, function (error) {
   // Do something with response error
+  endLoading();
   if (error && error.response) {
     const { status, data: { msg } } = error.response;
     if (status === 401)
@@ -39,14 +51,6 @@ axios.interceptors.response.use(function (response) {
   }
   return Promise.reject(error);
 });
-
-const startLoading = function() {
-  Indicator.open();
-}
-
-const endLoading = function() {
-  Indicator.close();
-}
 
 export default axios;
 export {
