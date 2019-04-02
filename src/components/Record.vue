@@ -285,7 +285,7 @@ export default {
 }
 
 .list {
-  padding-top: 32px;
+  padding-top: 33px;
 }
 
 .item-icon {

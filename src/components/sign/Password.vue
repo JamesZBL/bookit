@@ -1,6 +1,6 @@
 <template>
   <div>
-    <c-title title="邮箱验证" back></c-title>
+    <c-title title="重置密码" back></c-title>
     <div class="wrapper">
       <v-form v-model="valid" ref="form">
         <v-container>
