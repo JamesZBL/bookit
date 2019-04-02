@@ -72,6 +72,7 @@ export default {
             color,
             display: name
           });
+          this.$store.commit("setLoaded", "book");
           this.$router.replace("/");
         });
     }

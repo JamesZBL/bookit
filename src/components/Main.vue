@@ -2,11 +2,11 @@
   <v-ons-page>
     <v-ons-tabbar :swipeable="false">
       <template slot="pages">
-          <keep-alive>
-            <div class="scroll" ref="scroll">
-              <component :is="currentPage"></component>
-            </div>
-          </keep-alive>
+        <keep-alive>
+          <div class="scroll" ref="scroll">
+            <component :is="currentPage"></component>
+          </div>
+        </keep-alive>
       </template>
       <v-ons-tab
         v-for="(tab, index) in tabs"
@@ -75,7 +75,11 @@ export default {
     };
   },
 
-  computed: {},
+  computed: {
+    loaded() {
+      return this.$store.state.loaded.book;
+    }
+  },
 
   created() {},
 
@@ -83,18 +87,26 @@ export default {
     setMainColor();
     this.currentPage = this.$store.getters.currentPage || "record";
     this.checkToken();
-    this.loadAppData();
+    this.loadIfNeeded();
   },
 
   mounted() {
     this.checkToken();
-    this.loadAppData();
+    this.loadIfNeeded();
   },
 
   methods: {
     checkToken() {
       const token = localStorage.getItem("token");
       if (!token) this.$router.replace("/signin");
+    },
+
+    loadIfNeeded() {
+      const { $store } = this;
+      if (!loaded) {
+        this.loadAppData();
+        $store.commit("setLoaded", "book");
+      }
     },
 
     loadAppData() {

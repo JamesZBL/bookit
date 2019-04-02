@@ -38,7 +38,8 @@ export default new Vuex.Store({
     },
     loaded: {
       record: false,
-      about: false
+      about: false,
+      book: false
     }
   },
 
