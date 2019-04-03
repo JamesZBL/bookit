@@ -3,12 +3,13 @@ import router from '../router';
 import { alert } from '@/notification';
 import config from '@/config';
 import { Indicator } from 'mint-ui';
+import store from '@/store';
 
-const startLoading = function() {
-    Indicator.open();
+const startLoading = function () {
+  Indicator.open();
 }
 
-const endLoading = function() {
+const endLoading = function () {
   Indicator.close();
 }
 
@@ -42,8 +43,10 @@ axios.interceptors.response.use(function (response) {
   endLoading();
   if (error && error.response) {
     const { status, data: { msg } } = error.response;
-    if (status === 401)
+    if (status === 401) {
       router.replace('/signin');
+      store.commit('resetAll');
+    }
     if (status >= 400 && status < 500)
       alert(msg);
     if (status >= 500)
