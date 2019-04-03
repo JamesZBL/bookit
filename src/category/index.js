@@ -1,4 +1,4 @@
-const categories = [
+const categories = () => [
 
   /** income **/
   {
@@ -184,7 +184,7 @@ const categories = [
 
 const getShowList = function () {
   const list = [];
-  categories.forEach((item, id) => list.push({ id, ...item }))
+  categories().forEach((item, id) => list.push({ id, ...item }))
   return list;
 }
 
@@ -193,7 +193,7 @@ const initCategories = function () {
   if (!stored)
     localStorage.setItem(
       KEY_CATEGORIES,
-      categories.map(i => {
+      categories().map(i => {
         return {
           ...i,
           hide: false
@@ -202,12 +202,12 @@ const initCategories = function () {
     );
 }
 
-const getCategoriesByType = function (type) {
-  return categories.filter(c => c.type === type);
+const getCategoriesByType = function (ctgrs, type) {
+  return ctgrs.filter(c => c.type === type);
 }
 
 const getDisplayOf = function (name) {
-  return categories.find(i => i.name === name).display;
+  return categories().find(i => i.name === name).display;
 }
 
 const KEY_CATEGORIES = "categories";

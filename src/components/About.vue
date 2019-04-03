@@ -148,6 +148,7 @@ export default {
           this.$router.replace("/signin");
           this.$store.commit("setCurrentPage", "");
           this.$store.commit("resetAll");
+          localStorage.removeItem("token");
         }
       });
     },

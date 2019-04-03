@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import DefaultBooks from '@/book';
+import books from '@/book';
 
 Vue.use(Vuex);
 
@@ -38,7 +38,8 @@ const defaultState = () => ({
   loaded: {
     record: false,
     about: false,
-    book: false
+    book: false,
+    category: false
   }
 });
 
@@ -128,9 +129,10 @@ export default new Vuex.Store({
       s.visibleCategories.splice(s.visibleCategories.findIndex(c => c.name === category.name), 1);
     },
 
-    setBooks(s, books) {
+    setBooks(s, bks) {
+      const DefaultBooks = books();
       s.books = [DefaultBooks[0]];
-      for (let b of books) {
+      for (let b of bks) {
         s.books.push({
           ...b,
           type: 'customed'
@@ -140,6 +142,7 @@ export default new Vuex.Store({
 
     setSelectedBook(s, book) {
       if (null == book.id) {
+        const DefaultBooks = books();
         s.selectedBook = DefaultBooks[0];
         return;
       }

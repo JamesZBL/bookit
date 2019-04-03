@@ -1,4 +1,4 @@
-const books = [
+const books = () => [
   {
     type: 'default',
     display: '默认账本',
@@ -6,7 +6,4 @@ const books = [
   }
 ]
 
-const getCurrentBookDisplay = () => '生意账本';
-
 export default books;
-export { getCurrentBookDisplay };

@@ -9,8 +9,6 @@
 </template>
 
 <script>
-import DefaultCategories from "@/category";
-import { getCategoriesByType } from "@/category";
 import books from "@/book";
 import "@/fonts/fonts.css";
 import axios from "@/request";
@@ -18,47 +16,14 @@ export default {
   name: "App",
   components: {},
   created() {
-    this.initCategories();
     this.initBooks();
   },
   methods: {
-    initCategories() {
-      const { $store } = this;
-
-      // fetch category order
-      for (let type of ["INCOME", "PAY"]) {
-        axios
-          .get("/order", {
-            params: {
-              type
-            }
-          })
-          .then(({ data: { names } }) => {
-            const visibleCategories = [];
-            for (let name of names) {
-              let index = DefaultCategories.findIndex(c => c.name === name);
-              let customed = -1 === index;
-              let find = DefaultCategories[index];
-              visibleCategories.push({
-                customed,
-                display: customed ? name : find.display,
-                name: customed ? name : find.name,
-                icon: customed ? "fa-star" : find.icon,
-                type: type.toLowerCase()
-              });
-              if (!customed) DefaultCategories.splice(index, 1);
-            }
-            const restCategories = getCategoriesByType(type.toLowerCase());
-            this.$store.commit("setVisibleCategoriesByType", visibleCategories);
-            this.$store.commit("setHiddenCategoriesByType", restCategories);
-          });
-      }
-    },
-
     initBooks() {
+      const defaultBooks = books();
       const { $store } = this;
-      $store.commit("setBooks", [books[0]]);
-      $store.commit("setSelectedBook", books[0]);
+      $store.commit("setBooks", [defaultBooks[0]]);
+      $store.commit("setSelectedBook", defaultBooks[0]);
     }
   }
 };

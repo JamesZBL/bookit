@@ -30,6 +30,8 @@ import { Tabbar, TabItem } from "mint-ui";
 import { Header } from "mint-ui";
 import { setMainColor } from "@/theme/statusbar";
 import axios from "@/request";
+import categories from "@/category";
+import { getCategoriesByType } from "@/category";
 
 export default {
   name: "Main",
@@ -78,6 +80,9 @@ export default {
   computed: {
     loaded() {
       return this.$store.state.loaded.book;
+    },
+    categoryLoaded() {
+      return this.$store.state.loaded.category;
     }
   },
 
@@ -103,9 +108,13 @@ export default {
 
     loadIfNeeded() {
       const { $store } = this;
-      if (!loaded) {
+      if (!this.loaded) {
         this.loadAppData();
         $store.commit("setLoaded", "book");
+      }
+      if (!this.categoryLoaded) {
+        this.loadCategories();
+        $store.commit("setLoaded", 'category');
       }
     },
 
@@ -129,6 +138,44 @@ export default {
           id: activeBookId
         });
       });
+    },
+
+    loadCategories() {
+      const DefaultCategories = categories();
+      const { $store } = this;
+
+      // fetch category order
+      for (let type of ["INCOME", "PAY"]) {
+        axios
+          .get("/order", {
+            params: {
+              type
+            }
+          })
+          .then(({ data: { names } }) => {
+            const visibleCategories = [];
+            if(!names.length) {
+              this.$store.commit("setVisibleCategories", DefaultCategories);
+              return;
+            }
+            for (let name of names) {
+              let index = DefaultCategories.findIndex(c => c.name === name);
+              let customed = -1 === index;
+              let find = DefaultCategories[index];
+              visibleCategories.push({
+                customed,
+                display: customed ? name : find.display,
+                name: customed ? name : find.name,
+                icon: customed ? "fa-star" : find.icon,
+                type: type.toLowerCase()
+              });
+              if (!customed) DefaultCategories.splice(index, 1);
+            }
+            const restCategories = getCategoriesByType(DefaultCategories, type.toLowerCase());
+            this.$store.commit("setVisibleCategoriesByType", visibleCategories);
+            this.$store.commit("setHiddenCategoriesByType", restCategories);
+          });
+      }
     }
   },
 
