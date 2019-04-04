@@ -24,11 +24,13 @@
             <div class="amount-wrapper">
               <span class="amount-line">
                 收入:
-                <span class="book-amount">{{formatMoneyClean(i.income)}}</span>
+                <span class="book-amount" v-if="!i.id">{{formatMoneyClean(defaultBook.income)}}</span>
+                <span class="book-amount" v-else>{{formatMoneyClean(i.income)}}</span>
               </span>
               <span class="amount-line">
                 支出:
-                <span class="book-amount">{{formatMoneyClean(i.pay)}}</span>
+                <span class="book-amount" v-if="!i.id">{{formatMoneyClean(defaultBook.pay)}}</span>
+                <span class="book-amount" v-else>{{formatMoneyClean(i.pay)}}</span>
               </span>
             </div>
           </v-flex>
@@ -61,6 +63,9 @@ export default {
     },
     loaded() {
       return this.$store.state.loaded.book;
+    },
+    defaultBook() {
+      return this.$store.state.defaultBook;
     }
   },
   mounted() {
@@ -151,6 +156,9 @@ export default {
         this.$store.commit("setSelectedBook", {
           id: activeBookId
         });
+      });
+      axios.get("/book/default").then(({ data }) => {
+        this.$store.commit("setDefaultBook", data);
       });
     }
   }

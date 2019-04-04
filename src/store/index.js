@@ -40,6 +40,10 @@ const defaultState = () => ({
     about: false,
     book: false,
     category: false
+  },
+  defaultBook: {
+    income: 0,
+    pay: 0
   }
 });
 
@@ -223,6 +227,14 @@ export default new Vuex.Store({
     setLoaded(s, name) {
       const origin = s.loaded[name];
       s.loaded[name] = !origin;
+    },
+
+    setDefaultBook(s, book) {
+      const { income, pay } = book;
+      s.defaultBook = {
+        income,
+        pay
+      };
     }
   },
 
