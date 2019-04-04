@@ -58,7 +58,16 @@ export default {
     },
     selectedBook() {
       return this.$store.state.selectedBook;
+    },
+    loaded() {
+      return this.$store.state.loaded.book;
     }
+  },
+  mounted() {
+    this.loadIfNeeded();
+  },
+  activated() {
+    this.loadIfNeeded();
   },
   methods: {
     onClickBook(book) {
@@ -117,6 +126,32 @@ export default {
 
     formatMoneyClean(amount) {
       return accounting.formatMoney(amount, "");
+    },
+
+    loadIfNeeded() {
+      const { $store } = this;
+      if (!this.loaded) {
+        this.loadBooks();
+        $store.commit("setLoaded", "book");
+      }
+    },
+
+    loadBooks() {
+      axios.get("/book").then(({ data }) => {
+        this.$store.commit(
+          "setBooks",
+          data.map(b => ({
+            ...b,
+            display: b.name
+          }))
+        );
+      });
+      axios.get("/settings").then(({ data }) => {
+        const { activeBookId } = data;
+        this.$store.commit("setSelectedBook", {
+          id: activeBookId
+        });
+      });
     }
   }
 };

@@ -7,7 +7,15 @@
           <v-layout>
             <v-flex xs12 md12>
               <v-select :items="options" label="类别" v-model="type"></v-select>
-              <v-text-field v-model="display" :rules="nameRules" label="分类名称" required clearable></v-text-field>
+              <v-text-field
+                :autofocus="true"
+                v-model="display"
+                :rules="nameRules"
+                label="分类名称"
+                :counter="6"
+                required
+                clearable
+              ></v-text-field>
             </v-flex>
           </v-layout>
         </v-container>

@@ -78,9 +78,6 @@ export default {
   },
 
   computed: {
-    loaded() {
-      return this.$store.state.loaded.book;
-    },
     categoryLoaded() {
       return this.$store.state.loaded.category;
     }
@@ -108,36 +105,10 @@ export default {
 
     loadIfNeeded() {
       const { $store } = this;
-      if (!this.loaded) {
-        this.loadAppData();
-        $store.commit("setLoaded", "book");
-      }
       if (!this.categoryLoaded) {
         this.loadCategories();
         $store.commit("setLoaded", 'category');
       }
-    },
-
-    loadAppData() {
-      this.loadBooks();
-    },
-
-    loadBooks() {
-      axios.get("/book").then(({ data }) => {
-        this.$store.commit(
-          "setBooks",
-          data.map(b => ({
-            ...b,
-            display: b.name
-          }))
-        );
-      });
-      axios.get("/settings").then(({ data }) => {
-        const { activeBookId } = data;
-        this.$store.commit("setSelectedBook", {
-          id: activeBookId
-        });
-      });
     },
 
     loadCategories() {

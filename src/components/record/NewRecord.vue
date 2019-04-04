@@ -82,6 +82,7 @@ export default {
         })
         .then(r => {
           this.$store.commit("setLoaded", "record");
+          this.$store.commit("setLoaded", "book");
           this.$router.replace("/");
         });
     }

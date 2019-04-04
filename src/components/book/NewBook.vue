@@ -19,6 +19,7 @@
           <v-layout>
             <v-flex xs12 md12>
               <v-text-field
+                :autofocus="true"
                 v-model="display"
                 :rules="displayRules"
                 :counter="6"

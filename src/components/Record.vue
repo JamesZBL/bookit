@@ -4,7 +4,7 @@
     <div class="wrapper fab-wrapper">
       <div class="head amount-slim" style>
         <div class="head-left box" @click="onClickDate">
-          <div class="label">
+          <div class="label name">
             <span>{{year}}年</span>
           </div>
           <span class="month">{{month}}</span>
@@ -12,7 +12,7 @@
           <font-awesome-icon icon="caret-down"/>
         </div>
         <div class="head-right box">
-          <div class="label">
+          <div class="label name">
             <span>收入</span>
           </div>
           <div>
@@ -20,7 +20,7 @@
           </div>
         </div>
         <div class="head-right box">
-          <div class="label">
+          <div class="label name">
             <span>支出</span>
           </div>
           <div>
@@ -263,6 +263,10 @@ export default {
 .label {
   font-size: 12px;
   font-weight: 500;
+}
+
+.label.name {
+  opacity: 0.8;
 }
 
 .month {

@@ -106,7 +106,7 @@ export default new Vuex.Store({
       const { visibleCategories } = s;
       const index = visibleCategories.findIndex(c => c.name === name);
       s.visibleCategories.splice(index, 1);
-      s.hiddenCategories.push(category);
+      s.hiddenCategories.unshift(category);
     },
 
     showDefaultCategory(s, category) {

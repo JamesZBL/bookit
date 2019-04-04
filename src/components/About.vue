@@ -207,9 +207,9 @@ export default {
 
     onClickNickName() {
       const _this = this;
-      prompt("请输入新的昵称", function(v) {
+      prompt("请输入新的昵称，不多于6个字符", function(v) {
         const value = v && v.trim();
-        if (!value) {
+        if (!value || value.length > 6) {
           alert("无效的昵称");
           return false;
         }

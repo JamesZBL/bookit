@@ -38,6 +38,7 @@
 <script>
 import draggable from "vuedraggable";
 import axios from "@/request";
+import { confirm } from "@/notification";
 
 export default {
   name: "category-content",
@@ -84,17 +85,19 @@ export default {
 
     hideDefaultCategory(item) {
       const { $store } = this;
-      this.hiddenCategories.push(item);
+      this.hiddenCategories.unshift(item);
       this.visibleCategories.splice(this.visibleCategories.indexOf(item), 1);
       $store.commit("hideDefaultCategory", item);
     },
 
     deleteCustomedCategory(category) {
-      this.$store.commit("removeCategory", category);
-      this.visibleCategories.splice(
-        this.visibleCategories.findIndex(c => c.name === category.name),
-        1
-      );
+      confirm(`确定删除自定义分类 ${category.display} 吗?`, () => {
+        this.$store.commit("removeCategory", category);
+        this.visibleCategories.splice(
+          this.visibleCategories.findIndex(c => c.name === category.name),
+          1
+        );
+      });
     },
 
     onDragCategories() {
