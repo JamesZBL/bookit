@@ -12,7 +12,7 @@
                 v-if="(selectedBook.display === i.display || selectedBook.id === i.id) && !showDelete"
                 class="bookmark"
               ></v-ons-icon>
-              <v-card-text class="px-0 display">{{i.display}}</v-card-text>
+              <v-card-text class="px-0 display card-name">{{i.display}}</v-card-text>
               <v-card-text
                 class="px-0 delete"
                 v-if="showDelete && i.type!=='default'"
@@ -21,6 +21,16 @@
                 <v-ons-icon icon="md-delete"></v-ons-icon>
               </v-card-text>
             </v-card>
+            <div class="amount-wrapper">
+              <span class="amount-line">
+                收入:
+                <span class="book-amount">{{formatMoneyClean(i.income)}}</span>
+              </span>
+              <span class="amount-line">
+                支出:
+                <span class="book-amount">{{formatMoneyClean(i.pay)}}</span>
+              </span>
+            </div>
           </v-flex>
         </v-layout>
       </v-container>
@@ -34,6 +44,7 @@
 <script>
 import axios from "@/request";
 import { confirm, toast } from "@/notification";
+import accounting from "accounting";
 export default {
   name: "book",
   data() {
@@ -102,6 +113,10 @@ export default {
 
     setBookDefault() {
       this.$store.commit("setBookDefault");
+    },
+
+    formatMoneyClean(amount) {
+      return accounting.formatMoney(amount, "");
     }
   }
 };
@@ -117,17 +132,18 @@ export default {
 
 .bookmark {
   position: absolute;
-  font-size: 22px;
+  font-size: 28px;
   right: 5px;
-  top: -9px;
+  top: -12px;
   color: white;
 }
 
 .delete {
   font-size: 28px;
   position: absolute;
-  bottom: 2px;
+  bottom: 0;
   z-index: 2;
+  line-height: 30px;
 }
 
 .display {
@@ -140,5 +156,30 @@ export default {
   height: 100%;
   background-color: rgba(0, 0, 0, 0.303);
   position: absolute;
+}
+
+.card-name {
+  line-height: 50px;
+}
+
+.amount-wrapper {
+  padding: 4px 0 12px 0;
+  line-height: 1;
+}
+
+.amount-wrapper * {
+  display: inline-block;
+  font-size: 12px;
+  color: #999999;
+}
+
+.amount-line {
+  width: 100%;
+  text-align: justify;
+  padding: 0 6px 0 6px;
+}
+
+.book-amount {
+  float: right;
 }
 </style>

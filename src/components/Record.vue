@@ -34,17 +34,14 @@
           <div v-for="(day, index) in list" :key="index">
             <v-ons-list-header class="amount-round">
               <span class="list-label">{{day.date}}</span>
+              <span class="list-label">星期{{["一", "二", "三", "四", "五","六", "日"][day.dayOfWeek]}}</span>
               <div class="list-head-right list-label">
                 <span class="list-label">收入: {{formatMoneyClean(day.income)}}</span>
                 <span class="list-label">支出: {{formatMoneyClean(day.pay)}}</span>
               </div>
             </v-ons-list-header>
 
-            <v-ons-list-item
-              v-for="(item, index) in day.list"
-              :key="index"
-              @press="loadSettings"
-            >
+            <v-ons-list-item v-for="(item, index) in day.list" :key="index" @press="loadSettings">
               <div class="left">
                 <v-ons-icon :icon="getCategory(item).icon" class="item-icon"></v-ons-icon>
               </div>
@@ -280,7 +277,7 @@ export default {
 
 .list-label {
   font-size: 12px;
-  padding: 6px 10px;
+  padding: 6px 4px;
   display: inline-flex;
   color: #9a9a9a;
 }
@@ -293,7 +290,8 @@ export default {
 .list-head-right {
   position: absolute;
   right: 0;
-  margin-top: -5px;
+  margin-top: -6px;
+  padding-right: 12px;
 }
 
 .mint-cell-wrapper {
