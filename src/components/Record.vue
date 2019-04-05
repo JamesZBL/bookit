@@ -292,7 +292,6 @@ export default {
 
 .list-label-right {
   color: #525d67;
-  font-size: 16px;
 }
 
 .list-head-right {
@@ -302,20 +301,17 @@ export default {
   padding-right: 12px;
 }
 
-.mint-cell-wrapper {
-  background-image: linear-gradient(
-    180deg,
-    #f50000,
-    #ec0101 50%,
-    transparent 50%
-  ) !important;
-}
-
 .list {
   padding-top: 33px;
+  font-size: 14px;
 }
 
 .item-icon {
-  color: #acadad;
+  background-color: #26a2ff;
+  border-radius: 50px;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  color: white;
 }
 </style>

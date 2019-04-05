@@ -131,4 +131,22 @@ span {
 .mint-indicator * {
   z-index: 3 !important;
 }
+
+.list-item__center,
+.list-item__right {
+  background-image: -webkit-gradient(
+    linear,
+    left bottom,
+    left top,
+    from(#e2e2e2),
+    color-stop(50%, #e2e2e2),
+    color-stop(50%, transparent)
+  ) !important;
+  background-image: linear-gradient(
+    0deg,
+    #e2e2e2,
+    #e2e2e2 50%,
+    transparent 50%
+  ) !important;
+}
 </style>
