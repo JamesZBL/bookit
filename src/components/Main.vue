@@ -107,7 +107,6 @@ export default {
       const { $store } = this;
       if (!this.categoryLoaded) {
         this.loadCategories();
-        $store.commit("setLoaded", 'category');
       }
     },
 
@@ -124,6 +123,7 @@ export default {
             }
           })
           .then(({ data: { names } }) => {
+            $store.commit("setLoaded", 'category');
             const visibleCategories = [];
             if(!names.length) {
               this.$store.commit("setVisibleCategories", DefaultCategories);
