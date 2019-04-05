@@ -43,7 +43,6 @@ export default {
   },
   data() {
     return {
-      loadedAtMounted: false,
       currentPage: "record",
       tabs: [
         {
@@ -87,28 +86,35 @@ export default {
   created() {},
 
   mounted() {
-    this.loadedAtMounted = true;
-    this.checkToken();
-    this.loadIfNeeded();
+    this.init();
   },
 
   activated() {
     setMainColor();
     this.currentPage = this.$store.getters.currentPage || "record";
-    if (!this.loadedAtMounted) {
-      this.checkToken();
-      this.loadIfNeeded();
-    }
+    this.init();
   },
 
   methods: {
+    init() {
+      if (this.checkToken()) {
+        this.loadIfNeeded();
+      }
+    },
+
     checkToken() {
       const token = localStorage.getItem("token");
-      if (!token) this.$router.replace("/signin");
+      if (!token) {
+        this.$store.commit("resetAll");
+        this.$router.replace("/signin");
+        return false;
+      }
+      return true;
     },
 
     loadIfNeeded() {
       if (!this.categoryLoaded) {
+        this.$store.commit("setLoaded", "category");
         this.loadCategories();
       }
     },
@@ -124,7 +130,6 @@ export default {
           })
           .then(({ data: { names } }) => {
             const DefaultCategories = categoriesByType(type.toLowerCase());
-            if (type === "PAY") $store.commit("setLoaded", "category");
             const visibleCategories = [];
             if (!names.length) {
               this.$store.commit(

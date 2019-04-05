@@ -49,10 +49,9 @@ const defaultState = () => ({
 
 export default new Vuex.Store({
   state: defaultState(),
-
   mutations: {
     resetAll(s) {
-      Object.assign(s, defaultState());
+      s = defaultState();
     },
 
     setEmail(s, email) {
