@@ -182,6 +182,8 @@ const categories = () => [
   }
 ]
 
+const categoriesByType = (type) => categories().filter(c => c.type === type);
+
 const getShowList = function () {
   const list = [];
   categories().forEach((item, id) => list.push({ id, ...item }))
@@ -218,5 +220,6 @@ export {
   getShowList,
   initCategories,
   getDisplayOf,
-  getCategoriesByType
+  getCategoriesByType,
+  categoriesByType
 }

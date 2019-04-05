@@ -55,11 +55,7 @@ export default {
     };
   },
   computed: {},
-  watch: {
-    visibleCategories(n, o) {
-      console.log(n);
-    }
-  },
+  watch: {},
   methods: {
     addToShow(item) {
       const { $store } = this;

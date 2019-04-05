@@ -31,7 +31,7 @@ import { Header } from "mint-ui";
 import { setMainColor } from "@/theme/statusbar";
 import axios from "@/request";
 import categories from "@/category";
-import { getCategoriesByType } from "@/category";
+import { getCategoriesByType, categoriesByType } from "@/category";
 
 export default {
   name: "Main",
@@ -43,6 +43,7 @@ export default {
   },
   data() {
     return {
+      loadedAtMounted: false,
       currentPage: "record",
       tabs: [
         {
@@ -85,16 +86,19 @@ export default {
 
   created() {},
 
-  activated() {
-    setMainColor();
-    this.currentPage = this.$store.getters.currentPage || "record";
+  mounted() {
+    this.loadedAtMounted = true;
     this.checkToken();
     this.loadIfNeeded();
   },
 
-  mounted() {
-    this.checkToken();
-    this.loadIfNeeded();
+  activated() {
+    setMainColor();
+    this.currentPage = this.$store.getters.currentPage || "record";
+    if (!this.loadedAtMounted) {
+      this.checkToken();
+      this.loadIfNeeded();
+    }
   },
 
   methods: {
@@ -110,10 +114,7 @@ export default {
     },
 
     loadCategories() {
-      const DefaultCategories = categories();
       const { $store } = this;
-
-      // fetch category order
       for (let type of ["INCOME", "PAY"]) {
         axios
           .get("/order", {
@@ -122,16 +123,20 @@ export default {
             }
           })
           .then(({ data: { names } }) => {
+            const DefaultCategories = categoriesByType(type.toLowerCase());
             if (type === "PAY") $store.commit("setLoaded", "category");
             const visibleCategories = [];
             if (!names.length) {
-              this.$store.commit("setVisibleCategories", DefaultCategories);
+              this.$store.commit(
+                "setVisibleCategoriesByType",
+                DefaultCategories
+              );
               return;
             }
             for (let name of names) {
-              let index = DefaultCategories.findIndex(c => c.name === name);
-              let customed = -1 === index;
-              let find = DefaultCategories[index];
+              const index = DefaultCategories.findIndex(c => c.name === name);
+              const customed = -1 === index;
+              const find = DefaultCategories[index];
               visibleCategories.push({
                 customed,
                 display: customed ? name : find.display,
@@ -141,10 +146,7 @@ export default {
               });
               if (!customed) DefaultCategories.splice(index, 1);
             }
-            const restCategories = getCategoriesByType(
-              DefaultCategories,
-              type.toLowerCase()
-            );
+            const restCategories = DefaultCategories;
             this.$store.commit("setVisibleCategoriesByType", visibleCategories);
             this.$store.commit("setHiddenCategoriesByType", restCategories);
           });

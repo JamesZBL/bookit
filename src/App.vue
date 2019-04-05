@@ -15,17 +15,8 @@ import axios from "@/request";
 export default {
   name: "App",
   components: {},
-  created() {
-    this.initBooks();
-  },
-  methods: {
-    initBooks() {
-      const defaultBooks = books();
-      const { $store } = this;
-      $store.commit("setBooks", [defaultBooks[0]]);
-      $store.commit("setSelectedBook", defaultBooks[0]);
-    }
-  }
+  created() {},
+  methods: {}
 };
 </script>
 

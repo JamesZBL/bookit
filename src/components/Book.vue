@@ -137,12 +137,13 @@ export default {
       const { $store } = this;
       if (!this.loaded) {
         this.loadBooks();
-        $store.commit("setLoaded", "book");
       }
     },
 
     loadBooks() {
+      const { $store } = this;
       axios.get("/book").then(({ data }) => {
+        $store.commit("setLoaded", "book");
         this.$store.commit(
           "setBooks",
           data.map(b => ({

@@ -107,7 +107,6 @@ export default {
   },
   computed: {
     startTime() {
-      console.log(this.pickerDate);
       return getFirstDayOf(this.pickerDate);
     },
     endTime() {
