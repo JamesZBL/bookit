@@ -36,8 +36,8 @@
               <span class="list-label">{{day.date}}</span>
               <span class="list-label">星期{{["一", "二", "三", "四", "五","六", "日"][day.dayOfWeek]}}</span>
               <div class="list-head-right list-label">
-                <span class="list-label">收入: {{formatMoneyClean(day.income)}}</span>
-                <span class="list-label">支出: {{formatMoneyClean(day.pay)}}</span>
+                <span class="list-label">收入: {{formatMoneyWithOptionalDecimal(day.income)}}</span>
+                <span class="list-label">支出: {{formatMoneyWithOptionalDecimal(day.pay)}}</span>
               </div>
             </v-ons-list-header>
 
@@ -47,7 +47,7 @@
               </div>
               <div class="center">{{item.name}}</div>
               <div class="right amount-round">
-                <span class="list-label-right">{{item.amount}}</span>
+                <span class="list-label-right">{{formatMoneyWithOptionalDecimal(item.amount)}}</span>
               </div>
             </v-ons-list-item>
           </div>
@@ -168,6 +168,10 @@ export default {
 
     formatMoneyClean(amount) {
       return accounting.formatMoney(amount, "");
+    },
+
+    formatMoneyWithOptionalDecimal(amount) {
+      return Math.floor(amount * 100) / 100;
     },
 
     loadIfNeeded() {
