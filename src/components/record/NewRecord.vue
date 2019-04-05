@@ -9,7 +9,14 @@
         </div>
         <div>
           <label class="label" for="comment">备注</label>
-          <input id="comment" type="text" maxlength="6" class="input" v-model="comment">
+          <input
+            id="comment"
+            type="text"
+            maxlength="12"
+            class="input"
+            v-model="comment"
+            :placeholder="display"
+          >
         </div>
         <div>
           <label class="label" for="amount">金额</label>
@@ -34,6 +41,7 @@
 </template>
 
 <script>
+import { alert } from "@/notification";
 import { getDisplayOf } from "@/category";
 import { getCurrentDate, formatDate } from "@/date";
 import axios from "@/request";
@@ -46,12 +54,13 @@ export default {
     } = this.$store.state;
     return {
       amount: "",
-      comment: display,
+      comment: "",
       category: name || display,
       pickerValue: new Date(),
       date: new Date(),
       type: recordType,
-      selectedBook
+      selectedBook,
+      display
     };
   },
   created() {},
@@ -69,14 +78,19 @@ export default {
         category,
         type,
         dateValue,
-        selectedBook
+        selectedBook,
+        display
       } = this;
+      if (0 === amountValue) {
+        alert("还没有输入金额哦");
+        return;
+      }
       axios
         .post("/record", {
           type,
           categoryName: category,
           amount: amountValue,
-          comment,
+          comment: comment || display,
           createdAt: dateValue,
           bookId: selectedBook.id
         })

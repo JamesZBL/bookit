@@ -1,5 +1,5 @@
 <template id="book">
-  <div class="scroll" v-on:swiperight="onPressCard">
+  <div class="scroll">
     <c-title title="账本"/>
     <div class="wrapper card-wrapper fab-wrapper">
       <v-container grid-list-md text-xs-center>
@@ -39,6 +39,18 @@
     </div>
     <v-btn absolute dark fab bottom right @click="onClickFab">
       <v-ons-icon :icon="showDelete? 'md-check':'md-plus'"></v-ons-icon>
+    </v-btn>
+    <v-btn
+      absolute
+      dark
+      fab
+      bottom
+      right
+      @click="onClickEdit"
+      class="fab-edit"
+      v-show="!showDelete"
+    >
+      <v-ons-icon icon="md-edit"></v-ons-icon>
     </v-btn>
   </div>
 </template>
@@ -97,7 +109,7 @@ export default {
       this.$router.push("/book/new");
     },
 
-    onPressCard() {
+    onClickEdit() {
       this.showDelete = true;
     },
 
@@ -225,5 +237,10 @@ export default {
 
 .book-amount {
   float: right;
+}
+
+.fab-edit {
+  right: 90px;
+  font-size: 20px !important;
 }
 </style>
