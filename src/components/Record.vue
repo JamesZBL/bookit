@@ -195,10 +195,10 @@ export default {
           }
         })
         .then(({ data }) => {
+          this.$store.commit("setLoaded", "record");
           this.$store.commit(
             "setRecordList",
             data.map(unit => {
-              this.$store.commit("setLoaded", "record");
               const transformedList = unit.list.map(record => ({
                 ...record,
                 category: record.categoryName,
