@@ -14,6 +14,14 @@
                 clearable
                 :rules="passwordRules"
               ></v-text-field>
+              <v-text-field
+                type="password"
+                v-model="repeatPassword"
+                label="确认密码"
+                required
+                clearable
+                :rules="repeatPasswordRules"
+              ></v-text-field>
             </v-flex>
           </v-layout>
         </v-container>
@@ -36,14 +44,26 @@ export default {
       valid: false,
       code: state.code,
       newPassword: "",
-      passwordRules: [
-        v => !!v || "请输入密码",
-        v => v.length >= 8 || "密码应不少于8个字符"
-      ]
+      repeatPassword: ""
     };
+  },
+  computed: {
+    passwordRules: () => [
+      v => !!v || "请输入密码",
+      v => v.length >= 8 || "密码应不少于8个字符"
+    ],
+    repeatPasswordRules() {
+      const { newPassword } = this;
+      return [
+        v => !!v || "请输入密码",
+        v => v.length >= 8 || "密码应不少于8个字符",
+        v => v === newPassword || "两次输入的密码不一致"
+      ];
+    }
   },
   methods: {
     onClickSubmit() {
+      if (!this.$refs.form.validate()) return;
       const { code, email, newPassword, $router, $store } = this;
       axios
         .put("/profile/password/reset", {
