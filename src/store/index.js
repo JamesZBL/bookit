@@ -17,6 +17,7 @@ const defaultState = () => ({
   selectedBook: {},
   hideAmount: false,
   recordType: '',
+  pickerDate: '',
   record: {
     list: [],
     income: 0,
@@ -234,6 +235,10 @@ export default new Vuex.Store({
         income,
         pay
       };
+    },
+
+    setPickerDate(s, date) {
+      s.pickerDate = date;
     }
   },
 

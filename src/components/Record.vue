@@ -61,7 +61,7 @@
       </v-btn>
       <v-ons-dialog cancelable :visible.sync="dialogVisible">
         <v-date-picker
-          v-model="pickerDate"
+          v-model="tmpDate"
           locale="zh-cn"
           type="month"
           v-show="true"
@@ -92,14 +92,9 @@ export default {
     number
   },
   data() {
-    const today = new Date();
-    const year = today.getFullYear();
-    const month = today.getMonth() + 1;
     return {
-      dialogVisible: false,
-      pickerDate: getCurrentYearAndMonthString(),
-      year,
-      month
+      tmpDate: getCurrentYearAndMonthString(),
+      dialogVisible: false
     };
   },
   activated() {
@@ -129,16 +124,23 @@ export default {
     },
     loaded() {
       return this.$store.state.loaded.record;
-    }
-  },
-  watch: {
-    year(n, o) {
-      this.loadData();
     },
-    month(n, o) {
-      this.loadData();
+    pickerDate: {
+      get() {
+        return this.$store.state.pickerDate || getCurrentYearAndMonthString();
+      },
+      set(d) {
+        this.$store.commit("setPickerDate", d);
+      }
+    },
+    year() {
+      return new Date(this.pickerDate).getFullYear();
+    },
+    month() {
+      return new Date(this.pickerDate).getMonth() + 1;
     }
   },
+  watch: {},
   methods: {
     onClickDate() {
       this.dialogVisible = true;
@@ -150,9 +152,8 @@ export default {
 
     onClickDateOk() {
       this.dialogVisible = false;
-      const yearAndMonth = this.pickerDate.split("-");
-      this.year = yearAndMonth[0];
-      this.month = yearAndMonth[1].replace(/^0/, "");
+      this.pickerDate = this.tmpDate;
+      this.loadData();
     },
 
     getCategory(record) {
