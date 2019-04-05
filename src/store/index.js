@@ -224,9 +224,15 @@ export default new Vuex.Store({
       s.code = code;
     },
 
-    setLoaded(s, name) {
-      const origin = s.loaded[name];
-      s.loaded[name] = !origin;
+    setLoaded(s, object) {
+      if ("object" === typeof object) {
+        const { name, value } = object;
+        s.loaded[name] = value;
+      }
+      else {
+        const origin = s.loaded[object];
+        s.loaded[object] = !origin;
+      }
     },
 
     setDefaultBook(s, book) {
