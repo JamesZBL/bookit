@@ -28,8 +28,11 @@
           </div>
         </div>
       </div>
-
       <div class="list">
+        <div class="no-data">
+          <img src="@/assets/no-data.svg" v-show="!list.length">
+          <span>暂无数据，快去记账吧</span>
+        </div>
         <v-ons-list>
           <div v-for="(day, index) in list" :key="index">
             <v-ons-list-header class="amount-round">
@@ -312,5 +315,25 @@ export default {
   height: 30px;
   line-height: 30px;
   color: white;
+}
+
+.no-data {
+  position: absolute;
+  top: 100%;
+  margin: auto;
+  display: block;
+  opacity: 0.3;
+}
+
+.no-data img {
+  width: 100%;
+  height: 90px;
+}
+
+.no-data span {
+  width: 100%;
+  text-align: center;
+  display: inline-block;
+  line-height: 40px;
 }
 </style>
