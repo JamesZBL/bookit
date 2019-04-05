@@ -21,7 +21,7 @@
                 <v-ons-icon icon="md-delete"></v-ons-icon>
               </v-card-text>
             </v-card>
-            <div class="amount-wrapper">
+            <div class="amount-wrapper amount-slim">
               <span class="amount-line">
                 收入:
                 <span class="book-amount" v-if="!i.id">{{formatMoneyClean(defaultBook.income)}}</span>

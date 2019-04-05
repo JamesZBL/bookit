@@ -97,13 +97,13 @@ export default {
         },
         {
           icon: "md-help",
-          name: "帮助",
+          name: "使用帮助",
           path: "/settings/help",
           color: "#ffc182"
         },
         {
           icon: "md-mood",
-          name: "关于",
+          name: "关于 Bookit",
           path: "/settings/aboutapp",
           color: "#ff83c7"
         }

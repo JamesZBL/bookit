@@ -47,7 +47,7 @@
               </div>
               <div class="center">{{item.name}}</div>
               <div class="right amount-round">
-                <span class="list-label-right">{{formatMoney(item.amount)}}</span>
+                <span class="list-label-right">{{item.amount}}</span>
               </div>
             </v-ons-list-item>
           </div>
@@ -287,7 +287,7 @@ export default {
 }
 
 .list-label-right {
-  color: #9a9a9a;
+  color: #525d67;
   font-size: 16px;
 }
 

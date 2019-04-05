@@ -2,7 +2,7 @@
   <div>
     <c-title title="关于" back/>
     <div>
-      <img src="@/assets/bookit.png" class="banner" alt>
+      <img src="@/assets/icon.png" class="banner" alt>
       <p class="appname">Bookit</p>
       <p class="version">{{buildVersion}}</p>
       <p class="copyright">Copyright 2019 MAO RU NAN</p>
