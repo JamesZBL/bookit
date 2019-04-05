@@ -29,8 +29,8 @@
         </div>
       </div>
       <div class="list">
-        <div class="no-data">
-          <img src="@/assets/no-data.svg" v-show="!list.length">
+        <div class="no-data" v-show="!list.length">
+          <img src="@/assets/no-data.svg">
           <span>暂无数据，快去记账吧</span>
         </div>
         <v-ons-list>
