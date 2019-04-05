@@ -104,7 +104,6 @@ export default {
     },
 
     loadIfNeeded() {
-      const { $store } = this;
       if (!this.categoryLoaded) {
         this.loadCategories();
       }
@@ -123,9 +122,9 @@ export default {
             }
           })
           .then(({ data: { names } }) => {
-            $store.commit("setLoaded", 'category');
+            if (type === "PAY") $store.commit("setLoaded", "category");
             const visibleCategories = [];
-            if(!names.length) {
+            if (!names.length) {
               this.$store.commit("setVisibleCategories", DefaultCategories);
               return;
             }
@@ -142,7 +141,10 @@ export default {
               });
               if (!customed) DefaultCategories.splice(index, 1);
             }
-            const restCategories = getCategoriesByType(DefaultCategories, type.toLowerCase());
+            const restCategories = getCategoriesByType(
+              DefaultCategories,
+              type.toLowerCase()
+            );
             this.$store.commit("setVisibleCategoriesByType", visibleCategories);
             this.$store.commit("setHiddenCategoriesByType", restCategories);
           });
