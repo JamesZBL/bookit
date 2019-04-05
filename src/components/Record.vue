@@ -177,7 +177,6 @@ export default {
     loadIfNeeded() {
       if (!this.loaded) {
         this.loadData();
-        this.$store.commit("setLoaded", "record");
       }
     },
 
@@ -199,6 +198,7 @@ export default {
           this.$store.commit(
             "setRecordList",
             data.map(unit => {
+              this.$store.commit("setLoaded", "record");
               const transformedList = unit.list.map(record => ({
                 ...record,
                 category: record.categoryName,
