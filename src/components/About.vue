@@ -11,11 +11,12 @@
         <div class="head-right">
           <div class="head-first" @click="onClickNickName">
             <span class="username">{{user.nickName}}</span>
+            <v-ons-icon icon="md-edit" class="nick-edit"></v-ons-icon>
           </div>
           <span class="email">{{user.email}}</span>
         </div>
         <div class="check" @click="onClickUserCheck">
-          <v-ons-icon style="color:white;" icon="md-edit"></v-ons-icon>
+          <v-ons-icon class="check-in-icon" icon="md-assignment"></v-ons-icon>
           <span class="check-text">签到</span>
         </div>
       </div>
@@ -383,5 +384,17 @@ export default {
   display: block;
   width: 100%;
   height: 100%;
+}
+
+.nick-edit {
+  opacity: 0.8;
+  font-size: 14px;
+  margin: 0 0 0 4px;
+}
+
+.check-in-icon {
+  color: white;
+  vertical-align: bottom;
+  opacity: 0.8;
 }
 </style>
