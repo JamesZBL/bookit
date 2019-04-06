@@ -174,3 +174,10 @@ export default {
   overflow-y: scroll;
 }
 </style>
+
+<style>
+:checked + .tabbar__button {
+  color: #26a2ff !important;
+}
+</style>
+
