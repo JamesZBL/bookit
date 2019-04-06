@@ -96,7 +96,7 @@ span {
 }
 
 .amount-round {
-  font-family: "Varela Round", Arial, Helvetica, sans-serif;
+  font-family: "Titillium Web", Arial, Helvetica, sans-serif;
 }
 
 .fab-wrapper {

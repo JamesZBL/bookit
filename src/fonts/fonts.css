@@ -7,3 +7,8 @@
   font-family: "Lato";
   src: url('Lato-Regular.ttf');
 }
+
+@font-face {
+  font-family: "Titillium Web";
+  src: url('TitilliumWeb-Regular.ttf');
+}
