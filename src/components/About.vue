@@ -397,4 +397,8 @@ export default {
   vertical-align: bottom;
   opacity: 0.8;
 }
+
+.wrapper {
+  margin-bottom: 10%;
+}
 </style>

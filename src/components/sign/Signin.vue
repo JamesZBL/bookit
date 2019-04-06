@@ -140,7 +140,10 @@ export default {
 }
 
 .signin {
+  position: absolute;
+  width: 100%;
   height: 100%;
+  min-height: 550px;
   background: rgba(33, 196, 237, 1);
   background: -moz-linear-gradient(
     top,
