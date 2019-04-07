@@ -68,7 +68,7 @@ var app = {
                     message: "再按一次退出",
                     duration: "short",
                     position: "bottom",
-                    addPixelsY: -120
+                    addPixelsY: -200
                 }
             );
             this.lastTimeBackPress = new Date().getTime();
