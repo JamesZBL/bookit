@@ -235,7 +235,6 @@ export default {
           }
         })
         .then(({ data }) => {
-          if (done) done();
           this.$store.commit("setLoaded", { name: "record", value: true });
           this.$store.commit(
             "setRecordList",
@@ -249,6 +248,11 @@ export default {
               return unit;
             })
           );
+          if (done) {
+            setTimeout(() => {
+              done();
+            }, 500);
+          }
         });
     },
 
