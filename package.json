@@ -21,6 +21,7 @@
     "bootstrap-vue": "^2.0.0-rc.14",
     "chart.js": "^2.7.3",
     "mint-ui": "^2.2.13",
+    "moment": "^2.24.0",
     "onsenui": "^2.10.6",
     "vue": "^2.6.8",
     "vue-chartjs": "^3.4.0",

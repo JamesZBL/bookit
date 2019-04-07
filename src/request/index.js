@@ -21,6 +21,7 @@ const setToken = function (token) {
 axios.defaults.baseURL = config.baseURL;
 axios.defaults.headers.common['token'] = localStorage.getItem("token") || "";
 axios.defaults.headers.post['Content-Type'] = 'application/json';
+axios.defaults.timeout = 8000;
 
 // Add a request interceptor
 axios.interceptors.request.use(function (config) {
@@ -41,6 +42,10 @@ axios.interceptors.response.use(function (response) {
 }, function (error) {
   // Do something with response error
   endLoading();
+  const { code } = error;
+  if (code) {
+    alert("请求超时，请检查网络连接");
+  }
   if (error && error.response) {
     const { status, data: { msg } } = error.response;
     if (status === 401) {

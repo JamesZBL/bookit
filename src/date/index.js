@@ -1,23 +1,32 @@
+import moment from 'moment';
+
 const getCurrentDate = function () {
-  return new Date();
+  return moment();
 }
 
 const getCurrentYearAndMonthString = function () {
-  return formatDate(getCurrentDate()).substring(0, 7);
+  return getCurrentDateString().substring(0, 7);
 }
 
 const getCurrentDateString = function () {
-  return formatDate(getCurrentDate());
+  return moment().format('YYYY-MM-DD');
 }
 
 const getFirstDayOfCurrentMonth = function () {
   return `${getCurrentDateString().substring(0, 8)}01`;
 }
 
+const getCurrentYear = function () {
+  return Number(getCurrentDateString().substring(0, 4));
+}
+
+const getCurrentMonth = function () {
+  return Number(getCurrentDateString().substring(5, 7));
+}
+
 const getFirstDayOfNextMonth = function () {
-  const date = new Date(getCurrentDateString());
-  const month = 1 + date.getMonth();
-  const year = date.getFullYear();
+  const month = getCurrentMonth();
+  const year = getCurrentYear();
   const december = month === 12;
   const nextMonth = december ? 1 : month + 1;
   const nextYear = december ? year + 1 : year;
@@ -25,22 +34,21 @@ const getFirstDayOfNextMonth = function () {
 }
 
 const getFirstDayOf = function (dateString) {
-  const date = new Date(dateString);
-  return `${formatDate(date).substring(0, 8)}01`;
+  return `${formatDate(dateString).substring(0, 8)}01`;
 }
 
 const getFirstDayOfNextMonthOf = function (dateString) {
-  const date = new Date(formatDate(new Date(dateString)));
-  const month = 1 + date.getMonth();
-  const year = date.getFullYear();
+  const date = formatDate(dateString);
+  const month = Number(date.substring(5, 7));
+  const year = Number(date.substring(0, 4));
   const december = month === 12;
   const nextMonth = december ? 1 : month + 1;
   const nextYear = december ? year + 1 : year;
-  return formatDate(new Date(`${nextYear}-${nextMonth}-01`));
+  return formatDate(`${nextYear}-${nextMonth}-01`);
 }
 
 const formatDate = function (v) {
-  return v.toLocaleDateString().split('/').map(n => n < 10 ? `0${n}` : n).join('-');
+  return moment(v).format('YYYY-MM-DD');
 }
 
 export {
