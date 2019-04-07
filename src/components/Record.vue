@@ -28,13 +28,19 @@
           </div>
         </div>
       </div>
-      <div class="list-wrapper">
+      <div class="list-wrapper" ref="listWrapper">
         <div class="no-data" v-show="!list.length">
           <img src="@/assets/no-data.svg">
           <span>暂无数据，快去记账吧</span>
         </div>
         <div class="lisb-under-fab">
-          <v-ons-pull-hook :action="loadData" @changestate="state = $event.state">
+          <v-ons-pull-hook
+            :action="loadData"
+            @changestate="state = $event.state"
+            height="120px"
+            threshold-height="1000px"
+            :disabled="pullRefreshDisabled"
+          >
             <span v-show="state === 'initial'">继续下拉刷新</span>
             <span v-show="state === 'preaction'">松开后刷新</span>
             <span v-show="state === 'action'">努力加载中...</span>
@@ -107,6 +113,7 @@ export default {
   },
   data() {
     return {
+      listScrollTop: 0,
       state: "initial",
       tmpDate: getCurrentYearAndMonthString(),
       dialogVisible: false,
@@ -114,11 +121,13 @@ export default {
       selectedRecordId: null
     };
   },
+  created() {},
   activated() {
     this.loadIfNeeded();
   },
   mounted() {
     this.loadIfNeeded();
+    this.addScrollListener();
   },
   computed: {
     startTime() {
@@ -155,10 +164,21 @@ export default {
     },
     month() {
       return new Date(this.pickerDate).getMonth() + 1;
+    },
+    pullRefreshDisabled() {
+      return this.listScrollTop > 0;
     }
   },
   watch: {},
   methods: {
+    addScrollListener() {
+      const _this = this;
+      const list = this.$refs.listWrapper;
+      list.addEventListener("scroll", function() {
+        _this.listScrollTop = list.scrollTop;
+      });
+    },
+
     onClickDate() {
       this.dialogVisible = true;
     },
