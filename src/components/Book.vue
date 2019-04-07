@@ -134,6 +134,7 @@ export default {
         })
         .then(r => {
           this.$store.commit("removeBook", book);
+          this.$store.commit("setLoaded", { name: "record", value: false });
         });
     },
 
