@@ -337,7 +337,7 @@ export default {
 .list-wrapper {
   position: absolute;
   font-size: 14px;
-  margin-top: 100px;
+  margin-top: 98px;
   top: -30px;
   left: 0;
   right: 0;
