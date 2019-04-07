@@ -17,6 +17,9 @@
  * under the License.
  */
 var app = {
+
+    lastTimeBackPress: 0,
+    timePeriodToExit: 2000,
     // Application Constructor
     initialize: function () {
         this.bindEvents();
@@ -39,7 +42,7 @@ var app = {
                 navigator.app.backHistory();
             }
             else {
-                navigator.app.exitApp();
+                app.onBackKeyDown(e);
             }
         }, false);
         app.receivedEvent('deviceready');
@@ -54,5 +57,23 @@ var app = {
         receivedElement.setAttribute('style', 'display:block;');
 
         console.log('Received Event: ' + id);
+    },
+    // Press again to exit.
+    onBackKeyDown: function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        if (new Date().getTime() - this.lastTimeBackPress < this.timePeriodToExit) {
+            navigator.app.exitApp();
+        } else {
+            window.plugins.toast.showWithOptions(
+                {
+                    message: "再按一次退出",
+                    duration: "short",
+                    position: "bottom",
+                    addPixelsY: -120
+                }
+            );
+            this.lastTimeBackPress = new Date().getTime();
+        }
     }
 };
