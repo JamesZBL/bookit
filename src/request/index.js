@@ -55,7 +55,7 @@ axios.interceptors.response.use(function (response) {
     if (status >= 400 && status < 500)
       alert(msg);
     if (status >= 500)
-      alert(msg || "服务器内部错误");
+      alert("哎呀，服务器开小差了");
   }
   return Promise.reject(error);
 });

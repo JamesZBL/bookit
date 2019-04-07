@@ -28,12 +28,12 @@
           </div>
         </div>
       </div>
-      <div class="list">
+      <div class="list-wrapper">
         <div class="no-data" v-show="!list.length">
           <img src="@/assets/no-data.svg">
           <span>暂无数据，快去记账吧</span>
         </div>
-        <v-ons-list>
+        <v-ons-list class="lisb-under-fab">
           <div v-for="(day, index) in list" :key="index">
             <v-ons-list-header class="amount-round">
               <span class="list-label">{{day.date}}</span>
@@ -63,21 +63,21 @@
       <v-btn absolute dark fab bottom right @click="handleNewRecord">
         <v-ons-icon icon="md-plus"></v-ons-icon>
       </v-btn>
-      <v-ons-dialog cancelable :visible.sync="dialogVisible">
-        <v-date-picker v-model="tmpDate" locale="zh-cn" type="month" v-show="true" :reactive="true">
-          <v-spacer></v-spacer>
-          <v-btn flat color="primary" @click="onClickDateOk">OK</v-btn>
-        </v-date-picker>
-      </v-ons-dialog>
-      <v-ons-action-sheet :visible.sync="actionSheetVisible" cancelable title="操作">
-        <v-ons-action-sheet-button
-          icon="md-square-o"
-          modifier="destructive"
-          @click="onClickRemoveRecord"
-        >删除</v-ons-action-sheet-button>
-        <v-ons-action-sheet-button icon="md-square-o" @click="actionSheetVisible = false">取消</v-ons-action-sheet-button>
-      </v-ons-action-sheet>
     </div>
+    <v-ons-dialog cancelable :visible.sync="dialogVisible">
+      <v-date-picker v-model="tmpDate" locale="zh-cn" type="month" v-show="true" :reactive="true">
+        <v-spacer></v-spacer>
+        <v-btn flat color="primary" @click="onClickDateOk">OK</v-btn>
+      </v-date-picker>
+    </v-ons-dialog>
+    <v-ons-action-sheet :visible.sync="actionSheetVisible" cancelable title="操作">
+      <v-ons-action-sheet-button
+        icon="md-square-o"
+        modifier="destructive"
+        @click="onClickRemoveRecord"
+      >删除</v-ons-action-sheet-button>
+      <v-ons-action-sheet-button icon="md-square-o" @click="actionSheetVisible = false">取消</v-ons-action-sheet-button>
+    </v-ons-action-sheet>
   </div>
 </template>
 
@@ -207,7 +207,7 @@ export default {
           }
         })
         .then(({ data }) => {
-          this.$store.commit("setLoaded", { name: "record", value: false });
+          this.$store.commit("setLoaded", { name: "record", value: true });
           this.$store.commit(
             "setRecordList",
             data.map(unit => {
@@ -272,14 +272,12 @@ export default {
 
 <style scoped>
 .head {
-  box-shadow: #00cdff 0px 0px 20px 0px;
-  height: 67px;
-  background: linear-gradient(#26a2ff, #00cdff);
+  position: absolute;
+  height: 70px;
   color: white;
-  margin-bottom: 4px;
-  position: fixed;
   z-index: 1;
-  width: 100%;
+  box-shadow: #00cdff 0px 0px 20px 0px;
+  background: linear-gradient(#26a2ff, #00cdff);
 }
 
 .box {
@@ -336,9 +334,16 @@ export default {
   padding-right: 12px;
 }
 
-.list {
-  padding-top: 33px;
+.list-wrapper {
+  position: absolute;
   font-size: 14px;
+  margin-top: 100px;
+  top: -30px;
+  left: 0;
+  right: 0;
+  overflow-y: scroll;
+  height: -webkit-fill-available;
+  z-index: 0;
 }
 
 .item-icon {
@@ -352,7 +357,7 @@ export default {
 
 .no-data {
   position: absolute;
-  top: 100%;
+  top: 30%;
   margin: auto;
   display: block;
   opacity: 0.3;
@@ -368,5 +373,9 @@ export default {
   text-align: center;
   display: inline-block;
   line-height: 40px;
+}
+
+.lisb-under-fab {
+  margin-bottom: 100px;
 }
 </style>

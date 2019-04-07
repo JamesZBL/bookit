@@ -100,7 +100,7 @@ span {
 }
 
 .fab-wrapper {
-  padding-bottom: 100px;
+  padding-bottom: 118px;
 }
 
 .center {
@@ -141,7 +141,9 @@ span {
   ) !important;
 }
 
-.action-sheet-mask {
+.dialog-mask,
+.action-sheet-mask,
+.alert-dialog-mask {
   background-color: rgba(9, 39, 61, 0.3) !important;
 }
 </style>
