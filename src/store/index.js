@@ -245,6 +245,19 @@ export default new Vuex.Store({
 
     setPickerDate(s, date) {
       s.pickerDate = date;
+    },
+
+    removeRecordById(s, rid) {
+      for (let day of s.record.list) {
+        const index = day.list.findIndex(r => r.id === rid);
+        if (-1 < index) {
+          day.list.splice(index, 1);
+          if (!day.list.length) {
+            const index = s.record.list.indexOf(day);
+            s.record.list.splice(index, 1);
+          }
+        }
+      }
     }
   },
 

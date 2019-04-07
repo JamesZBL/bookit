@@ -44,7 +44,11 @@
               </div>
             </v-ons-list-header>
 
-            <v-ons-list-item v-for="(item, index) in day.list" :key="index" @press="loadSettings">
+            <v-ons-list-item
+              v-for="(item, index) in day.list"
+              :key="index"
+              @click="onClickRecord(item)"
+            >
               <div class="left">
                 <v-ons-icon :icon="getCategory(item).icon" class="item-icon"></v-ons-icon>
               </div>
@@ -60,17 +64,19 @@
         <v-ons-icon icon="md-plus"></v-ons-icon>
       </v-btn>
       <v-ons-dialog cancelable :visible.sync="dialogVisible">
-        <v-date-picker
-          v-model="tmpDate"
-          locale="zh-cn"
-          type="month"
-          v-show="true"
-          :reactive="true"
-        >
+        <v-date-picker v-model="tmpDate" locale="zh-cn" type="month" v-show="true" :reactive="true">
           <v-spacer></v-spacer>
           <v-btn flat color="primary" @click="onClickDateOk">OK</v-btn>
         </v-date-picker>
       </v-ons-dialog>
+      <v-ons-action-sheet :visible.sync="actionSheetVisible" cancelable title="操作">
+        <v-ons-action-sheet-button
+          icon="md-square-o"
+          modifier="destructive"
+          @click="onClickRemoveRecord"
+        >删除</v-ons-action-sheet-button>
+        <v-ons-action-sheet-button icon="md-square-o" @click="actionSheetVisible = false">取消</v-ons-action-sheet-button>
+      </v-ons-action-sheet>
     </div>
   </div>
 </template>
@@ -79,6 +85,7 @@
 import number from "@/components/number/Money";
 import accounting from "accounting";
 import axios from "@/request";
+import { toast } from "@/notification";
 import {
   formatDate,
   getCurrentDateString,
@@ -94,7 +101,9 @@ export default {
   data() {
     return {
       tmpDate: getCurrentYearAndMonthString(),
-      dialogVisible: false
+      dialogVisible: false,
+      actionSheetVisible: false,
+      selectedRecordId: null
     };
   },
   activated() {
@@ -233,6 +242,27 @@ export default {
       axios.get("/settings").then(({ data: { showAmount } }) => {
         this.$store.commit("setRecordAmountVisible", showAmount);
       });
+    },
+
+    onClickRecord(r) {
+      const { id } = r;
+      this.selectedRecordId = id;
+      this.actionSheetVisible = true;
+    },
+
+    onClickRemoveRecord() {
+      const { selectedRecordId } = this;
+      axios.delete(`/record/${selectedRecordId}`).then(r => {
+        toast("已删除");
+        this.actionSheetVisible = false;
+        this.removeRecordFromList();
+        this.$store.commit("setLoaded", { name: "about", value: false });
+      });
+    },
+
+    removeRecordFromList() {
+      const { selectedRecordId } = this;
+      this.$store.commit("removeRecordById", selectedRecordId);
     }
   }
 };
