@@ -207,7 +207,7 @@ export default {
           }
         })
         .then(({ data }) => {
-          this.$store.commit("setLoaded", "record");
+          this.$store.commit("setLoaded", { name: "record", value: false });
           this.$store.commit(
             "setRecordList",
             data.map(unit => {
@@ -256,6 +256,7 @@ export default {
         toast("已删除");
         this.actionSheetVisible = false;
         this.removeRecordFromList();
+        this.loadSum();
         this.$store.commit("setLoaded", { name: "about", value: false });
         this.$store.commit("setLoaded", { name: "book", value: false });
       });

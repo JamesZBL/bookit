@@ -140,4 +140,8 @@ span {
     transparent 50%
   ) !important;
 }
+
+.action-sheet-mask {
+  background-color: rgba(9, 39, 61, 0.3) !important;
+}
 </style>

@@ -95,7 +95,7 @@ export default {
           bookId: selectedBook.id
         })
         .then(r => {
-          this.$store.commit("setLoaded", "record");
+          this.$store.commit("setLoaded", { name: "record", value: false });
           this.$store.commit("setLoaded", { name: "book", value: false });
           this.$router.replace("/");
         });
