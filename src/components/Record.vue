@@ -33,32 +33,39 @@
           <img src="@/assets/no-data.svg">
           <span>暂无数据，快去记账吧</span>
         </div>
-        <v-ons-list class="lisb-under-fab">
-          <div v-for="(day, index) in list" :key="index">
-            <v-ons-list-header class="amount-round">
-              <span class="list-label">{{day.date}}</span>
-              <span class="list-label">星期{{["一", "二", "三", "四", "五","六", "日"][day.dayOfWeek]}}</span>
-              <div class="list-head-right list-label">
-                <span class="list-label">收入: {{formatMoneyWithOptionalDecimal(day.income)}}</span>
-                <span class="list-label">支出: {{formatMoneyWithOptionalDecimal(day.pay)}}</span>
-              </div>
-            </v-ons-list-header>
+        <div class="lisb-under-fab">
+          <v-ons-pull-hook :action="loadData" @changestate="state = $event.state">
+            <span v-show="state === 'initial'">继续下拉刷新</span>
+            <span v-show="state === 'preaction'">松开后刷新</span>
+            <span v-show="state === 'action'">努力加载中...</span>
+          </v-ons-pull-hook>
+          <v-ons-list>
+            <div v-for="(day, index) in list" :key="index">
+              <v-ons-list-header class="amount-round">
+                <span class="list-label">{{day.date}}</span>
+                <span class="list-label">星期{{["一", "二", "三", "四", "五","六", "日"][day.dayOfWeek]}}</span>
+                <div class="list-head-right list-label">
+                  <span class="list-label">收入: {{formatMoneyWithOptionalDecimal(day.income)}}</span>
+                  <span class="list-label">支出: {{formatMoneyWithOptionalDecimal(day.pay)}}</span>
+                </div>
+              </v-ons-list-header>
 
-            <v-ons-list-item
-              v-for="(item, index) in day.list"
-              :key="index"
-              @click="onClickRecord(item)"
-            >
-              <div class="left">
-                <v-ons-icon :icon="getCategory(item).icon" class="item-icon"></v-ons-icon>
-              </div>
-              <div class="center">{{item.name}}</div>
-              <div class="right amount-round">
-                <span class="list-label-right">{{formatMoneyWithOptionalDecimal(item.amount)}}</span>
-              </div>
-            </v-ons-list-item>
-          </div>
-        </v-ons-list>
+              <v-ons-list-item
+                v-for="(item, index) in day.list"
+                :key="index"
+                @click="onClickRecord(item)"
+              >
+                <div class="left">
+                  <v-ons-icon :icon="getCategory(item).icon" class="item-icon"></v-ons-icon>
+                </div>
+                <div class="center">{{item.name}}</div>
+                <div class="right amount-round">
+                  <span class="list-label-right">{{formatMoneyWithOptionalDecimal(item.amount)}}</span>
+                </div>
+              </v-ons-list-item>
+            </div>
+          </v-ons-list>
+        </div>
       </div>
       <v-btn absolute dark fab bottom right @click="handleNewRecord">
         <v-ons-icon icon="md-plus"></v-ons-icon>
@@ -100,6 +107,7 @@ export default {
   },
   data() {
     return {
+      state: "initial",
       tmpDate: getCurrentYearAndMonthString(),
       dialogVisible: false,
       actionSheetVisible: false,
@@ -192,13 +200,13 @@ export default {
       }
     },
 
-    loadData() {
-      this.loadRecords();
+    loadData(done) {
+      this.loadRecords(done);
       this.loadSum();
       this.loadSettings();
     },
 
-    loadRecords() {
+    loadRecords(done) {
       axios
         .get("/record", {
           params: {
@@ -207,6 +215,7 @@ export default {
           }
         })
         .then(({ data }) => {
+          if (done) done();
           this.$store.commit("setLoaded", { name: "record", value: true });
           this.$store.commit(
             "setRecordList",
@@ -278,6 +287,7 @@ export default {
   z-index: 1;
   box-shadow: #00cdff 0px 0px 20px 0px;
   background: linear-gradient(#26a2ff, #00cdff);
+  width: 100%;
 }
 
 .box {
@@ -337,7 +347,7 @@ export default {
 .list-wrapper {
   position: absolute;
   font-size: 14px;
-  margin-top: 100px;
+  margin-top: 98px;
   top: -30px;
   left: 0;
   right: 0;
@@ -377,5 +387,6 @@ export default {
 
 .lisb-under-fab {
   margin-bottom: 100px;
+  color: #a4a4a4;
 }
 </style>
