@@ -257,6 +257,7 @@ export default {
         this.actionSheetVisible = false;
         this.removeRecordFromList();
         this.$store.commit("setLoaded", { name: "about", value: false });
+        this.$store.commit("setLoaded", { name: "book", value: false });
       });
     },
 
