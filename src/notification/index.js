@@ -8,6 +8,17 @@ const alert = function (message, callback) {
 }
 
 const toast = function (message, callback) {
+  if (window.plugins && window.plugins.toast) {
+    window.plugins.toast.showWithOptions(
+      {
+        message,
+        duration: "short",
+        position: "bottom",
+        addPixelsY: -200
+      }
+    );
+    return;
+  }
   notification.toast(message, {
     callback: callback || (() => { }),
     timeout: 2500
