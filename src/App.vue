@@ -146,4 +146,14 @@ span {
 .alert-dialog-mask {
   background-color: rgba(9, 39, 61, 0.3) !important;
 }
+
+.progress-bar__primary,
+.progress-bar__secondary {
+  background-color: #26a2ff !important;
+  border-radius: 4px;
+}
+
+.progress-bar {
+  height: 6px !important;
+}
 </style>

@@ -196,9 +196,11 @@ export default {
     addScrollListener() {
       const _this = this;
       const list = this.$refs.list;
-      list.addEventListener("scroll", function() {
-        _this.listScrollTop = list.scrollTop;
-      });
+      if (!!list) {
+        list.addEventListener("scroll", function() {
+          _this.listScrollTop = list.scrollTop;
+        });
+      }
     },
 
     onClickDate() {
