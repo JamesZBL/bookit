@@ -28,7 +28,7 @@
           </div>
         </div>
       </div>
-      <div class="list-wrapper" ref="listWrapper">
+      <div class="list-wrapper" ref="list">
         <div class="no-data" v-show="!list.length">
           <img src="@/assets/no-data.svg">
           <span>暂无数据，快去记账吧</span>
@@ -113,7 +113,8 @@ export default {
   },
   data() {
     return {
-      show: false,
+      show: true,
+      scrollListenerAdded: false,
       listScrollTop: 0,
       state: "initial",
       tmpDate: getCurrentYearAndMonthString(),
@@ -124,12 +125,17 @@ export default {
   },
   created() {},
   activated() {
+    this.fixBug();
     this.loadIfNeeded();
   },
   mounted() {
-    this.fixBug();
     this.loadIfNeeded();
-    this.addScrollListener();
+  },
+  updated() {
+    if (!this.scrollListenerAdded) {
+      this.addScrollListener();
+      this.scrollListenerAdded = true;
+    }
   },
   computed: {
     startTime() {
@@ -169,21 +175,27 @@ export default {
     },
     pullRefreshDisabled() {
       return this.listScrollTop > 0;
+    },
+    fixed() {
+      return this.$store.state.loaded.fixBug;
     }
   },
   watch: {},
   methods: {
     fixBug() {
-      this.show = false;
-      const _this = this;
-      setTimeout(() => {
-        _this.show = true;
-      }, 100);
+      if (!this.fixed) {
+        this.show = false;
+        const _this = this;
+        setTimeout(() => {
+          _this.show = true;
+        }, 500);
+        this.$store.commit("setLoaded", { name: "fixBug", value: true });
+      }
     },
 
     addScrollListener() {
       const _this = this;
-      const list = this.$refs.listWrapper;
+      const list = this.$refs.list;
       list.addEventListener("scroll", function() {
         _this.listScrollTop = list.scrollTop;
       });
@@ -381,8 +393,8 @@ export default {
 .list-wrapper {
   position: absolute;
   font-size: 14px;
-  margin-top: 146px;
-  top: -82px;
+  margin-top: 148px;
+  top: -80px;
   left: 0;
   right: 0;
   overflow-y: scroll;
