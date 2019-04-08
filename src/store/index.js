@@ -40,7 +40,8 @@ const defaultState = () => ({
     record: false,
     about: false,
     book: false,
-    category: false
+    category: false,
+    fixBug: false
   },
   defaultBook: {
     income: 0,
