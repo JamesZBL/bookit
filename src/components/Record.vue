@@ -1,5 +1,5 @@
 <template id="record">
-  <div class="scroll">
+  <div>
     <c-title title="Bookit"/>
     <div class="wrapper fab-wrapper">
       <div class="head amount-slim" style>
@@ -377,5 +377,9 @@ export default {
 
 .lisb-under-fab {
   margin-bottom: 100px;
+}
+
+.fab-wrapper {
+  padding-bottom: 120px;
 }
 </style>
