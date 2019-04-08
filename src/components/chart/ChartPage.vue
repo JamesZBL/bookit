@@ -7,6 +7,7 @@
     <div class="chart">
       <Chart ref="chart" :chartData="data" :options="options" :height="100"/>
     </div>
+    <div></div>
     <div class="analyse">
       <p>支出排行榜</p>
     </div>
@@ -160,7 +161,6 @@ export default {
 .chart {
   width: 100%;
   padding: 0 0 0.6em 0;
-  border-bottom: #ebebeb 1px solid;
 }
 
 .item-icon {
