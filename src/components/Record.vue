@@ -1,5 +1,5 @@
 <template id="record">
-  <div>
+  <div class="scroll" v-if="show">
     <c-title title="Bookit"/>
     <div class="wrapper fab-wrapper">
       <div class="head amount-slim" style>
@@ -100,6 +100,7 @@ export default {
   },
   data() {
     return {
+      show: false,
       tmpDate: getCurrentYearAndMonthString(),
       dialogVisible: false,
       actionSheetVisible: false,
@@ -110,6 +111,7 @@ export default {
     this.loadIfNeeded();
   },
   mounted() {
+    this.fixBug();
     this.loadIfNeeded();
   },
   computed: {
@@ -151,6 +153,13 @@ export default {
   },
   watch: {},
   methods: {
+    fixBug() {
+      this.show = false;
+      const _this = this;
+      setTimeout(() => {
+        _this.show = true;
+      }, 100);
+    },
     onClickDate() {
       this.dialogVisible = true;
     },
@@ -337,8 +346,8 @@ export default {
 .list-wrapper {
   position: absolute;
   font-size: 14px;
-  margin-top: 100px;
-  top: -30px;
+  margin-top: 146px;
+  top: -82px;
   left: 0;
   right: 0;
   overflow-y: scroll;
@@ -377,9 +386,5 @@ export default {
 
 .lisb-under-fab {
   margin-bottom: 100px;
-}
-
-.fab-wrapper {
-  padding-bottom: 120px;
 }
 </style>
