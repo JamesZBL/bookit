@@ -1,8 +1,10 @@
 <template>
   <div>
     <div class="c-title">
-      <v-ons-icon @click="goBack" v-if="back" class="icon-back" icon="md-chevron-left"></v-ons-icon>
-      <span>{{ title }}</span>
+      <div v-show="showTitle">
+        <v-ons-icon @click="goBack" v-if="back" class="icon-back" icon="md-chevron-left"></v-ons-icon>
+        <span>{{ title }}</span>
+      </div>
       <slot></slot>
     </div>
   </div>
@@ -13,7 +15,13 @@ export default {
   name: "Title",
   props: {
     title: String,
-    back: Boolean
+    back: Boolean,
+    hideTitle: Boolean
+  },
+  computed: {
+    showTitle() {
+      return !this.hideTitle;
+    }
   },
   methods: {
     goBack() {

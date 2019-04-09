@@ -156,4 +156,18 @@ span {
 .progress-bar {
   height: 6px !important;
 }
+
+.select-dialog {
+  top: 100px;
+}
+
+.select-dialog .dialog {
+  top: 43px !important;
+  min-width: 100% !important;
+  min-height: 87px;
+}
+
+.select-dialog .dialog-container {
+  border-radius: 0 !important;
+}
 </style>
