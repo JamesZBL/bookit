@@ -413,26 +413,6 @@ export default {
   color: white;
 }
 
-.no-data {
-  position: absolute;
-  top: 30%;
-  margin: auto;
-  display: block;
-  opacity: 0.3;
-}
-
-.no-data img {
-  width: 100%;
-  height: 90px;
-}
-
-.no-data span {
-  width: 100%;
-  text-align: center;
-  display: inline-block;
-  line-height: 40px;
-}
-
 .lisb-under-fab {
   margin-bottom: 100px;
   color: #a4a4a4;

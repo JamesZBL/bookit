@@ -158,7 +158,7 @@ span {
 }
 
 .select-dialog {
-  top: 100px;
+  top: 90px;
 }
 
 .select-dialog .dialog {
@@ -169,5 +169,25 @@ span {
 
 .select-dialog .dialog-container {
   border-radius: 0 !important;
+}
+
+.no-data {
+  position: absolute;
+  top: 30%;
+  margin: auto;
+  display: block;
+  opacity: 0.3;
+}
+
+.no-data img {
+  width: 100%;
+  height: 90px;
+}
+
+.no-data span {
+  width: 100%;
+  text-align: center;
+  display: inline-block;
+  line-height: 40px;
 }
 </style>
