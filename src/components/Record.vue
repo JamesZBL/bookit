@@ -326,7 +326,19 @@ export default {
   }
 };
 </script>
-
+<style>
+.list-header {
+  background-image: -webkit-gradient(
+    linear,
+    left bottom,
+    left top,
+    from(#fff),
+    to(#e2e2e2)
+  ) !important;
+  background-image: linear-gradient(0deg, #fffefe, #e2e2e2 100%) !important;
+  background-color: #fff !important;
+}
+</style>
 <style scoped>
 .head {
   position: absolute;
