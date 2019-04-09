@@ -106,18 +106,6 @@ export default {
   }
 };
 </script>
-<style>
-.v-tabs__div {
-  max-width: 70px !important;
-}
-.theme--light.v-tabs__bar .v-tabs__div {
-  color: rgba(74, 86, 96, 0.8) !important;
-}
-.v-tabs__container--centered .v-tabs__slider-wrapper + .v-tabs__div,
-.v-tabs__container--centered > .v-tabs__div:first-child {
-  margin-left: 0 !important;
-}
-</style>
 <style scoped>
 .card-wrapper {
   padding-top: 5px;

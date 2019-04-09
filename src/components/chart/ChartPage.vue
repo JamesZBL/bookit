@@ -7,6 +7,7 @@
       slider-color="rgba(74, 86, 96, 0.8)"
       height="38px"
       v-model="selectedUnitIndex"
+      class="v-tabs"
     >
       <v-tab v-for="(unit, n) in unitList" :key="n" :value="n">{{ unit.display }}</v-tab>
     </v-tabs>
@@ -59,11 +60,12 @@ export default {
           display: "本周",
           start: "2019-04-01",
           end: "2019-04-07"
-        },{
+        },
+        {
           display: "本周",
           start: "2019-04-01",
           end: "2019-04-07"
-        },
+        }
       ],
       list: [
         {
@@ -199,5 +201,16 @@ export default {
 
 .no-data {
   top: 110%;
+}
+
+.v-tabs .v-tabs__div {
+  max-width: 70px !important;
+}
+.v-tabs .theme--light.v-tabs__bar .v-tabs__div {
+  color: rgba(74, 86, 96, 0.8) !important;
+}
+.v-tabs .v-tabs__container--centered .v-tabs__slider-wrapper + .v-tabs__div,
+.v-tabs .v-tabs__container--centered > .v-tabs__div:first-child {
+  margin-left: 0 !important;
 }
 </style>
