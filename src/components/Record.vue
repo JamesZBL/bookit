@@ -125,11 +125,11 @@ export default {
   },
   created() {},
   activated() {
-    this.fixBugAct();
+    this.initViewAtActivated();
     this.loadIfNeeded();
   },
   mounted() {
-    this.fixBug();
+    this.initViewAtMounted();
     this.loadIfNeeded();
   },
   updated() {
@@ -163,7 +163,6 @@ export default {
       get() {
         return this.$store.state.record.list;
       },
-
       set(list) {
         this.$store.commit("setRecordList", list);
       }
@@ -194,34 +193,39 @@ export default {
   },
   watch: {},
   methods: {
-    fixBug() {
+    initViewAtMounted() {
       if (!this.fixed) {
-        this.fix();
+        this.fixByModifyVisible();
         this.$store.commit("setLoaded", { name: "fixBug", value: true });
       }
     },
 
-    fixBugAct() {
-      this.fixB();
+    initViewAtActivated() {
+      this.fixByModifyData();
     },
 
-    fix() {
+    fixByModifyVisible() {
       this.show = false;
       const _this = this;
       setTimeout(() => {
         _this.show = true;
-      }, 5);
+      }, 0);
     },
 
-    fixB() {
-      // const tmpList = this.list;
-      // let tmp = tmpList;
-      // tmp.push({});
-      // this.list = tmp;
-      // this.list = tmpList;
-      // let tmp = this.income;
-      // this.income = 0;
-      // this.income = tmp;
+    fixByModifyData() {
+      const _this = this;
+      const tmp = this.list;
+      tmp.push({});
+      this.list = tmp;
+      setTimeout(() => {
+        tmp.splice(tmp.length - 1, 1);
+        _this.list = tmp;
+      }, 0);
+      const tmpIn = this.income;
+      this.income = -1;
+      setTimeout(() => {
+        _this.income = tmpIn;
+      }, 0);
     },
 
     addScrollListener() {
