@@ -125,10 +125,11 @@ export default {
   },
   created() {},
   activated() {
-    this.fixBug();
+    this.initViewAtActivated();
     this.loadIfNeeded();
   },
   mounted() {
+    this.initViewAtMounted();
     this.loadIfNeeded();
   },
   updated() {
@@ -147,14 +148,24 @@ export default {
     amountVisible() {
       return this.$store.state.record.amountVisible;
     },
-    income() {
-      return this.$store.state.record.income;
+    income: {
+      get() {
+        return this.$store.state.record.income;
+      },
+      set(income) {
+        this.$store.commit("setRecordIncome", income);
+      }
     },
     pay() {
       return this.$store.state.record.pay;
     },
-    list() {
-      return this.$store.state.record.list;
+    list: {
+      get() {
+        return this.$store.state.record.list;
+      },
+      set(list) {
+        this.$store.commit("setRecordList", list);
+      }
     },
     loaded() {
       return this.$store.state.loaded.record;
@@ -182,15 +193,39 @@ export default {
   },
   watch: {},
   methods: {
-    fixBug() {
+    initViewAtMounted() {
       if (!this.fixed) {
-        this.show = false;
-        const _this = this;
-        setTimeout(() => {
-          _this.show = true;
-        }, 500);
+        this.fixByModifyVisible();
         this.$store.commit("setLoaded", { name: "fixBug", value: true });
       }
+    },
+
+    initViewAtActivated() {
+      this.fixByModifyData();
+    },
+
+    fixByModifyVisible() {
+      this.show = false;
+      const _this = this;
+      setTimeout(() => {
+        _this.show = true;
+      }, 0);
+    },
+
+    fixByModifyData() {
+      const _this = this;
+      const tmp = this.list;
+      tmp.push({});
+      this.list = tmp;
+      setTimeout(() => {
+        tmp.splice(tmp.length - 1, 1);
+        _this.list = tmp;
+      }, 0);
+      const tmpIn = this.income;
+      this.income = -1;
+      setTimeout(() => {
+        _this.income = tmpIn;
+      }, 0);
     },
 
     addScrollListener() {
