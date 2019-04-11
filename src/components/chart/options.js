@@ -24,7 +24,7 @@ const datesBetween = (s, e) => {
   const start = moment(s);
   const end = moment(e);
   const result = [];
-  while (start.isSameOrBefore(end)) {
+  while (start.isBefore(end)) {
     result.push(Date.format(start));
     start.add(1, 'days');
   }

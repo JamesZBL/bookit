@@ -156,6 +156,9 @@ export default {
     type(n, o) {
       this.loadAmount();
       this.loadRank();
+    },
+    dataList(n, o) {
+      this.renderChart();
     }
   },
 
@@ -250,7 +253,6 @@ export default {
             }
           }
           this.dataList = result;
-          this.renderChart();
         });
     },
 
@@ -271,7 +273,7 @@ export default {
     },
 
     formatRatio(r) {
-      return `${Math.floor(r * 100)}%`;
+      return `${Math.floor(r * 100) || '< 1'}%`;
     },
 
     getCategoryName(item) {
