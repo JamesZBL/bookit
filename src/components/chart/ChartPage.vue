@@ -22,12 +22,12 @@
       <p>{{type.display}}排行榜</p>
     </div>
     <div class="categories">
-      <div class="no-data" v-show="!list.length">
+      <div class="no-data" v-show="!rankList.length">
         <img src="@/assets/no-data.svg">
         <span>暂无数据</span>
       </div>
       <v-ons-list>
-        <v-ons-list-item class="amount-round" v-for="(item, index) in list" :key="index">
+        <v-ons-list-item class="amount-round" v-for="(item, index) in rankList" :key="index">
           <div class="left">
             <v-ons-icon :icon="getCategory(item).icon" class="item-icon"></v-ons-icon>
           </div>
@@ -44,8 +44,10 @@
   </div>
 </template>
 <script>
+import axios from "@/request";
 import Chart from "@/components/chart/Chart";
 import Options from "@/components/chart/options";
+import Date from "@/components/chart/date";
 export default {
   name: "chart-page",
   components: {
@@ -54,37 +56,7 @@ export default {
   props: ["type", "scope"],
   data() {
     return {
-      scopeIndex: -1,
-      unitList: [
-        {
-          display: "本周",
-          start: "2019-04-01",
-          end: "2019-04-07"
-        },
-        {
-          display: "本周",
-          start: "2019-04-01",
-          end: "2019-04-07"
-        }
-      ],
-      list: [
-        {
-          name: "food",
-          amount: 350.29,
-          ratio: 0.93
-        },
-        {
-          name: "learning",
-          amount: 50.29,
-          ratio: 0.12
-        },
-        {
-          name: "transportation",
-          amount: 10.29,
-          ratio: 0.08
-        }
-      ],
-      dataList: [0, 0, 1, 4, 8, 9, 2, 8, 9, 2, 10, 32],
+      unitIndex: -1,
       options: Options.options()
     };
   },
@@ -106,8 +78,18 @@ export default {
       );
     },
     chartData() {
+      const { selectedUnit } = this;
+      // if (!selectedUnit) return {};
+      const { scope } = this;
+      const { start, end } = selectedUnit;
+      let labels = [];
+      switch (scope) {
+        case "week":
+          labels = Options.weekLabels(start, end);
+          break;
+      }
       return {
-        labels: Options.dayLabels(31),
+        labels,
         datasets: [
           {
             ...Options.dataSetItem(),
@@ -118,23 +100,164 @@ export default {
     },
     selectedUnitIndex: {
       get() {
-        return this.scopeIndex === -1
-          ? this.unitList.length - 1
-          : this.scopeIndex;
+        return (
+          (this.unitIndex === -1 && this.unitList.length - 1) || this.unitIndex
+        );
       },
 
       set(s) {
-        this.scopeIndex = s;
+        this.unitIndex = s;
+      }
+    },
+    unitList: {
+      get() {
+        return this.$store.state.chart.dateUnits;
+      },
+      set(s) {
+        this.$store.commit("setChartDateUnits", s);
+      }
+    },
+    rankList: {
+      get() {
+        return this.$store.state.chart.rankList;
+      },
+      set(s) {
+        this.$store.commit("setChartRankList", s);
+      }
+    },
+    dataList: {
+      get() {
+        return this.$store.state.chart.dataList;
+      },
+      set(s) {
+        this.$store.commit("setChartDataList", s);
+      }
+    },
+    selectedUnit() {
+      return this.unitList[this.selectedUnitIndex];
+    },
+    loaded: {
+      get() {
+        return this.$store.state.loaded.chart;
+      },
+      set(s) {
+        this.$store.commit("setLoaded", { name: "chart", value: s });
       }
     }
   },
-  mounted() {
-    this.initChart();
+  watch: {
+    scope(n, o) {
+      this.loadUnits();
+    },
+    selectedUnit(n, o) {
+      this.loadRank();
+      this.loadAmount();
+    },
+    type(n, o) {
+      this.loadAmount();
+      this.loadRank();
+    }
   },
+
+  mounted() {
+    if (!this.loaded) {
+      this.loadUnits();
+      this.loadAmount();
+    }
+    this.renderChart();
+  },
+
   methods: {
-    initChart() {
+    loadUnits() {
+      axios.get("/record/first").then(({ data }) => {
+        this.loaded = true;
+        const { createdAt } = data;
+        let dateUnits;
+        switch (this.scope) {
+          case "week":
+            dateUnits = Date.weekUnits(createdAt);
+            break;
+          case "month":
+            dateUnits = Date.monthUnits(createdAt);
+            break;
+          case "year":
+            dateUnits = Date.yearUnits(createdAt);
+            break;
+          default:
+        }
+        this.unitList = dateUnits;
+        this.selectedUnitIndex = this.unitList.length - 1;
+        this.loadRank();
+        this.loadAmount();
+      });
+    },
+
+    loadRank() {
+      const { start, end } = this.selectedUnit;
+      const type = this.type.toUpperCase();
+      axios
+        .get("/record/rank", {
+          params: {
+            start,
+            end,
+            type
+          }
+        })
+        .then(({ data }) => {
+          this.rankList = data
+            .map(i => {
+              i.name = i.categoryName;
+              return i;
+            })
+            .sort((a, b) => b.ratio - a.ratio);
+        });
+    },
+
+    loadAmount() {
+      const { scope } = this;
+      switch (scope) {
+        case "week":
+          this.loadWeekAmount();
+          break;
+        case "month":
+          break;
+        case "year":
+          break;
+        default:
+      }
+    },
+
+    loadWeekAmount() {
+      const { start, end } = this.selectedUnit;
+      const type = this.type.toUpperCase();
+      axios
+        .get("/record/days", {
+          params: {
+            start,
+            end,
+            type
+          }
+        })
+        .then(({ data }) => {
+          const dates = Options.datesBetween(start, end);
+          const result = [];
+          let index;
+          for (let date of dates) {
+            if (-1 === (index = data.findIndex(d => d.date === date))) {
+              result.push(0);
+            } else {
+              result.push(data[index].amount);
+            }
+          }
+          this.dataList = result;
+          this.renderChart();
+        });
+    },
+
+    renderChart() {
       this.$refs.chart.render();
     },
+
     getCategory(category) {
       return (
         this.$store.getters.findCategoryByName(category.name) || {
@@ -142,12 +265,15 @@ export default {
         }
       );
     },
+
     formatMoneyWithOptionalDecimal(amount) {
       return Math.floor(amount * 100) / 100;
     },
+
     formatRatio(r) {
       return `${Math.floor(r * 100)}%`;
     },
+
     getCategoryName(item) {
       return this.getCategory(item).display || item.name;
     }
@@ -212,5 +338,9 @@ export default {
 .v-tabs .v-tabs__container--centered .v-tabs__slider-wrapper + .v-tabs__div,
 .v-tabs .v-tabs__container--centered > .v-tabs__div:first-child {
   margin-left: 0 !important;
+}
+
+.categories * {
+  z-index: 1 !important;
 }
 </style>

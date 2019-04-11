@@ -19,7 +19,7 @@
       </div>
     </c-title>
     <div class="tab-wrapper">
-      <ChartPage :type="selectedType" :scope="selectedScope"/>
+      <ChartPage :type="selectedType.name" :scope="selectedScope"/>
     </div>
     <v-ons-dialog cancelable :visible.sync="dialogVisible" class="select-dialog">
       <v-ons-list class="menus">
@@ -87,7 +87,6 @@ export default {
     };
   },
   created() {
-    console.log(this.selectedScope);
     this.selectedType = this.types[0];
   },
   mounted() {},

@@ -36,12 +36,18 @@ const defaultState = () => ({
       check_count: 0
     },
   },
+  chart: {
+    dateUnits: [],
+    rankList: [],
+    dataList: []
+  },
   loaded: {
     record: false,
     about: false,
     book: false,
     category: false,
-    fixBug: false
+    fixBug: false,
+    chart: false,
   },
   defaultBook: {
     income: 0,
@@ -259,6 +265,18 @@ export default new Vuex.Store({
           }
         }
       }
+    },
+
+    setChartDateUnits(s, units) {
+      s.chart.dateUnits = units;
+    },
+
+    setChartRankList(s, rank) {
+      s.chart.rankList = rank;
+    },
+
+    setChartDataList(s, data) {
+      s.chart.dataList = data;
     }
   },
 

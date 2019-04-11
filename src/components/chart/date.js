@@ -1,6 +1,6 @@
 import moment from 'moment';
 
-export const weekUnits = (dateOfFirst) => {
+const weekUnits = (dateOfFirst) => {
   const result = [];
   let p = moment(dateOfFirst).weekday(0);
   do {
@@ -43,7 +43,7 @@ const getWeekName = (p) => {
   return `${resultYear}${resultWeek}周`;
 }
 
-export const monthUnits = (dateOfFirst) => {
+const monthUnits = (dateOfFirst) => {
   const result = [];
   let p = moment(dateOfFirst).startOf('month');
   do {
@@ -82,7 +82,7 @@ const getMonthName = (p) => {
   return `${year}${month}月`;
 }
 
-export const yearUnits = (dateOfFirst) => {
+const yearUnits = (dateOfFirst) => {
   let p = moment(dateOfFirst).startOf('year');
   const result = [];
   do {
@@ -100,3 +100,10 @@ export const yearUnits = (dateOfFirst) => {
 }
 
 const format = (moment) => moment.format('YYYY-MM-DD');
+
+export default {
+  weekUnits,
+  monthUnits,
+  yearUnits,
+  format
+};
