@@ -43,21 +43,43 @@ const getWeekName = (p) => {
   return `${resultYear}${resultWeek}周`;
 }
 
-const monthUnits = (dateOfFirst) => {
+export const monthUnits = (dateOfFirst) => {
   const result = [];
   let p = moment(dateOfFirst).startOf('month');
-  let start = format(p);
-  p.add(1, 'months');
-  while (p.isBefore(moment().add(1, 'months'))) {
+  do {
+    const start = format(p);
+    const end = format(p.endOf('month').add(1, 'second'));
+    p.subtract(1, 'months');
     result.push({
-      display: `${moment().year() !== moment().year() && `${p.year()}-` || ''}${p.isAfter(moment()) && '本' || p.isSameOrAfter(moment().startOf('month').hour(0).minute(0).second(-1)) && '上' || p.month()}月`,
+      display: getMonthName(p),
       start,
-      end: format(p)
+      end
     });
-    start = format(p);
     p.add(1, 'months');
-  }
+  } while (p.isBefore(moment()));
   return result;
+}
+
+const getMonthName = (p) => {
+  let year = '';
+  let month = '';
+  if (p.year() != moment().year()) {
+    year = `${p.year()}年-`;
+  }
+  if (p.endOf('month').isSameOrAfter(moment().startOf('month').hour(0).minute(0).second(-1))) {
+    month = '上';
+  }
+  if (p.endOf('month').isSameOrAfter(moment())) {
+    month = '本';
+  }
+  p.startOf('month');
+  if (p.isBefore(moment().startOf('month').subtract(1, 'months'))) {
+    month = p.month() + 1;
+  }
+  if (['本', '上'].includes(month)) {
+    year = '';
+  }
+  return `${year}${month}月`;
 }
 
 const format = (moment) => moment.format('YYYY-MM-DD');
