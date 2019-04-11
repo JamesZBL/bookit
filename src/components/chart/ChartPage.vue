@@ -273,7 +273,7 @@ export default {
     },
 
     formatRatio(r) {
-      return `${Math.floor(r * 100) || '< 1'}%`;
+      return `${Math.floor(r * 100) || '<1'}%`;
     },
 
     getCategoryName(item) {
