@@ -82,4 +82,21 @@ const getMonthName = (p) => {
   return `${year}${month}月`;
 }
 
+export const yearUnits = (dateOfFirst) => {
+  let p = moment(dateOfFirst).startOf('year');
+  const result = [];
+  do {
+    const start = format(p);
+    const end = format(p.add(1, 'year'));
+    p.subtract(1, 'year');
+    result.push({
+      display: `${p.year()}年`,
+      start,
+      end
+    });
+    p.add(1, 'year');
+  } while (p.isBefore(moment()));
+  return result;
+}
+
 const format = (moment) => moment.format('YYYY-MM-DD');
