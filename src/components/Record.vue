@@ -45,7 +45,7 @@
             <span v-show="state === 'preaction'">松开后刷新</span>
             <span v-show="state === 'action'">努力加载中...</span>
           </v-ons-pull-hook>
-          <v-ons-list>
+          <v-ons-list class="record-list">
             <div v-for="(day, index) in list" :key="index">
               <v-ons-list-header class="amount-round">
                 <span class="list-label">{{day.date}}</span>
@@ -359,19 +359,6 @@ export default {
   }
 };
 </script>
-<style>
-.list-header {
-  background-image: -webkit-gradient(
-    linear,
-    left bottom,
-    left top,
-    from(#fff),
-    to(#e2e2e2)
-  ) !important;
-  background-image: linear-gradient(0deg, #fffefe, #e2e2e2 100%) !important;
-  background-color: #fff !important;
-}
-</style>
 <style scoped>
 .head {
   position: absolute;
@@ -481,5 +468,17 @@ export default {
 .lisb-under-fab {
   margin-bottom: 100px;
   color: #a4a4a4;
+}
+
+.record-list .list-header {
+  background-image: -webkit-gradient(
+    linear,
+    left bottom,
+    left top,
+    from(#fff),
+    to(#e2e2e2)
+  ) !important;
+  background-image: linear-gradient(0deg, #fffefe, #e2e2e2 100%) !important;
+  background-color: #fff !important;
 }
 </style>
