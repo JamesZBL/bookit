@@ -12,7 +12,7 @@
               v-for="(scope, index) in scopes"
               :key="index"
               :class="tabClass(scope)"
-              @click="setScope(scope)"
+              @click="selectedScope = scope.name"
             >{{scope.display}}</div>
           </div>
         </div>
@@ -56,7 +56,6 @@ export default {
   data() {
     return {
       dialogVisible: false,
-      selectedScope: "week",
       scopes: [
         {
           name: "week",
@@ -86,6 +85,17 @@ export default {
       selectedType: null
     };
   },
+  computed: {
+    selectedScope: {
+      get() {
+        return this.$store.state.chart.scope;
+      },
+
+      set(s) {
+        this.$store.commit("setChartScope", s);
+      }
+    }
+  },
   created() {
     this.selectedType = this.types[0];
   },
@@ -93,9 +103,6 @@ export default {
   methods: {
     onClickType() {
       this.dialogVisible = !this.dialogVisible;
-    },
-    setScope(s) {
-      this.selectedScope = s.name;
     },
     tabClass(scope) {
       const classes = ["tab"];
