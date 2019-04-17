@@ -11,35 +11,37 @@
     >
       <v-tab v-for="(unit, n) in unitList" :key="n" :value="n">{{ unit.display }}</v-tab>
     </v-tabs>
-    <div class="analyse">
-      <p>总支出: {{sum}}</p>
-      <p>平均值: {{avg}}</p>
-    </div>
-    <div class="chart">
-      <Chart ref="chart" :chartData="chartData" :options="options" :height="100"/>
-    </div>
-    <div class="analyse">
-      <p>{{type.display}}排行榜</p>
-    </div>
-    <div class="categories">
-      <div class="no-data" v-show="!rankList.length">
-        <img src="@/assets/no-data.svg">
-        <span>暂无数据</span>
+    <div class="chart-wrapper">
+      <div class="analyse">
+        <p>总支出: {{sum}}</p>
+        <p>平均值: {{avg}}</p>
       </div>
-      <v-ons-list>
-        <v-ons-list-item class="amount-round" v-for="(item, index) in rankList" :key="index">
-          <div class="left">
-            <v-ons-icon :icon="getCategory(item).icon" class="item-icon"></v-ons-icon>
-          </div>
-          <div class="center">
-            <dir>{{getCategoryName(item)}} {{formatRatio(item.ratio)}}</dir>
-            <div class="amount">{{formatMoneyWithOptionalDecimal(item.amount)}}</div>
-            <div class="progress-wrapper">
-              <ons-progress-bar :value="item.ratio*100"></ons-progress-bar>
+      <div class="chart">
+        <Chart ref="chart" :chartData="chartData" :options="options" :height="100"/>
+      </div>
+      <div class="analyse">
+        <p>{{type.display}}排行榜</p>
+      </div>
+      <div class="categories">
+        <div class="no-data" v-show="!rankList.length">
+          <img src="@/assets/no-data.svg">
+          <span>暂无数据</span>
+        </div>
+        <v-ons-list>
+          <v-ons-list-item class="amount-round" v-for="(item, index) in rankList" :key="index">
+            <div class="left">
+              <v-ons-icon :icon="getCategory(item).icon" class="item-icon"></v-ons-icon>
             </div>
-          </div>
-        </v-ons-list-item>
-      </v-ons-list>
+            <div class="center">
+              <dir>{{getCategoryName(item)}} {{formatRatio(item.ratio)}}</dir>
+              <div class="amount">{{formatMoneyWithOptionalDecimal(item.amount)}}</div>
+              <div class="progress-wrapper">
+                <ons-progress-bar :value="item.ratio*100"></ons-progress-bar>
+              </div>
+            </div>
+          </v-ons-list-item>
+        </v-ons-list>
+      </div>
     </div>
   </div>
 </template>
@@ -273,7 +275,7 @@ export default {
     },
 
     formatRatio(r) {
-      return `${Math.floor(r * 100) || '<1'}%`;
+      return `${Math.floor(r * 100) || "<1"}%`;
     },
 
     getCategoryName(item) {
@@ -285,7 +287,7 @@ export default {
 <style scoped>
 .analyse {
   padding: 1em 1em 0 1em;
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .analyse p {
@@ -344,5 +346,13 @@ export default {
 
 .categories * {
   z-index: 1 !important;
+}
+
+.v-tabs {
+  position: fixed !important;
+}
+
+.chart-wrapper {
+  padding-top: 40px;
 }
 </style>
