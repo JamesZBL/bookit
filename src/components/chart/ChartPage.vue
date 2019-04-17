@@ -350,6 +350,8 @@ export default {
 
 .v-tabs {
   position: fixed !important;
+  width: 100% !important;
+  z-index: 2 !important;
 }
 
 .chart-wrapper {
