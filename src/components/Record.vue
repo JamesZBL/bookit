@@ -231,9 +231,11 @@ export default {
     addScrollListener() {
       const _this = this;
       const list = this.$refs.list;
-      list.addEventListener("scroll", function() {
-        _this.listScrollTop = list.scrollTop;
-      });
+      if (!!list) {
+        list.addEventListener("scroll", function() {
+          _this.listScrollTop = list.scrollTop;
+        });
+      }
     },
 
     onClickDate() {
@@ -443,26 +445,6 @@ export default {
   height: 30px;
   line-height: 30px;
   color: white;
-}
-
-.no-data {
-  position: absolute;
-  top: 30%;
-  margin: auto;
-  display: block;
-  opacity: 0.3;
-}
-
-.no-data img {
-  width: 100%;
-  height: 90px;
-}
-
-.no-data span {
-  width: 100%;
-  text-align: center;
-  display: inline-block;
-  line-height: 40px;
 }
 
 .lisb-under-fab {

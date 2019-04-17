@@ -146,4 +146,48 @@ span {
 .alert-dialog-mask {
   background-color: rgba(9, 39, 61, 0.3) !important;
 }
+
+.progress-bar__primary,
+.progress-bar__secondary {
+  background-color: #26a2ff !important;
+  border-radius: 4px;
+}
+
+.progress-bar {
+  height: 6px !important;
+}
+
+.select-dialog {
+  top: 90px;
+}
+
+.select-dialog .dialog {
+  top: 43px !important;
+  min-width: 100% !important;
+  min-height: 87px;
+}
+
+.select-dialog .dialog-container {
+  border-radius: 0 !important;
+}
+
+.no-data {
+  position: absolute;
+  top: 30%;
+  margin: auto;
+  display: block;
+  opacity: 0.3;
+}
+
+.no-data img {
+  width: 100%;
+  height: 90px;
+}
+
+.no-data span {
+  width: 100%;
+  text-align: center;
+  display: inline-block;
+  line-height: 40px;
+}
 </style>

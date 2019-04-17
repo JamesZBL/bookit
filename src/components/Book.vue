@@ -1,6 +1,6 @@
 <template id="book">
   <div class="scroll">
-    <c-title title="账本"/>
+    <c-title title="我的账本"/>
     <div class="wrapper card-wrapper fab-wrapper">
       <v-container grid-list-md text-xs-center>
         <v-layout row wrap>
