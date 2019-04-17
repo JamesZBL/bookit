@@ -18,6 +18,10 @@ const setToken = function (token) {
   localStorage.setItem('token', token);
 }
 
+const resetLoading = () => {
+  store.commit('resetLoading');
+}
+
 axios.defaults.baseURL = config.baseURL;
 axios.defaults.headers.common['token'] = localStorage.getItem("token") || "";
 axios.defaults.headers.post['Content-Type'] = 'application/json';
@@ -42,6 +46,7 @@ axios.interceptors.response.use(function (response) {
 }, function (error) {
   // Do something with response error
   endLoading();
+  resetLoading();
   const { code } = error;
   if (code) {
     alert("请求超时，请检查网络连接");
