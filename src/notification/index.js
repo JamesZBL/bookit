@@ -3,7 +3,9 @@ const { notification } = ons;
 
 const alert = function (message, callback) {
   notification.alert(message, {
-    callback: callback || (() => { })
+    callback: callback || (() => { }),
+    buttonLabels: '确定',
+    title: '提示'
   });
 }
 
@@ -26,15 +28,20 @@ const toast = function (message, callback) {
 }
 
 const prompt = function (message, callback) {
-  notification.prompt(message)
-    .then(function (v) {
-      if (callback)
-        callback(v);
-    });
+  notification.prompt(message, {
+    buttonLabels: '确定',
+    title: '请输入'
+  }).then(function (v) {
+    if (callback)
+      callback(v);
+  });
 }
 
 const confirm = function (message, callback) {
-  notification.confirm(message).then(ok => {
+  notification.confirm(message, {
+    buttonLabels: ['取消', '确定'],
+    title: '提示'
+  }).then(ok => {
     ok && callback && callback();
   });
 }
