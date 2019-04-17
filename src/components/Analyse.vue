@@ -163,4 +163,8 @@ export default {
   background-color: white;
   color: #26a2ff;
 }
+
+.right {
+  font-size: 18px;
+}
 </style>

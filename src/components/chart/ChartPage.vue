@@ -160,6 +160,22 @@ export default {
       set(s) {
         this.$store.commit("setLoaded", { name: "chart", value: s });
       }
+    },
+    amountLoading: {
+      get() {
+        return this.$store.state.loading.amount;
+      },
+      set(s) {
+        this.$store.commit("setLoading", { name: "amount", s });
+      }
+    },
+    rankLoading: {
+      get() {
+        return this.$store.state.loading.rank;
+      },
+      set(s) {
+        this.$store.commit("setLoading", { name: "rank", s });
+      }
     }
   },
   watch: {
@@ -204,8 +220,6 @@ export default {
         }
         this.unitList = dateUnits;
         this.selectedUnitIndex = this.unitList.length - 1;
-        this.loadRank();
-        this.loadAmount();
       });
     },
 
@@ -233,13 +247,22 @@ export default {
     },
 
     loadAmount() {
+      this.amountLoading = true;
       const { scope } = this;
       switch (scope) {
         case "week":
-          this.loadWeekAmount();
+          if (!this.amountLoading) {
+            this.loadWeekAmount().then(r => {
+              this.amountLoading = false;
+            });
+          }
           break;
         case "month":
-          this.loadMonthAmount();
+          if (!this.amountLoading) {
+            this.loadMonthAmount().then(r => {
+              this.amountLoading = false;
+            });
+          }
           break;
         case "year":
           break;
@@ -252,7 +275,7 @@ export default {
       if (!selectedUnit) return;
       const { start, end } = selectedUnit;
       const type = this.type.toUpperCase();
-      axios
+      return axios
         .get("/record/days", {
           params: {
             start,
@@ -280,7 +303,7 @@ export default {
       if (!selectedUnit) return;
       const { start, end } = selectedUnit;
       const type = this.type.toUpperCase();
-      axios
+      return axios
         .get("/record/days", {
           params: {
             start,

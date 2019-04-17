@@ -55,6 +55,10 @@ const defaultState = () => ({
   defaultBook: {
     income: 0,
     pay: 0
+  },
+  loading: {
+    amount: false,
+    rank: false,
   }
 });
 
@@ -292,6 +296,16 @@ export default new Vuex.Store({
 
     setChartScope(s, scope) {
       s.chart.scope = scope;
+    },
+
+    setLoading(s, object) {
+      s.loading[object.name] = object.value;
+    },
+
+    resetLoading(s) {
+      for (let key in s.loading) {
+        s.loading[key] = false;
+      }
     }
   },
 
