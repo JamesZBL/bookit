@@ -39,7 +39,10 @@ const defaultState = () => ({
   chart: {
     dateUnits: [],
     rankList: [],
-    dataList: []
+    dataList: [],
+    type: 'pay',
+    scope: 'week',
+    unitIndex: -1,
   },
   loaded: {
     record: false,
@@ -277,6 +280,18 @@ export default new Vuex.Store({
 
     setChartDataList(s, data) {
       s.chart.dataList = data;
+    },
+
+    setChartUnitIndex(s, index) {
+      s.chart.unitIndex = index;
+    },
+
+    setChartType(s, type) {
+      s.chart.type = type;
+    },
+
+    setChartScope(s, scope) {
+      s.chart.scope = scope;
     }
   },
 

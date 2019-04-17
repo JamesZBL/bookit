@@ -58,7 +58,6 @@ export default {
   props: ["type", "scope"],
   data() {
     return {
-      unitIndex: -1,
       options: Options.options()
     };
   },
@@ -81,13 +80,19 @@ export default {
     },
     chartData() {
       const { selectedUnit } = this;
-      // if (!selectedUnit) return {};
+      if (!selectedUnit) return {};
       const { scope } = this;
       const { start, end } = selectedUnit;
       let labels = [];
       switch (scope) {
         case "week":
           labels = Options.weekLabels(start, end);
+          break;
+        case "month":
+          labels = Options.dayLabelsForMonth(start, end);
+          break;
+        case "year":
+          labels = Options.monthLabels(start, end);
           break;
       }
       return {
@@ -99,6 +104,14 @@ export default {
           }
         ]
       };
+    },
+    unitIndex: {
+      get() {
+        return this.$store.state.chart.unitIndex;
+      },
+      set(s) {
+        this.$store.commit("setChartUnitIndex", s);
+      }
     },
     selectedUnitIndex: {
       get() {
@@ -136,7 +149,9 @@ export default {
       }
     },
     selectedUnit() {
-      return this.unitList[this.selectedUnitIndex];
+      const { selectedUnitIndex } = this;
+      if (selectedUnitIndex === undefined) return;
+      return this.unitList[selectedUnitIndex];
     },
     loaded: {
       get() {
@@ -198,7 +213,9 @@ export default {
     },
 
     loadRank() {
-      const { start, end } = this.selectedUnit;
+      const { selectedUnit } = this;
+      if (!selectedUnit) return;
+      const { start, end } = selectedUnit;
       const type = this.type.toUpperCase();
       axios
         .get("/record/rank", {
@@ -225,6 +242,7 @@ export default {
           this.loadWeekAmount();
           break;
         case "month":
+          this.loadMonthAmount();
           break;
         case "year":
           break;
@@ -233,7 +251,37 @@ export default {
     },
 
     loadWeekAmount() {
-      const { start, end } = this.selectedUnit;
+      const { selectedUnit } = this;
+      if (!selectedUnit) return;
+      const { start, end } = selectedUnit;
+      const type = this.type.toUpperCase();
+      axios
+        .get("/record/days", {
+          params: {
+            start,
+            end,
+            type
+          }
+        })
+        .then(({ data }) => {
+          const dates = Options.datesBetween(start, end);
+          const result = [];
+          let index;
+          for (let date of dates) {
+            if (-1 === (index = data.findIndex(d => d.date === date))) {
+              result.push(0);
+            } else {
+              result.push(data[index].amount);
+            }
+          }
+          this.dataList = result;
+        });
+    },
+
+    loadMonthAmount() {
+      const { selectedUnit } = this;
+      if (!selectedUnit) return;
+      const { start, end } = selectedUnit;
       const type = this.type.toUpperCase();
       axios
         .get("/record/days", {

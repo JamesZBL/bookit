@@ -35,6 +35,10 @@ const weekLabels = (s, e) => {
   return datesBetween(s, e).map(d => d.substring(5, 10));
 };
 
+const dayLabelsForMonth = (s, e) => {
+  return datesBetween(s, e).map(d => d.substring(8, 10));
+};
+
 const dataSetItem = () => ({
   pointBackgroundColor: "rgb(38, 162, 255)",
   pointStyle: "round",
@@ -79,5 +83,6 @@ export default {
   weekLabels,
   datesBetween,
   options,
-  dataSetItem
+  dataSetItem,
+  dayLabelsForMonth
 };
