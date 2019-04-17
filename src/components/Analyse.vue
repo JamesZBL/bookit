@@ -19,7 +19,7 @@
       </div>
     </c-title>
     <div class="tab-wrapper">
-      <ChartPage :type="selectedType.name" :scope="selectedScope"/>
+      <ChartPage :type.sync="selectedType.name" :scope="selectedScope"/>
     </div>
     <v-ons-dialog cancelable :visible.sync="dialogVisible" class="select-dialog">
       <v-ons-list class="menus">

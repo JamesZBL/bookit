@@ -17,7 +17,7 @@
         <p>平均值: {{avg}}</p>
       </div>
       <div class="chart">
-        <Chart ref="chart" :chartData="chartData" :options="options" :height="100"/>
+        <Chart ref="chart" :chartData.sync="chartData" :options="options" :height="100"/>
       </div>
       <div class="analyse">
         <p>{{type.display}}排行榜</p>
@@ -173,9 +173,6 @@ export default {
     type(n, o) {
       this.loadAmount();
       this.loadRank();
-    },
-    dataList(n, o) {
-      this.renderChart();
     }
   },
 

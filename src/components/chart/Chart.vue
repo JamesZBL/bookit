@@ -13,6 +13,11 @@ export default {
   data() {
     return {};
   },
+  watch: {
+    chartData(n, o) {
+      this.render();
+    }
+  },
   methods: {
     render() {
       this.renderChart(this.chartData, this.options);

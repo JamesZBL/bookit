@@ -67,7 +67,8 @@ const options = () => ({
     yAxes: [
       {
         ticks: {
-          display: false
+          display: false,
+          beginAtZero: true
         },
         gridLines: {
           display: false
