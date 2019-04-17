@@ -67,7 +67,7 @@
 
 <script>
 import axios from "@/request";
-import { prompt, alert, toast } from "@/notification";
+import { prompt, alert, toast, confirm } from "@/notification";
 import config from "@/config";
 export default {
   name: "about",
@@ -144,13 +144,11 @@ export default {
 
   methods: {
     onClickLogout() {
-      this.$ons.notification.confirm("确定要退出登录吗?").then(ok => {
-        if (ok) {
-          this.$router.replace("/signin");
-          this.$store.commit("setCurrentPage", "");
-          this.$store.commit("resetAll");
-          localStorage.removeItem("token");
-        }
+      confirm("确定要退出登录吗?", () => {
+        this.$router.replace("/signin");
+        this.$store.commit("setCurrentPage", "");
+        this.$store.commit("resetAll");
+        localStorage.removeItem("token");
       });
     },
 
