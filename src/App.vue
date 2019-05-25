@@ -105,6 +105,7 @@ span {
 
 .center {
   color: #4a5660 !important;
+  font-size: 16px;
 }
 
 .toast {

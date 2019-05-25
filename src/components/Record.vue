@@ -463,4 +463,8 @@ export default {
   background-image: linear-gradient(0deg, #fffefe, #e2e2e2 100%) !important;
   background-color: #fff !important;
 }
+
+.center {
+  font-size: 14px;
+}
 </style>

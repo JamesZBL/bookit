@@ -40,6 +40,6 @@ export const libs = [
     description:
       "The iconic SVG, font, and CSS toolkit.",
     link: "https://fontawesome.com",
-    author: "Monaca x Onsen UI Team"
+    author: "Fonticons, Inc."
   }
 ]

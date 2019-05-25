@@ -1,3 +1,3 @@
 export default {
-  buildVersion: 'v1.1.0'
+  buildVersion: 'v1.2.0'
 }
