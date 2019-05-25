@@ -13,7 +13,7 @@
     </v-tabs>
     <div class="chart-wrapper">
       <div class="analyse">
-        <p>总支出: {{sum}}</p>
+        <p>{{sumName}}: {{sum}}</p>
         <p>平均值: {{avg}}</p>
       </div>
       <div class="chart">
@@ -62,6 +62,9 @@ export default {
     };
   },
   computed: {
+    sumName() {
+      return (this.type === "pay" && "总支出") || "总收入";
+    },
     sum() {
       return this.formatMoneyWithOptionalDecimal(
         (this.dataList.length < 1 ? [0] : this.dataList).reduce(
