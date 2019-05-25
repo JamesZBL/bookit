@@ -97,10 +97,10 @@ export default {
           color: "#8783ff"
         },
         {
-          icon: "md-help",
-          name: "使用帮助",
-          path: "/settings/help",
-          color: "#ffc182"
+          icon: "md-book",
+          name: "版权信息",
+          path: "/settings/copyright",
+          color: "#82a8ff"
         },
         {
           icon: "md-mood",
