@@ -428,4 +428,9 @@ export default {
 .chart-wrapper {
   padding-top: 40px;
 }
+
+.center,
+.amount {
+  font-size: 14px;
+}
 </style>

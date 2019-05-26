@@ -1,5 +1,11 @@
 export const libs = [
   {
+    name: "Cordova Android",
+    description:
+      "Cordova Android is an Android application library that allows for Cordova-based projects to be built for the Android Platform. Cordova based applications are, at the core, applications written with web technology: HTML, CSS and JavaScript.",
+    link: "https://cordova.apache.org",
+    author: "Apache Software Foundation"
+  }, {
     name: "Vue.js",
     description:
       "Vue is a progressive framework for building user interfaces. It is designed from the ground up to be incrementally adoptable, and can easily scale between a library and a framework depending on different use cases. It consists of an approachable core library that focuses on the view layer only, and an ecosystem of supporting libraries that helps you tackle complexity in large Single-Page Applications.",
@@ -40,6 +46,6 @@ export const libs = [
     description:
       "The iconic SVG, font, and CSS toolkit.",
     link: "https://fontawesome.com",
-    author: "Fonticons, Inc."
+    author: "Fonticons, Inc"
   }
 ]
