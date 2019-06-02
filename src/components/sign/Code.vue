@@ -49,7 +49,11 @@ export default {
           break;
         case "PASSWORD":
           $store.commit("setCode", emailCode);
-          $router.push('/password/new');
+          if (!emailCode) {
+            toast("请输入验证码");
+            break;
+          }
+          $router.push("/password/new");
           break;
         default:
       }
