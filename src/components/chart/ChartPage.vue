@@ -195,11 +195,11 @@ export default {
     }
   },
 
+  created() {
+    this.loadUnits();
+  },
+
   mounted() {
-    if (!this.loaded) {
-      this.loadUnits();
-      this.loadAmount();
-    }
     this.renderChart();
   },
 
