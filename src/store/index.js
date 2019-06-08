@@ -36,16 +36,29 @@ const defaultState = () => ({
       check_count: 0
     },
   },
+  chart: {
+    dateUnits: [],
+    rankList: [],
+    dataList: [],
+    type: 'pay',
+    scope: 'week',
+    unitIndex: -1,
+  },
   loaded: {
     record: false,
     about: false,
     book: false,
     category: false,
-    fixBug: false
+    fixBug: false,
+    chart: false,
   },
   defaultBook: {
     income: 0,
     pay: 0
+  },
+  loading: {
+    amount: false,
+    rank: false,
   }
 });
 
@@ -258,6 +271,40 @@ export default new Vuex.Store({
             s.record.list.splice(index, 1);
           }
         }
+      }
+    },
+
+    setChartDateUnits(s, units) {
+      s.chart.dateUnits = units;
+    },
+
+    setChartRankList(s, rank) {
+      s.chart.rankList = rank;
+    },
+
+    setChartDataList(s, data) {
+      s.chart.dataList = data;
+    },
+
+    setChartUnitIndex(s, index) {
+      s.chart.unitIndex = index;
+    },
+
+    setChartType(s, type) {
+      s.chart.type = type;
+    },
+
+    setChartScope(s, scope) {
+      s.chart.scope = scope;
+    },
+
+    setLoading(s, object) {
+      s.loading[object.name] = object.value;
+    },
+
+    resetLoading(s) {
+      for (let key in s.loading) {
+        s.loading[key] = false;
       }
     }
   },

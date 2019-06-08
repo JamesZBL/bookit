@@ -97,6 +97,7 @@ export default {
         .then(r => {
           this.$store.commit("setLoaded", { name: "record", value: false });
           this.$store.commit("setLoaded", { name: "book", value: false });
+          this.$store.commit("setLoaded", { name: "chart", value: false });
           this.$router.replace("/");
         });
     }

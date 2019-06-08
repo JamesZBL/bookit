@@ -18,6 +18,7 @@ import Code from '@/components/sign/Code'
 import Email from '@/components/sign/Email'
 import NewPassword from '@/components/sign/Password'
 import DisplaySettings from '@/components/settings/Display'
+import Copyright from '@/components/about/Copyright'
 
 Vue.use(Router)
 
@@ -72,6 +73,9 @@ export default new Router({
     }, {
       path: '/settings/display',
       component: DisplaySettings
+    }, {
+      path: '/settings/copyright',
+      component: Copyright
     }, {
       path: '/record/new',
       component: NewRecord
