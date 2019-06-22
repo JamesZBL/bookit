@@ -5,7 +5,7 @@
       <img src="@/assets/icon.png" class="banner" alt>
       <p class="appname">Bookit</p>
       <p class="version">{{buildVersion}}</p>
-      <p class="copyright">Copyright 2019 MAO RU NAN</p>
+      <p class="copyright">Copyright 2019 ZHENG BAO LE</p>
     </div>
   </div>
 </template>

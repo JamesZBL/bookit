@@ -29,7 +29,7 @@
     </v-container>
     <div class="copyright-wrapper">
       <span class="signin-sub-title signin-copyright">License Apache 2.0</span>
-      <span class="signin-sub-title signin-copyright">Copyright 2019 MAO RU NAN</span>
+      <span class="signin-sub-title signin-copyright">Copyright 2019 ZHENG BAO LE</span>
     </div>
   </div>
 </template>
