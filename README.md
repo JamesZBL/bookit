@@ -1,19 +1,18 @@
 # Bookit 
 
-> A bookkeeping app based on Vue.js
+A bookkeeping app based on Vue and Cordova.
 
 ## Build Setup
 
 ``` bash
+# install Android SDK
+# ...
+
+# install phonegap
+npm install -g phonegap
+
 # install dependencies
 npm install
 
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
-
+# build for debug package
+./build-js.sh && ./install-debug.sh
