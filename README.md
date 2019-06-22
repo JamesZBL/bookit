@@ -16,3 +16,7 @@ npm install
 
 # build for debug package
 ./build-js.sh && ./install-debug.sh
+```
+
+## License
+Apache License 2.0
